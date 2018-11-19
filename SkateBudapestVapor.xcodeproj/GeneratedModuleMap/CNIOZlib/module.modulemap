@@ -1,0 +1,4 @@
+module CNIOZlib {
+    umbrella "/Volumes/Data/Development/Skate-Budapest-Backend/.build/checkouts/swift-nio.git--3020518368850693572/Sources/CNIOZlib/include"
+    export *
+}

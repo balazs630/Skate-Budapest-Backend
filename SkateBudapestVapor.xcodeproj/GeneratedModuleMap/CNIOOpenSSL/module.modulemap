@@ -1,0 +1,4 @@
+module CNIOOpenSSL {
+    umbrella "/Volumes/Data/Development/Skate-Budapest-Backend/.build/checkouts/swift-nio-ssl.git-8148710701426305481/Sources/CNIOOpenSSL/include"
+    export *
+}
