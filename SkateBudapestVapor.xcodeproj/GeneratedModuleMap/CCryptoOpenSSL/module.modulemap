@@ -1,4 +1,4 @@
 module CCryptoOpenSSL {
-    umbrella "/Volumes/Data/Development/Skate-Budapest-Backend/.build/checkouts/crypto.git--6018064664952972454/Sources/CCryptoOpenSSL/include"
+    umbrella "/Volumes/Data/Development/Skate-Budapest-Backend/.build/checkouts/crypto.git-728702124251311436/Sources/CCryptoOpenSSL/include"
     export *
 }
