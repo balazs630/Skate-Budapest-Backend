@@ -13,7 +13,6 @@
 			buildPhases = (
 			);
 			dependencies = (
-				OBJ_2625 /* PBXTargetDependency */,
 			);
 			name = SkateBudapestVaporPackageTests;
 			productName = SkateBudapestVaporPackageTests;
@@ -21,51 +20,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		OBJ_1058 /* AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* AppTests.swift */; };
-		OBJ_1060 /* App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SkateBudapestVapor::App::Product" /* App.framework */; };
-		OBJ_1061 /* Vapor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Vapor::Vapor::Product" /* Vapor.framework */; };
-		OBJ_1062 /* WebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "WebSocket::WebSocket::Product" /* WebSocket.framework */; };
-		OBJ_1063 /* NIOWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::NIOWebSocket::Product" /* NIOWebSocket.framework */; };
-		OBJ_1064 /* Validation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Validation::Validation::Product" /* Validation.framework */; };
-		OBJ_1065 /* URLEncodedForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "URLEncodedForm::URLEncodedForm::Product" /* URLEncodedForm.framework */; };
-		OBJ_1066 /* TemplateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "TemplateKit::TemplateKit::Product" /* TemplateKit.framework */; };
-		OBJ_1067 /* Routing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Routing::Routing::Product" /* Routing.framework */; };
-		OBJ_1068 /* Multipart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Multipart::Multipart::Product" /* Multipart.framework */; };
-		OBJ_1069 /* HTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "HTTP::HTTP::Product" /* HTTP.framework */; };
-		OBJ_1070 /* NIOHTTP1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::NIOHTTP1::Product" /* NIOHTTP1.framework */; };
-		OBJ_1071 /* CNIOZlib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::CNIOZlib::Product" /* CNIOZlib.framework */; };
-		OBJ_1072 /* CNIOHTTPParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::CNIOHTTPParser::Product" /* CNIOHTTPParser.framework */; };
-		OBJ_1073 /* Crypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Crypto::Crypto::Product" /* Crypto.framework */; };
-		OBJ_1074 /* NIOOpenSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio-ssl::NIOOpenSSL::Product" /* NIOOpenSSL.framework */; };
-		OBJ_1075 /* NIOTLS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::NIOTLS::Product" /* NIOTLS.framework */; };
-		OBJ_1076 /* CNIOOpenSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio-ssl::CNIOOpenSSL::Product" /* CNIOOpenSSL.framework */; };
-		OBJ_1077 /* Random.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Crypto::Random::Product" /* Random.framework */; };
-		OBJ_1078 /* CCryptoOpenSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Crypto::CCryptoOpenSSL::Product" /* CCryptoOpenSSL.framework */; };
-		OBJ_1079 /* CBcrypt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Crypto::CBcrypt::Product" /* CBcrypt.framework */; };
-		OBJ_1080 /* CBase32.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Crypto::CBase32::Product" /* CBase32.framework */; };
-		OBJ_1081 /* FluentSQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "FluentSQLite::FluentSQLite::Product" /* FluentSQLite.framework */; };
-		OBJ_1082 /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SQLite::SQLite::Product" /* SQLite.framework */; };
-		OBJ_1083 /* FluentSQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Fluent::FluentSQL::Product" /* FluentSQL.framework */; };
-		OBJ_1084 /* SQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SQL::SQL::Product" /* SQL.framework */; };
-		OBJ_1085 /* Fluent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Fluent::Fluent::Product" /* Fluent.framework */; };
-		OBJ_1086 /* DatabaseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "DatabaseKit::DatabaseKit::Product" /* DatabaseKit.framework */; };
-		OBJ_1087 /* Command.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Console::Command::Product" /* Command.framework */; };
-		OBJ_1088 /* Console.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Console::Console::Product" /* Console.framework */; };
-		OBJ_1089 /* Service.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Service::Service::Product" /* Service.framework */; };
-		OBJ_1090 /* Logging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Console::Logging::Product" /* Logging.framework */; };
-		OBJ_1091 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::Core::Product" /* Core.framework */; };
-		OBJ_1092 /* NIOFoundationCompat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::NIOFoundationCompat::Product" /* NIOFoundationCompat.framework */; };
-		OBJ_1093 /* COperatingSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::COperatingSystem::Product" /* COperatingSystem.framework */; };
-		OBJ_1094 /* Bits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::Bits::Product" /* Bits.framework */; };
-		OBJ_1095 /* Debugging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::Debugging::Product" /* Debugging.framework */; };
-		OBJ_1096 /* Async.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Core::Async::Product" /* Async.framework */; };
-		OBJ_1097 /* NIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::NIO::Product" /* NIO.framework */; };
-		OBJ_1098 /* CNIOSHA1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::CNIOSHA1::Product" /* CNIOSHA1.framework */; };
-		OBJ_1099 /* NIOPriorityQueue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::NIOPriorityQueue::Product" /* NIOPriorityQueue.framework */; };
-		OBJ_1100 /* NIOConcurrencyHelpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::NIOConcurrencyHelpers::Product" /* NIOConcurrencyHelpers.framework */; };
-		OBJ_1101 /* CNIOAtomics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::CNIOAtomics::Product" /* CNIOAtomics.framework */; };
-		OBJ_1102 /* CNIODarwin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::CNIODarwin::Product" /* CNIODarwin.framework */; };
-		OBJ_1103 /* CNIOLinux.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "swift-nio::CNIOLinux::Product" /* CNIOLinux.framework */; };
 		OBJ_1152 /* Async+NIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_707 /* Async+NIO.swift */; };
 		OBJ_1153 /* AsyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_708 /* AsyncError.swift */; };
 		OBJ_1154 /* Collection+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_709 /* Collection+Future.swift */; };
@@ -4751,321 +4705,6 @@
 			remoteGlobalIDString = "swift-nio::CNIOLinux";
 			remoteInfo = CNIOLinux;
 		};
-		ACA4762921A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "SkateBudapestVapor::App";
-			remoteInfo = App;
-		};
-		ACA4762A21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Vapor::Vapor";
-			remoteInfo = Vapor;
-		};
-		ACA4762B21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "WebSocket::WebSocket";
-			remoteInfo = WebSocket;
-		};
-		ACA4762C21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio::NIOWebSocket";
-			remoteInfo = NIOWebSocket;
-		};
-		ACA4762D21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Validation::Validation";
-			remoteInfo = Validation;
-		};
-		ACA4762E21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "URLEncodedForm::URLEncodedForm";
-			remoteInfo = URLEncodedForm;
-		};
-		ACA4762F21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "TemplateKit::TemplateKit";
-			remoteInfo = TemplateKit;
-		};
-		ACA4763021A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Routing::Routing";
-			remoteInfo = Routing;
-		};
-		ACA4763121A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Multipart::Multipart";
-			remoteInfo = Multipart;
-		};
-		ACA4763221A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "HTTP::HTTP";
-			remoteInfo = HTTP;
-		};
-		ACA4763321A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio::NIOHTTP1";
-			remoteInfo = NIOHTTP1;
-		};
-		ACA4763421A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio::CNIOZlib";
-			remoteInfo = CNIOZlib;
-		};
-		ACA4763521A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio::CNIOHTTPParser";
-			remoteInfo = CNIOHTTPParser;
-		};
-		ACA4763621A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Crypto::Crypto";
-			remoteInfo = Crypto;
-		};
-		ACA4763721A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio-ssl::NIOOpenSSL";
-			remoteInfo = NIOOpenSSL;
-		};
-		ACA4763821A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio::NIOTLS";
-			remoteInfo = NIOTLS;
-		};
-		ACA4763921A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio-ssl::CNIOOpenSSL";
-			remoteInfo = CNIOOpenSSL;
-		};
-		ACA4763A21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Crypto::Random";
-			remoteInfo = Random;
-		};
-		ACA4763B21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Crypto::CCryptoOpenSSL";
-			remoteInfo = CCryptoOpenSSL;
-		};
-		ACA4763C21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Crypto::CBcrypt";
-			remoteInfo = CBcrypt;
-		};
-		ACA4763D21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Crypto::CBase32";
-			remoteInfo = CBase32;
-		};
-		ACA4763E21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "FluentSQLite::FluentSQLite";
-			remoteInfo = FluentSQLite;
-		};
-		ACA4763F21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "SQLite::SQLite";
-			remoteInfo = SQLite;
-		};
-		ACA4764021A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Fluent::FluentSQL";
-			remoteInfo = FluentSQL;
-		};
-		ACA4764121A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "SQL::SQL";
-			remoteInfo = SQL;
-		};
-		ACA4764221A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Fluent::Fluent";
-			remoteInfo = Fluent;
-		};
-		ACA4764321A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "DatabaseKit::DatabaseKit";
-			remoteInfo = DatabaseKit;
-		};
-		ACA4764421A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Console::Command";
-			remoteInfo = Command;
-		};
-		ACA4764521A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Console::Console";
-			remoteInfo = Console;
-		};
-		ACA4764621A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Service::Service";
-			remoteInfo = Service;
-		};
-		ACA4764721A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Console::Logging";
-			remoteInfo = Logging;
-		};
-		ACA4764821A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Core::Core";
-			remoteInfo = Core;
-		};
-		ACA4764921A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio::NIOFoundationCompat";
-			remoteInfo = NIOFoundationCompat;
-		};
-		ACA4764A21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Core::COperatingSystem";
-			remoteInfo = COperatingSystem;
-		};
-		ACA4764B21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Core::Bits";
-			remoteInfo = Bits;
-		};
-		ACA4764C21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Core::Debugging";
-			remoteInfo = Debugging;
-		};
-		ACA4764D21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Core::Async";
-			remoteInfo = Async;
-		};
-		ACA4764E21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio::NIO";
-			remoteInfo = NIO;
-		};
-		ACA4764F21A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio::CNIOSHA1";
-			remoteInfo = CNIOSHA1;
-		};
-		ACA4765021A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio::NIOPriorityQueue";
-			remoteInfo = NIOPriorityQueue;
-		};
-		ACA4765121A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio::NIOConcurrencyHelpers";
-			remoteInfo = NIOConcurrencyHelpers;
-		};
-		ACA4765221A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio::CNIOAtomics";
-			remoteInfo = CNIOAtomics;
-		};
-		ACA4765321A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio::CNIODarwin";
-			remoteInfo = CNIODarwin;
-		};
-		ACA4765421A35D5500B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "swift-nio::CNIOLinux";
-			remoteInfo = CNIOLinux;
-		};
-		ACA4765521A35D5800B95817 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "SkateBudapestVapor::AppTests";
-			remoteInfo = AppTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -5194,7 +4833,6 @@
 		OBJ_207 /* SQLTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLTable.swift; sourceTree = "<group>"; };
 		OBJ_208 /* SQLTableConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLTableConstraint.swift; sourceTree = "<group>"; };
 		OBJ_209 /* SQLTableConstraintAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLTableConstraintAlgorithm.swift; sourceTree = "<group>"; };
-		OBJ_21 /* AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTests.swift; sourceTree = "<group>"; };
 		OBJ_210 /* SQLTableIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLTableIdentifier.swift; sourceTree = "<group>"; };
 		OBJ_211 /* SQLUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLUpdate.swift; sourceTree = "<group>"; };
 		OBJ_212 /* SQLUpdateBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLUpdateBuilder.swift; sourceTree = "<group>"; };
@@ -5772,7 +5410,6 @@
 		"SQLite::SQLite::Product" /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SQLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Service::Service::Product" /* Service.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Service.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"SkateBudapestVapor::App::Product" /* App.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"SkateBudapestVapor::AppTests::Product" /* AppTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		"SkateBudapestVapor::Run::Product" /* Run */ = {isa = PBXFileReference; lastKnownFileType = text; path = Run; sourceTree = BUILT_PRODUCTS_DIR; };
 		"TemplateKit::TemplateKit::Product" /* TemplateKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TemplateKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"URLEncodedForm::URLEncodedForm::Product" /* URLEncodedForm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = URLEncodedForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -5797,57 +5434,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_1059 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_1060 /* App.framework in Frameworks */,
-				OBJ_1061 /* Vapor.framework in Frameworks */,
-				OBJ_1062 /* WebSocket.framework in Frameworks */,
-				OBJ_1063 /* NIOWebSocket.framework in Frameworks */,
-				OBJ_1064 /* Validation.framework in Frameworks */,
-				OBJ_1065 /* URLEncodedForm.framework in Frameworks */,
-				OBJ_1066 /* TemplateKit.framework in Frameworks */,
-				OBJ_1067 /* Routing.framework in Frameworks */,
-				OBJ_1068 /* Multipart.framework in Frameworks */,
-				OBJ_1069 /* HTTP.framework in Frameworks */,
-				OBJ_1070 /* NIOHTTP1.framework in Frameworks */,
-				OBJ_1071 /* CNIOZlib.framework in Frameworks */,
-				OBJ_1072 /* CNIOHTTPParser.framework in Frameworks */,
-				OBJ_1073 /* Crypto.framework in Frameworks */,
-				OBJ_1074 /* NIOOpenSSL.framework in Frameworks */,
-				OBJ_1075 /* NIOTLS.framework in Frameworks */,
-				OBJ_1076 /* CNIOOpenSSL.framework in Frameworks */,
-				OBJ_1077 /* Random.framework in Frameworks */,
-				OBJ_1078 /* CCryptoOpenSSL.framework in Frameworks */,
-				OBJ_1079 /* CBcrypt.framework in Frameworks */,
-				OBJ_1080 /* CBase32.framework in Frameworks */,
-				OBJ_1081 /* FluentSQLite.framework in Frameworks */,
-				OBJ_1082 /* SQLite.framework in Frameworks */,
-				OBJ_1083 /* FluentSQL.framework in Frameworks */,
-				OBJ_1084 /* SQL.framework in Frameworks */,
-				OBJ_1085 /* Fluent.framework in Frameworks */,
-				OBJ_1086 /* DatabaseKit.framework in Frameworks */,
-				OBJ_1087 /* Command.framework in Frameworks */,
-				OBJ_1088 /* Console.framework in Frameworks */,
-				OBJ_1089 /* Service.framework in Frameworks */,
-				OBJ_1090 /* Logging.framework in Frameworks */,
-				OBJ_1091 /* Core.framework in Frameworks */,
-				OBJ_1092 /* NIOFoundationCompat.framework in Frameworks */,
-				OBJ_1093 /* COperatingSystem.framework in Frameworks */,
-				OBJ_1094 /* Bits.framework in Frameworks */,
-				OBJ_1095 /* Debugging.framework in Frameworks */,
-				OBJ_1096 /* Async.framework in Frameworks */,
-				OBJ_1097 /* NIO.framework in Frameworks */,
-				OBJ_1098 /* CNIOSHA1.framework in Frameworks */,
-				OBJ_1099 /* NIOPriorityQueue.framework in Frameworks */,
-				OBJ_1100 /* NIOConcurrencyHelpers.framework in Frameworks */,
-				OBJ_1101 /* CNIOAtomics.framework in Frameworks */,
-				OBJ_1102 /* CNIODarwin.framework in Frameworks */,
-				OBJ_1103 /* CNIOLinux.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		OBJ_1167 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
@@ -6869,23 +6455,6 @@
 			path = ".build/checkouts/sql.git--5847654560568495844/Sources/SQL";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_19 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_20 /* AppTests */,
-			);
-			name = Tests;
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_20 /* AppTests */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_21 /* AppTests.swift */,
-			);
-			name = AppTests;
-			path = Tests/AppTests;
-			sourceTree = SOURCE_ROOT;
-		};
 		OBJ_213 /* SQLBenchmark */ = {
 			isa = PBXGroup;
 			children = (
@@ -7718,7 +7287,6 @@
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
-				OBJ_19 /* Tests */,
 				OBJ_22 /* Public */,
 				OBJ_23 /* Dependencies */,
 				OBJ_865 /* Products */,
@@ -8830,7 +8398,6 @@
 				"Console::Console::Product" /* Console.framework */,
 				"swift-nio::CNIODarwin::Product" /* CNIODarwin.framework */,
 				"Validation::Validation::Product" /* Validation.framework */,
-				"SkateBudapestVapor::AppTests::Product" /* AppTests.xctest */,
 				"URLEncodedForm::URLEncodedForm::Product" /* URLEncodedForm.framework */,
 				"Vapor::Vapor::Product" /* Vapor.framework */,
 				"Multipart::Multipart::Product" /* Multipart.framework */,
@@ -9772,66 +9339,6 @@
 			productReference = "SkateBudapestVapor::App::Product" /* App.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		"SkateBudapestVapor::AppTests" /* AppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_1054 /* Build configuration list for PBXNativeTarget "AppTests" */;
-			buildPhases = (
-				OBJ_1057 /* Sources */,
-				OBJ_1059 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				OBJ_1104 /* PBXTargetDependency */,
-				OBJ_1105 /* PBXTargetDependency */,
-				OBJ_1106 /* PBXTargetDependency */,
-				OBJ_1107 /* PBXTargetDependency */,
-				OBJ_1108 /* PBXTargetDependency */,
-				OBJ_1109 /* PBXTargetDependency */,
-				OBJ_1110 /* PBXTargetDependency */,
-				OBJ_1111 /* PBXTargetDependency */,
-				OBJ_1112 /* PBXTargetDependency */,
-				OBJ_1113 /* PBXTargetDependency */,
-				OBJ_1114 /* PBXTargetDependency */,
-				OBJ_1115 /* PBXTargetDependency */,
-				OBJ_1116 /* PBXTargetDependency */,
-				OBJ_1117 /* PBXTargetDependency */,
-				OBJ_1118 /* PBXTargetDependency */,
-				OBJ_1119 /* PBXTargetDependency */,
-				OBJ_1120 /* PBXTargetDependency */,
-				OBJ_1121 /* PBXTargetDependency */,
-				OBJ_1122 /* PBXTargetDependency */,
-				OBJ_1123 /* PBXTargetDependency */,
-				OBJ_1124 /* PBXTargetDependency */,
-				OBJ_1125 /* PBXTargetDependency */,
-				OBJ_1126 /* PBXTargetDependency */,
-				OBJ_1127 /* PBXTargetDependency */,
-				OBJ_1128 /* PBXTargetDependency */,
-				OBJ_1129 /* PBXTargetDependency */,
-				OBJ_1130 /* PBXTargetDependency */,
-				OBJ_1131 /* PBXTargetDependency */,
-				OBJ_1132 /* PBXTargetDependency */,
-				OBJ_1133 /* PBXTargetDependency */,
-				OBJ_1134 /* PBXTargetDependency */,
-				OBJ_1135 /* PBXTargetDependency */,
-				OBJ_1136 /* PBXTargetDependency */,
-				OBJ_1137 /* PBXTargetDependency */,
-				OBJ_1138 /* PBXTargetDependency */,
-				OBJ_1139 /* PBXTargetDependency */,
-				OBJ_1140 /* PBXTargetDependency */,
-				OBJ_1141 /* PBXTargetDependency */,
-				OBJ_1142 /* PBXTargetDependency */,
-				OBJ_1143 /* PBXTargetDependency */,
-				OBJ_1144 /* PBXTargetDependency */,
-				OBJ_1145 /* PBXTargetDependency */,
-				OBJ_1146 /* PBXTargetDependency */,
-				OBJ_1147 /* PBXTargetDependency */,
-			);
-			name = AppTests;
-			productName = AppTests;
-			productReference = "SkateBudapestVapor::AppTests::Product" /* AppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		"SkateBudapestVapor::Run" /* Run */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_2291 /* Build configuration list for PBXNativeTarget "Run" */;
@@ -10547,9 +10054,6 @@
 					"SkateBudapestVapor::App" = {
 						LastSwiftMigration = 1010;
 					};
-					"SkateBudapestVapor::AppTests" = {
-						LastSwiftMigration = 1010;
-					};
 					"SkateBudapestVapor::Run" = {
 						LastSwiftMigration = 1010;
 					};
@@ -10607,7 +10111,6 @@
 			projectRoot = "";
 			targets = (
 				"SkateBudapestVapor::App" /* App */,
-				"SkateBudapestVapor::AppTests" /* AppTests */,
 				"Core::Async" /* Async */,
 				"Core::Bits" /* Bits */,
 				"Crypto::CBase32" /* CBase32 */,
@@ -10678,14 +10181,6 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_1057 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_1058 /* AppTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		OBJ_1151 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -11931,226 +11426,6 @@
 			isa = PBXTargetDependency;
 			target = "swift-nio::CNIOLinux" /* CNIOLinux */;
 			targetProxy = ACA475FD21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1104 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "SkateBudapestVapor::App" /* App */;
-			targetProxy = ACA4762921A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1105 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Vapor::Vapor" /* Vapor */;
-			targetProxy = ACA4762A21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1106 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "WebSocket::WebSocket" /* WebSocket */;
-			targetProxy = ACA4762B21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1107 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio::NIOWebSocket" /* NIOWebSocket */;
-			targetProxy = ACA4762C21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1108 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Validation::Validation" /* Validation */;
-			targetProxy = ACA4762D21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1109 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "URLEncodedForm::URLEncodedForm" /* URLEncodedForm */;
-			targetProxy = ACA4762E21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1110 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "TemplateKit::TemplateKit" /* TemplateKit */;
-			targetProxy = ACA4762F21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1111 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Routing::Routing" /* Routing */;
-			targetProxy = ACA4763021A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1112 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Multipart::Multipart" /* Multipart */;
-			targetProxy = ACA4763121A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1113 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "HTTP::HTTP" /* HTTP */;
-			targetProxy = ACA4763221A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1114 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio::NIOHTTP1" /* NIOHTTP1 */;
-			targetProxy = ACA4763321A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1115 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio::CNIOZlib" /* CNIOZlib */;
-			targetProxy = ACA4763421A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1116 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio::CNIOHTTPParser" /* CNIOHTTPParser */;
-			targetProxy = ACA4763521A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1117 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Crypto::Crypto" /* Crypto */;
-			targetProxy = ACA4763621A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1118 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio-ssl::NIOOpenSSL" /* NIOOpenSSL */;
-			targetProxy = ACA4763721A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1119 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio::NIOTLS" /* NIOTLS */;
-			targetProxy = ACA4763821A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1120 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio-ssl::CNIOOpenSSL" /* CNIOOpenSSL */;
-			targetProxy = ACA4763921A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1121 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Crypto::Random" /* Random */;
-			targetProxy = ACA4763A21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1122 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Crypto::CCryptoOpenSSL" /* CCryptoOpenSSL */;
-			targetProxy = ACA4763B21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1123 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Crypto::CBcrypt" /* CBcrypt */;
-			targetProxy = ACA4763C21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1124 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Crypto::CBase32" /* CBase32 */;
-			targetProxy = ACA4763D21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1125 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "FluentSQLite::FluentSQLite" /* FluentSQLite */;
-			targetProxy = ACA4763E21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1126 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "SQLite::SQLite" /* SQLite */;
-			targetProxy = ACA4763F21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1127 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Fluent::FluentSQL" /* FluentSQL */;
-			targetProxy = ACA4764021A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1128 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "SQL::SQL" /* SQL */;
-			targetProxy = ACA4764121A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1129 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Fluent::Fluent" /* Fluent */;
-			targetProxy = ACA4764221A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1130 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "DatabaseKit::DatabaseKit" /* DatabaseKit */;
-			targetProxy = ACA4764321A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1131 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Console::Command" /* Command */;
-			targetProxy = ACA4764421A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1132 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Console::Console" /* Console */;
-			targetProxy = ACA4764521A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1133 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Service::Service" /* Service */;
-			targetProxy = ACA4764621A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1134 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Console::Logging" /* Logging */;
-			targetProxy = ACA4764721A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1135 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Core::Core" /* Core */;
-			targetProxy = ACA4764821A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1136 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio::NIOFoundationCompat" /* NIOFoundationCompat */;
-			targetProxy = ACA4764921A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1137 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Core::COperatingSystem" /* COperatingSystem */;
-			targetProxy = ACA4764A21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1138 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Core::Bits" /* Bits */;
-			targetProxy = ACA4764B21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1139 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Core::Debugging" /* Debugging */;
-			targetProxy = ACA4764C21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1140 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Core::Async" /* Async */;
-			targetProxy = ACA4764D21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1141 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio::NIO" /* NIO */;
-			targetProxy = ACA4764E21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1142 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio::CNIOSHA1" /* CNIOSHA1 */;
-			targetProxy = ACA4764F21A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1143 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio::NIOPriorityQueue" /* NIOPriorityQueue */;
-			targetProxy = ACA4765021A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1144 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio::NIOConcurrencyHelpers" /* NIOConcurrencyHelpers */;
-			targetProxy = ACA4765121A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1145 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio::CNIOAtomics" /* CNIOAtomics */;
-			targetProxy = ACA4765221A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1146 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio::CNIODarwin" /* CNIODarwin */;
-			targetProxy = ACA4765321A35D5500B95817 /* PBXContainerItemProxy */;
-		};
-		OBJ_1147 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "swift-nio::CNIOLinux" /* CNIOLinux */;
-			targetProxy = ACA4765421A35D5500B95817 /* PBXContainerItemProxy */;
 		};
 		OBJ_1175 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -13937,11 +13212,6 @@
 			target = "swift-nio::CNIOLinux" /* CNIOLinux */;
 			targetProxy = ACA474F621A35D5500B95817 /* PBXContainerItemProxy */;
 		};
-		OBJ_2625 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "SkateBudapestVapor::AppTests" /* AppTests */;
-			targetProxy = ACA4765521A35D5800B95817 /* PBXContainerItemProxy */;
-		};
 		OBJ_2686 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Service::Service" /* Service */;
@@ -14545,114 +13815,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_1055 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/.build/checkouts/swift-nio.git--3020518368850693572/Sources/CNIOZlib/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio.git--3020518368850693572/Sources/CNIOHTTPParser/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio-ssl.git-8148710701426305481/Sources/CNIOOpenSSL/include",
-					"$(SRCROOT)/.build/checkouts/crypto.git--6018064664952972454/Sources/CCryptoOpenSSL/include",
-					"$(SRCROOT)/.build/checkouts/crypto.git--6018064664952972454/Sources/CBcrypt/include",
-					"$(SRCROOT)/.build/checkouts/crypto.git--6018064664952972454/Sources/CBase32/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio-ssl-support.git--2687895996838724589",
-					"$(SRCROOT)/.build/checkouts/swift-nio.git--3020518368850693572/Sources/CNIOSHA1/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio.git--3020518368850693572/Sources/CNIOAtomics/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio.git--3020518368850693572/Sources/CNIODarwin/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio.git--3020518368850693572/Sources/CNIOLinux/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio-zlib-support.git-1991550043630244017",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOZlib",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOHTTPParser",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOOpenSSL",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CCryptoOpenSSL",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOSHA1",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOAtomics",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIODarwin",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOLinux",
-				);
-				INFOPLIST_FILE = SkateBudapestVapor.xcodeproj/AppTests_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-I/usr/local/Cellar/libressl/2.8.2/include",
-					"-I/usr/local/Cellar/libressl/2.8.2/include",
-				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-L/usr/local/Cellar/libressl/2.8.2/lib",
-					"-lssl",
-					"-L/usr/local/Cellar/libressl/2.8.2/lib",
-					"-lcrypto",
-					"-lz",
-				);
-				OTHER_SWIFT_FLAGS = "$(inherited) -I/usr/local/Cellar/libressl/2.8.2/include -I/usr/local/Cellar/libressl/2.8.2/include -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOZlib/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOHTTPParser/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOOpenSSL/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CCryptoOpenSSL/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/.build/checkouts/crypto.git--6018064664952972454/Sources/CBcrypt/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/.build/checkouts/crypto.git--6018064664952972454/Sources/CBase32/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOSHA1/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOAtomics/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIODarwin/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOLinux/module.modulemap";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				SWIFT_VERSION = 4.0;
-				TARGET_NAME = AppTests;
-			};
-			name = Debug;
-		};
-		OBJ_1056 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/.build/checkouts/swift-nio.git--3020518368850693572/Sources/CNIOZlib/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio.git--3020518368850693572/Sources/CNIOHTTPParser/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio-ssl.git-8148710701426305481/Sources/CNIOOpenSSL/include",
-					"$(SRCROOT)/.build/checkouts/crypto.git--6018064664952972454/Sources/CCryptoOpenSSL/include",
-					"$(SRCROOT)/.build/checkouts/crypto.git--6018064664952972454/Sources/CBcrypt/include",
-					"$(SRCROOT)/.build/checkouts/crypto.git--6018064664952972454/Sources/CBase32/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio-ssl-support.git--2687895996838724589",
-					"$(SRCROOT)/.build/checkouts/swift-nio.git--3020518368850693572/Sources/CNIOSHA1/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio.git--3020518368850693572/Sources/CNIOAtomics/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio.git--3020518368850693572/Sources/CNIODarwin/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio.git--3020518368850693572/Sources/CNIOLinux/include",
-					"$(SRCROOT)/.build/checkouts/swift-nio-zlib-support.git-1991550043630244017",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOZlib",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOHTTPParser",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOOpenSSL",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CCryptoOpenSSL",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOSHA1",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOAtomics",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIODarwin",
-					"$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOLinux",
-				);
-				INFOPLIST_FILE = SkateBudapestVapor.xcodeproj/AppTests_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-I/usr/local/Cellar/libressl/2.8.2/include",
-					"-I/usr/local/Cellar/libressl/2.8.2/include",
-				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-L/usr/local/Cellar/libressl/2.8.2/lib",
-					"-lssl",
-					"-L/usr/local/Cellar/libressl/2.8.2/lib",
-					"-lcrypto",
-					"-lz",
-				);
-				OTHER_SWIFT_FLAGS = "$(inherited) -I/usr/local/Cellar/libressl/2.8.2/include -I/usr/local/Cellar/libressl/2.8.2/include -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOZlib/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOHTTPParser/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOOpenSSL/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CCryptoOpenSSL/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/.build/checkouts/crypto.git--6018064664952972454/Sources/CBcrypt/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/.build/checkouts/crypto.git--6018064664952972454/Sources/CBase32/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOSHA1/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOAtomics/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIODarwin/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/SkateBudapestVapor.xcodeproj/GeneratedModuleMap/CNIOLinux/module.modulemap";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
-				SWIFT_VERSION = 4.0;
-				TARGET_NAME = AppTests;
-			};
-			name = Release;
-		};
 		OBJ_1149 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -18588,15 +17750,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		OBJ_1054 /* Build configuration list for PBXNativeTarget "AppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_1055 /* Debug */,
-				OBJ_1056 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		OBJ_1148 /* Build configuration list for PBXNativeTarget "Async" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
