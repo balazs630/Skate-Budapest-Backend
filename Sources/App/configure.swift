@@ -1,32 +1,31 @@
-import FluentSQLite
+//
+//  configure.swift
+//  SkateBudapestBackend
+//
+//  Created by Horváth Balázs on 2018. 11. 21..
+//
+
 import Vapor
 
-// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
-    // Register providers
-    try services.register(FluentSQLiteProvider())
+    try registerEngineRouter(to: &services)
+    registerMiddlewares(to: &services)
+}
 
-    // Register routes to the router
+private func registerEngineRouter(to services: inout Services) throws {
     let router = EngineRouter.default()
     try routes(router)
+
     services.register(router, as: Router.self)
+}
 
-    // Register middleware
+private func registerMiddlewares(to services: inout Services) {
     var middlewares = MiddlewareConfig()
-    middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
-    middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
+    // Serves files from `Public/` directory
+    middlewares.use(FileMiddleware.self)
+
+    // Catches errors and converts to HTTP response
+    middlewares.use(ErrorMiddleware.self)
+
     services.register(middlewares)
-
-    // Configure a SQLite database
-    let sqlite = try SQLiteDatabase(storage: .memory)
-
-    // Register the configured SQLite database to the database config.
-    var databases = DatabasesConfig()
-    databases.add(database: sqlite, as: .sqlite)
-    services.register(databases)
-
-    // Configure migrations
-    var migrations = MigrationConfig()
-    migrations.add(model: Todo.self, database: .sqlite)
-    services.register(migrations)
 }
