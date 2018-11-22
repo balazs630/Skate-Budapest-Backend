@@ -9,5 +9,8 @@ import Vapor
 
 public func routes(_ router: Router) throws {
     let placeController = PlaceController()
-    router.get("place", use: placeController.example)
+
+    router.group("v1") { router in
+        router.get("place", use: placeController.getPlace)
+    }
 }

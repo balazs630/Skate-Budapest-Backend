@@ -8,7 +8,18 @@
 import Vapor
 
 final class PlaceController {
-    func example(_ req: Request) throws -> Place {
-        return Place(id: 1, title: "title")
+    // MARK: Properties
+    let placeService: PlaceServiceInterface
+
+    // MARK: Initializers
+    init() {
+        placeService = PlaceService()
+    }
+}
+
+// MARK: Controller tasks
+extension PlaceController {
+    func getPlace(_ req: Request) -> Place {
+        return placeService.getSimplePlace()
     }
 }
