@@ -7,10 +7,17 @@
 
 import Vapor
 
+fileprivate enum Slug {
+    static let apiVersionPath = "v1"
+    static let placeUrl = "place"
+}
+
 public func routes(_ router: Router) throws {
+    // MARK: Properties
     let placeController = PlaceController()
 
-    router.group("v1") { router in
-        router.get("place", use: placeController.getPlace)
+    // MARK: Configure routes
+    router.group(Slug.apiVersionPath) { versionPath in
+        versionPath.get(Slug.placeUrl, use: placeController.getPlace)
     }
 }
