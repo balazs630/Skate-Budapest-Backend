@@ -9,7 +9,9 @@ import Vapor
 
 fileprivate enum Slug {
     static let apiVersionPath = "v1"
-    static let placeUrl = "place"
+    static let waypointPath = "waypoint/"
+    static let infoPath = "info"
+    static let listPath = "list"
 }
 
 public func routes(_ router: Router) throws {
@@ -17,7 +19,8 @@ public func routes(_ router: Router) throws {
     let placeController = PlaceController()
 
     // MARK: Configure routes
-    router.group(Slug.apiVersionPath) { versionPath in
-        versionPath.get(Slug.placeUrl, use: placeController.getPlace)
+    router.group(Slug.apiVersionPath) { apiVersionPath in
+        apiVersionPath.get(Slug.waypointPath + Slug.infoPath, use: placeController.getWaypointInfo)
+        apiVersionPath.get(Slug.waypointPath + Slug.listPath, use: placeController.getWaypoints)
     }
 }
