@@ -15,7 +15,8 @@ final class Place: Content {
     var info: String
     var type: PlaceType
     var status: PlaceStatus
-    var images: [PlaceImage]
+    var thumbnailUrl: String?
+    var imageUrls: [String?]
 
     init(id: String,
          latitude: Double,
@@ -24,7 +25,8 @@ final class Place: Content {
          info: String,
          type: PlaceType,
          status: PlaceStatus,
-         images: [PlaceImage]) {
+         thumbnailUrl: String?,
+         imageUrls: [String?]) {
         self.id = id
         self.latitude = latitude
         self.longitude = longitude
@@ -32,6 +34,7 @@ final class Place: Content {
         self.info = info
         self.type = type
         self.status = status
-        self.images = images
+        self.thumbnailUrl = thumbnailUrl
+        self.imageUrls = imageUrls
     }
 }

@@ -21,13 +21,10 @@ struct Data {
             info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
             type: .skatepark,
             status: .active,
-            images: [
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Helicopter.png",
-                              imageSizeClass: .thumbnail),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Helicopter.jpg",
-                              imageSizeClass: .large),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Crag.jpg",
-                              imageSizeClass: .large)
+            thumbnailUrl: "https://libertyskate.hu/mobile/example/images/Helicopter.png",
+            imageUrls: [
+                "https://libertyskate.hu/mobile/example/images/Helicopter.jpg",
+                "https://libertyskate.hu/mobile/example/images/Helicopter.jpg"
             ]
         ),
         Place(
@@ -38,11 +35,9 @@ struct Data {
             info: "Incredible views from up here.",
             type: .skatepark,
             status: .active,
-            images: [
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Crag.png",
-                              imageSizeClass: .thumbnail),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Crag.jpg",
-                              imageSizeClass: .large)
+            thumbnailUrl: "https://libertyskate.hu/mobile/example/images/Crag.png",
+            imageUrls: [
+                "https://libertyskate.hu/mobile/example/images/Crag.jpg"
             ]
         ),
         Place(
@@ -53,13 +48,10 @@ struct Data {
             info: "Oh no! Clouds rolling in.",
             type: .skatepark,
             status: .active,
-            images: [
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/FreshTracks.png",
-                              imageSizeClass: .thumbnail),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/FreshTracks.jpg",
-                              imageSizeClass: .large),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/FreshTracks.jpg",
-                              imageSizeClass: .large)
+            thumbnailUrl: "https://libertyskate.hu/mobile/example/images/FreshTracks.png",
+            imageUrls: [
+                "https://libertyskate.hu/mobile/example/images/FreshTracks.jpg",
+                "https://libertyskate.hu/mobile/example/images/FreshTracks.jpg"
             ]
         ),
         Place(
@@ -70,11 +62,9 @@ struct Data {
             info: "Brace yourself for fierce wind.",
             type: .streetspot,
             status: .active,
-            images: [
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/HelicopterLanding.png",
-                              imageSizeClass: .thumbnail),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/HelicopterLanding.jpg",
-                              imageSizeClass: .large)
+            thumbnailUrl: "https://libertyskate.hu/mobile/example/images/HelicopterLanding.png",
+            imageUrls: [
+                "https://libertyskate.hu/mobile/example/images/HelicopterLanding.jpg"
             ]
         ),
         Place(
@@ -85,13 +75,10 @@ struct Data {
             info: "Views are spectacular even from here.",
             type: .streetspot,
             status: .active,
-            images: [
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Mountain.png",
-                              imageSizeClass: .thumbnail),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Mountain.jpg",
-                              imageSizeClass: .large),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Mountain.jpg",
-                              imageSizeClass: .large)
+            thumbnailUrl: "https://libertyskate.hu/mobile/example/images/Mountain.png",
+            imageUrls: [
+                "https://libertyskate.hu/mobile/example/images/Mountain.jpg",
+                "https://libertyskate.hu/mobile/example/images/Mountain.jpg"
             ]
         ),
         Place(
@@ -102,11 +89,9 @@ struct Data {
             info: "This isn’t Jenga, stack ‘em neatly.",
             type: .streetspot,
             status: .active,
-            images: [
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/PileOfSkis.png",
-                              imageSizeClass: .thumbnail),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/PileOfSkis.jpg",
-                              imageSizeClass: .large)
+            thumbnailUrl: "https://libertyskate.hu/mobile/example/images/PileOfSkis.png",
+            imageUrls: [
+                "https://libertyskate.hu/mobile/example/images/PileOfSkis.jpg"
             ]
         ),
         Place(
@@ -117,13 +102,10 @@ struct Data {
             info: "Wouldn’t you love to be at the controls?",
             type: .skateshop,
             status: .active,
-            images: [
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Cockpit.png",
-                              imageSizeClass: .thumbnail),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Cockpit.jpg",
-                              imageSizeClass: .large),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Cockpit.jpg",
-                              imageSizeClass: .large)
+            thumbnailUrl: "https://libertyskate.hu/mobile/example/images/Cockpit.png",
+            imageUrls: [
+                "https://libertyskate.hu/mobile/example/images/Cockpit.jpg",
+                "https://libertyskate.hu/mobile/example/images/Cockpit.jpg"
             ]
         ),
         Place(
@@ -134,11 +116,9 @@ struct Data {
             info: "Cool iPhone feature.",
             type: .skateshop,
             status: .active,
-            images: [
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Panorama.png",
-                              imageSizeClass: .thumbnail),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Panorama.jpg",
-                              imageSizeClass: .large)
+            thumbnailUrl: "https://libertyskate.hu/mobile/example/images/Panorama.png",
+            imageUrls: [
+                "https://libertyskate.hu/mobile/example/images/Panorama.jpg"
             ]
         ),
         Place(
@@ -149,13 +129,10 @@ struct Data {
             info: "In Canada, after all.",
             type: .skateshop,
             status: .inactive,
-            images: [
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Curling.png",
-                              imageSizeClass: .thumbnail),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Curling.jpg",
-                              imageSizeClass: .large),
-                PlaceImage(imageUrl: "https://libertyskate.hu/mobile/example/images/Curling.jpg",
-                              imageSizeClass: .large)
+            thumbnailUrl: "https://libertyskate.hu/mobile/example/images/Curling.png",
+            imageUrls: [
+                "https://libertyskate.hu/mobile/example/images/Curling.jpg",
+                "https://libertyskate.hu/mobile/example/images/Curling.jpg"
             ]
         )
     ]
