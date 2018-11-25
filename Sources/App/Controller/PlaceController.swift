@@ -19,11 +19,11 @@ final class PlaceController {
 
 // MARK: Controller tasks
 extension PlaceController {
-    func getWaypointInfo(_ req: Request) -> WaypointInfo {
-        return placeService.getWaypointInfo()
+    func getPlaceDataInfo(_ req: Request) -> PlaceDataInfo {
+        return placeService.getPlaceDataInfo()
     }
 
-    func getWaypoints(_ req: Request) -> [Waypoint] {
-        return placeService.getWaypoints()
+    func getPlaces(_ req: Request) -> [Place] {
+        return placeService.getPlaces()
     }
 }

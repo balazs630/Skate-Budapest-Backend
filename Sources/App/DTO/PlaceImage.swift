@@ -1,5 +1,5 @@
 //
-//  WaypointImage.swift
+//  PlaceImage.swift
 //  SkateBudapestBackend
 //
 //  Created by Horváth Balázs on 2018. 11. 22..
@@ -7,7 +7,7 @@
 
 import Vapor
 
-final class WaypointImage: Content {
+final class PlaceImage: Content {
     var imageUrl: String
     var imageSizeClass: ImageSizeClassType
 

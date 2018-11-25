@@ -6,11 +6,11 @@
 //
 
 final class PlaceService: PlaceServiceInterface {
-    func getWaypointInfo() -> WaypointInfo {
-        return WaypointInfo(dataVersion: Data.waypointDataVersion)
+    func getPlaceDataInfo() -> PlaceDataInfo {
+        return PlaceDataInfo(dataVersion: Data.placesDataVersion)
     }
 
-    func getWaypoints() -> [Waypoint] {
-        return Data.waypoints
+    func getPlaces() -> [Place] {
+        return Data.places
     }
 }

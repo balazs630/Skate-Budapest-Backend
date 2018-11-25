@@ -6,6 +6,6 @@
 //
 
 protocol PlaceServiceInterface {
-    func getWaypointInfo() -> WaypointInfo
-    func getWaypoints() -> [Waypoint]
+    func getPlaceDataInfo() -> PlaceDataInfo
+    func getPlaces() -> [Place]
 }

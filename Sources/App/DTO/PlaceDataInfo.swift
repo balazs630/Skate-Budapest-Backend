@@ -1,5 +1,5 @@
 //
-//  WaypointInfo.swift
+//  PlaceDataInfo.swift
 //  SkateBudapestBackend
 //
 //  Created by Horváth Balázs on 2018. 11. 23..
@@ -7,7 +7,7 @@
 
 import Vapor
 
-final class WaypointInfo: Content {
+final class PlaceDataInfo: Content {
     var dataVersion: String
 
     init(dataVersion: String) {
