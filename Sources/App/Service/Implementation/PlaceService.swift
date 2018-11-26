@@ -6,11 +6,22 @@
 //
 
 final class PlaceService: PlaceServiceInterface {
+    // MARK: Properties
+    let placeRepository: PlaceRepositoryInterface
+
+    // MARK: Initializers
+    init() {
+        placeRepository = PlaceRepository()
+    }
+}
+
+// MARK: PlaceServiceInterface conformances
+extension PlaceService {
     func getPlaceDataInfo() -> PlaceDataInfo {
-        return PlaceDataInfo(dataVersion: Data.placesDataVersion)
+        return placeRepository.findPlaceDataInfo()
     }
 
     func getPlaces() -> [Place] {
-        return Data.places
+        return placeRepository.findPlaces()
     }
 }

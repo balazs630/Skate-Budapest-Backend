@@ -11,7 +11,7 @@ struct Data {
         Since this API will only have GET endpoints, I've declared all data here which I want to return in the json responses.
         Moving all this stuff to a database later...
     */
-    static let placesDataVersion = "1.0"
+    static let placeDataVersion = PlaceDataInfo(dataVersion: "1.0")
     static let places = [
         Place(
             id: "1371AEF5-5782-49C6-B71B-F3D511ABAC90",
