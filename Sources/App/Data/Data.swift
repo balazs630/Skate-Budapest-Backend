@@ -11,9 +11,9 @@ struct Data {
         Since this API will only have GET endpoints, I've declared all data here which I want to return in the json responses.
         Moving all this stuff to a database later...
     */
-    static let placeDataVersion = PlaceDataInfo(dataVersion: "1.0")
+    static let placeDataVersion = PlaceInfoDTO(dataVersion: "1.0")
     static let places = [
-        Place(
+        PlaceDTO(
             id: "1371AEF5-5782-49C6-B71B-F3D511ABAC90",
             latitude: 47.497912,
             longitude: 19.040235,
@@ -27,7 +27,7 @@ struct Data {
                 "https://libertyskate.hu/mobile/example/images/Helicopter.jpg"
             ]
         ),
-        Place(
+        PlaceDTO(
             id: "D16EEC15-DAB4-4E90-86BE-C5884F0C3B34",
             latitude: 47.539016,
             longitude: 19.034754,
@@ -40,7 +40,7 @@ struct Data {
                 "https://libertyskate.hu/mobile/example/images/Crag.jpg"
             ]
         ),
-        Place(
+        PlaceDTO(
             id: "61BE013D-28BD-40ED-AB4F-D678AACD0B04",
             latitude: 47.420912,
             longitude: 19.090235,
@@ -54,7 +54,7 @@ struct Data {
                 "https://libertyskate.hu/mobile/example/images/FreshTracks.jpg"
             ]
         ),
-        Place(
+        PlaceDTO(
             id: "FBC6DB92-9B2B-476E-978E-1F5E5939D262",
             latitude: 47.560912,
             longitude: 19.160235,
@@ -67,7 +67,7 @@ struct Data {
                 "https://libertyskate.hu/mobile/example/images/HelicopterLanding.jpg"
             ]
         ),
-        Place(
+        PlaceDTO(
             id: "6F64B5D7-4EB6-4BB6-A719-95912101A8E7",
             latitude: 47.380912,
             longitude: 19.044235,
@@ -81,7 +81,7 @@ struct Data {
                 "https://libertyskate.hu/mobile/example/images/Mountain.jpg"
             ]
         ),
-        Place(
+        PlaceDTO(
             id: "0FC2EDBA-01CD-4376-81A5-A3FD872BB7EB",
             latitude: 47.450912,
             longitude: 19.320235,
@@ -94,7 +94,7 @@ struct Data {
                 "https://libertyskate.hu/mobile/example/images/PileOfSkis.jpg"
             ]
         ),
-        Place(
+        PlaceDTO(
             id: "62AA30F7-0D61-4006-B417-B9E34A3190DA",
             latitude: 47.607912,
             longitude: 19.120235,
@@ -108,7 +108,7 @@ struct Data {
                 "https://libertyskate.hu/mobile/example/images/Cockpit.jpg"
             ]
         ),
-        Place(
+        PlaceDTO(
             id: "0CF937B2-C509-4677-B109-4B7E1D9E8791",
             latitude: 47.486818,
             longitude: 19.014536,
@@ -121,7 +121,7 @@ struct Data {
                 "https://libertyskate.hu/mobile/example/images/Panorama.jpg"
             ]
         ),
-        Place(
+        PlaceDTO(
             id: "8A5549E5-C122-47F8-B446-292A71B68A7A",
             latitude: 47.510258,
             longitude: 19.082678,

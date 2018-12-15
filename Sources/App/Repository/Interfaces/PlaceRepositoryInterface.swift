@@ -6,6 +6,6 @@
 //
 
 protocol PlaceRepositoryInterface {
-    func findPlaceDataInfo() -> PlaceDataInfo
-    func findPlaces() -> [Place]
+    func findPlaceDataInfo() -> PlaceInfoDTO
+    func findPlaces() -> [PlaceDTO]
 }

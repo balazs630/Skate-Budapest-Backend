@@ -17,11 +17,11 @@ final class PlaceService: PlaceServiceInterface {
 
 // MARK: PlaceServiceInterface conformances
 extension PlaceService {
-    func getPlaceDataInfo() -> PlaceDataInfo {
+    func getPlaceDataInfo() -> PlaceInfoDTO {
         return placeRepository.findPlaceDataInfo()
     }
 
-    func getPlaces() -> [Place] {
+    func getPlaces() -> [PlaceDTO] {
         return placeRepository.findPlaces()
     }
 }

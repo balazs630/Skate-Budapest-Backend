@@ -6,6 +6,6 @@
 //
 
 protocol PlaceServiceInterface {
-    func getPlaceDataInfo() -> PlaceDataInfo
-    func getPlaces() -> [Place]
+    func getPlaceDataInfo() -> PlaceInfoDTO
+    func getPlaces() -> [PlaceDTO]
 }

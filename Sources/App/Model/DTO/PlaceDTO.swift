@@ -1,5 +1,5 @@
 //
-//  Place.swift
+//  PlaceDTO.swift
 //  SkateBudapestBackend
 //
 //  Created by Horváth Balázs on 2018. 11. 21..
@@ -7,7 +7,7 @@
 
 import Vapor
 
-final class Place: Content {
+final class PlaceDTO: Content {
     var id: String
     var latitude: Double
     var longitude: Double
