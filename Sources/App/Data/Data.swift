@@ -48,7 +48,7 @@ struct Data {
             info: "Oh no! Clouds rolling in.",
             type: .skatepark,
             status: .active,
-            thumbnailUrl: "https://libertyskate.hu/mobile/example/images/FreshTracks.png",
+            thumbnailUrl: nil,
             imageUrls: [
                 "https://libertyskate.hu/mobile/example/images/FreshTracks.jpg",
                 "https://libertyskate.hu/mobile/example/images/FreshTracks.jpg"
@@ -63,9 +63,7 @@ struct Data {
             type: .streetspot,
             status: .active,
             thumbnailUrl: "https://libertyskate.hu/mobile/example/images/HelicopterLanding.png",
-            imageUrls: [
-                "https://libertyskate.hu/mobile/example/images/HelicopterLanding.jpg"
-            ]
+            imageUrls: []
         ),
         PlaceDTO(
             id: "6F64B5D7-4EB6-4BB6-A719-95912101A8E7",
