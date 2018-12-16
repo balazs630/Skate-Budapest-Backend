@@ -1,0 +1,180 @@
+{
+  "swagger": "2.0",
+  "schemes": [
+    "https"
+  ],
+  "host": "skate-budapest.vapor.cloud",
+  "basePath": "/v1",
+  "info": {
+    "description": "Skate Budapest Backend API documentation - design document.\n\n**GitHub projects:**\n  - [Skate Budapest iOS app](https://github.com/balazs630/Skate-Budapest)\n  - [Skate Budapest backend](https://github.com/balazs630/Skate-Budapest-Backend)\n",
+    "version": "2018.12.16",
+    "title": "Skate Budapest Backend",
+    "contact": {
+      "email": "balazs630@icloud.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "x-logo": {
+      "url": "logo.png"
+    }
+  },
+  "produces": [
+    "application/json",
+    "text/csv"
+  ],
+  "consumes": [
+    "application/json",
+    "text/csv"
+  ],
+  "tags": [
+    {
+      "name": "places",
+      "description": "Operations to do with extreme sport related places"
+    }
+  ],
+  "paths": {
+    "/places": {
+      "get": {
+        "tags": [
+          "places"
+        ],
+        "summary": "Get all the places",
+        "operationId": "getAllPlace",
+        "description": "This endpoint allows clients to issue requests against the SkateBudapest API to get a collection of extreme sport related  places in Budapest.\n",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/PlacesSuccessResponse"
+          }
+        }
+      }
+    },
+    "/places/info": {
+      "get": {
+        "tags": [
+          "places"
+        ],
+        "summary": "Get places data information",
+        "operationId": "getPlaceInfo",
+        "description": "This endpoint returns the current dataVersion for the places data.  A change in the `dataVersion` string indicates a modification of  an existing place or the addition of a new one.\n",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/PlacesInfoSuccessResponse"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "PlacesSuccessResponse": {
+      "description": "Success",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Place"
+        }
+      }
+    },
+    "PlacesInfoSuccessResponse": {
+      "description": "Success",
+      "schema": {
+        "$ref": "#/definitions/DataVersion"
+      }
+    }
+  },
+  "definitions": {
+    "Place": {
+      "description": "Place object",
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "info",
+        "latitude",
+        "longitude",
+        "type",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "description": "The ID of the place",
+          "type": "string",
+          "example": "8541AEF5-5782-49A6-B71B-F3D511ABAC40"
+        },
+        "name": {
+          "description": "The name of the place",
+          "type": "string",
+          "example": "Example Skatepark name"
+        },
+        "info": {
+          "description": "The description of the place",
+          "type": "string",
+          "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
+        },
+        "latitude": {
+          "description": "The latitude coordinate part of the place",
+          "type": "number",
+          "format": "float",
+          "example": 47.123456
+        },
+        "longitude": {
+          "description": "The longitude coordinate part of the place",
+          "type": "number",
+          "format": "float",
+          "example": 19.123456
+        },
+        "type": {
+          "description": "The type of the place",
+          "type": "string",
+          "enum": [
+            "skatepark",
+            "skateshop",
+            "streetspot"
+          ],
+          "example": "skatepark"
+        },
+        "status": {
+          "description": "The status of the place",
+          "type": "string",
+          "enum": [
+            "active",
+            "inactive",
+            "pending"
+          ],
+          "example": "active"
+        },
+        "thumbnailUrl": {
+          "description": "Thumnbnail image url of the place",
+          "type": "string",
+          "example": "https://images.com/skatepark.png"
+        },
+        "imageUrls": {
+          "description": "The gallery images of the place",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "https://images.com/skatepark-1.jpg",
+            "https://images.com/skatepark-2.jpg"
+          ]
+        }
+      }
+    },
+    "DataVersion": {
+      "description": "DataVersion object",
+      "type": "object",
+      "required": [
+        "dataVersion"
+      ],
+      "properties": {
+        "dataVersion": {
+          "description": "The version of the places data",
+          "type": "string",
+          "example": "1.0"
+        }
+      }
+    }
+  }
+}
