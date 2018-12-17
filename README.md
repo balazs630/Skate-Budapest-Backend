@@ -24,23 +24,24 @@
 -->
 <h1>Skate-Budapest Backend</h1>
 
-Simple backend for Skate-Budapest app using Vapor.
+Simple backend for Skate-Budapest iOS app using Swift with Vapor web framework.
+
+## Specification
+
+- See the [API Documentation](https://balazs630.github.io/Skate-Budapest-Backend/) (Swagger with ReDoc)
+- Preview spec version for branch [`[gh-pages]`](https://github.com/balazs630/Skate-Budapest-Backend/tree/gh-pages)
 
 
 ## Installation
 
-Install Vapor with [Homebrew](https://brew.sh).
+Install Vapor with [Homebrew](https://brew.sh):
 ```
 brew install vapor/tap/vapor
 ```
 
-Update dependencies, generate Xcode project:
-```swift
+Clone the project, then execute:
+```bash
 vapor update
-
-// Would you like to regenerate your xcode project now?
-// y/n> y
-
-// Open Xcode project?
-// y/n> y
 ```
+
+It will download the dependencies and generate an Xcode project for you.
