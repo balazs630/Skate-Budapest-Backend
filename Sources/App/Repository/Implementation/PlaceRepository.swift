@@ -6,7 +6,7 @@
 //
 
 final class PlaceRepository: PlaceRepositoryInterface {
-    func findPlaceDataInfo() -> PlaceInfoDTO {
+    func findPlaceInfo() -> PlaceInfoDTO {
         return Data.placeDataVersion
     }
 

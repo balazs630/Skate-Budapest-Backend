@@ -19,8 +19,8 @@ final class PlaceController {
 
 // MARK: Controller tasks
 extension PlaceController {
-    func getPlaceDataInfo(_ req: Request) -> PlaceInfoDTO {
-        return placeService.getPlaceDataInfo()
+    func getPlaceInfo(_ req: Request) -> PlaceInfoDTO {
+        return placeService.getPlaceInfo()
     }
 
     func getPlaces(_ req: Request) -> [PlaceDTO] {

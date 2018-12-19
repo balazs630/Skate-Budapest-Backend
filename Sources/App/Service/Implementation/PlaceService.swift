@@ -17,8 +17,8 @@ final class PlaceService: PlaceServiceInterface {
 
 // MARK: PlaceServiceInterface conformances
 extension PlaceService {
-    func getPlaceDataInfo() -> PlaceInfoDTO {
-        return placeRepository.findPlaceDataInfo()
+    func getPlaceInfo() -> PlaceInfoDTO {
+        return placeRepository.findPlaceInfo()
     }
 
     func getPlaces() -> [PlaceDTO] {
