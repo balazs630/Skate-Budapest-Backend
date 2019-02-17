@@ -6,24 +6,39 @@
 //
 
 import Vapor
+import FluentSQLite
+
+fileprivate enum Slug {
+    static let apiVersionPath = "v1"
+    static let placesPath = "places"
+    static let placeInfoPath = "\(placesPath)/info"
+}
 
 final class PlaceController {
-    // MARK: Properties
-    let placeService: PlaceServiceInterface
+    private let placeService: PlaceServiceInterface
 
-    // MARK: Initializers
-    init() {
-        placeService = PlaceService()
+    init(placeService: PlaceServiceInterface) {
+        self.placeService = placeService
     }
 }
 
-// MARK: Controller tasks
+// MARK: Routes definitions
+extension PlaceController: RouteCollection {
+    func boot(router: Router) throws {
+        router.group(Slug.apiVersionPath) { apiVersionPath in
+            apiVersionPath.get(Slug.placesPath, use: getPlaces)
+            apiVersionPath.get(Slug.placeInfoPath, use: getPlaceInfo)
+        }
+    }
+}
+
+// MARK: Routes action
 extension PlaceController {
-    func getPlaceInfo(_ req: Request) -> PlaceInfoDTO {
-        return placeService.getPlaceInfo()
+    func getPlaces(req: Request) -> Future<[PlaceRequestDTO]> {
+        return placeService.getPlaces()
     }
 
-    func getPlaces(_ req: Request) -> [PlaceDTO] {
-        return placeService.getPlaces()
+    func getPlaceInfo(req: Request) -> Future<PlaceInfoRequestDTO> {
+        return placeService.getPlaceInfo()
     }
 }
