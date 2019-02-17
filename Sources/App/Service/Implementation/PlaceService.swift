@@ -5,23 +5,24 @@
 //  Created by Horváth Balázs on 2018. 11. 21..
 //
 
-final class PlaceService: PlaceServiceInterface {
-    // MARK: Properties
-    let placeRepository: PlaceRepositoryInterface
+import Vapor
+import FluentSQLite
 
-    // MARK: Initializers
-    init() {
-        placeRepository = PlaceRepository()
+final class PlaceService {
+    private let placeRepository: PlaceRepositoryInterface
+
+    init(placeRepository: PlaceRepositoryInterface) {
+        self.placeRepository = placeRepository
     }
 }
 
 // MARK: PlaceServiceInterface conformances
-extension PlaceService {
-    func getPlaceInfo() -> PlaceInfoDTO {
-        return placeRepository.findPlaceInfo()
+extension PlaceService: PlaceServiceInterface {
+    func getPlaces() -> Future<[PlaceRequestDTO]> {
+        return placeRepository.findAllPlaces()
     }
 
-    func getPlaces() -> [PlaceDTO] {
-        return placeRepository.findPlaces()
+    func getPlaceInfo() -> Future<PlaceInfoRequestDTO> {
+        return placeRepository.findPlaceInfo()
     }
 }

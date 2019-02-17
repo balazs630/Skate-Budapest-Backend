@@ -5,7 +5,9 @@
 //  Created by Horváth Balázs on 2018. 11. 21..
 //
 
+import Vapor
+
 protocol PlaceServiceInterface {
-    func getPlaceInfo() -> PlaceInfoDTO
-    func getPlaces() -> [PlaceDTO]
+    func getPlaces() -> Future<[PlaceRequestDTO]>
+    func getPlaceInfo() -> Future<PlaceInfoRequestDTO>
 }
