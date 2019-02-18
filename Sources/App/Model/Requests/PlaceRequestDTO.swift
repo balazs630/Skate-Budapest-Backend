@@ -8,6 +8,7 @@
 import Vapor
 
 struct PlaceRequestDTO: Content {
+    let id: String
     let latitude: Double
     var longitude: Double
     var name: String
@@ -18,6 +19,7 @@ struct PlaceRequestDTO: Content {
     var imageUrls: [String]?
 
     init(place: Place, placeImages: [String]?) {
+        self.id = place.id!.uuidString
         self.latitude = place.latitude
         self.longitude = place.longitude
         self.name = place.name
