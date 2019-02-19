@@ -12,6 +12,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     try registerEngineRouter(to: &services)
     try registerMiddlewares(to: &services)
 
+    populateDatabaseWithBaseData()
     try registerSQLiteDatabase(to: &services)
     try registerFluentSQLiteProvider(to: &services)
     setupRepositories(services: &services, config: &config)

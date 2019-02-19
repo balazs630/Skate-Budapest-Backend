@@ -34,13 +34,14 @@ Simple backend for Skate-Budapest iOS app using Swift with Vapor web framework.
 
 ## Installation
 
-Install Vapor with [Homebrew](https://brew.sh):
+Install Vapor and SQLite with [Homebrew](https://brew.sh):
 ```
 brew install vapor/tap/vapor
+brew install sqlite
 ```
 
 Clone the project, then execute:
-```bash
+```
 vapor update
 ```
 

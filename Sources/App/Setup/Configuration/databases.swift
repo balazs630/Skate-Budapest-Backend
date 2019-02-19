@@ -8,15 +8,19 @@
 import Vapor
 import FluentSQLite
 
-private var databasePath: String {
-    let directory = DirectoryConfig.detect()
-    let relativePath = "Resources/skate-budapest.db"
-    return directory.workDir + relativePath
+struct Constant {
+    static let sqliteDatabaseFile = "skate-budapest.db"
+    static let insertBaseDataScriptFilePath = "Resources/insert-base-data.sh"
+}
+
+public func populateDatabaseWithBaseData() {
+    let shellScriptFilePath = DirectoryConfig.detect().workDir + Constant.insertBaseDataScriptFilePath
+    Util.runShellScript("sh \(shellScriptFilePath)")
 }
 
 public func registerSQLiteDatabase(to services: inout Services) throws {
     var databasesConfig = DatabasesConfig()
-    let sqliteDatabase = try SQLiteDatabase(storage: .file(path: databasePath))
+    let sqliteDatabase = try SQLiteDatabase(storage: .file(path: Constant.sqliteDatabaseFile))
     databasesConfig.add(database: sqliteDatabase, as: .sqlite)
     services.register(databasesConfig)
 }
