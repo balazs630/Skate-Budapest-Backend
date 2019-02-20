@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS Places;
 CREATE TABLE Places (
 	id TEXT NOT NULL,
 	latitude REAL NOT NULL,
-	longitude  REAL NOT NULL,
+	longitude REAL NOT NULL,
 	name TEXT NOT NULL,
 	info TEXT NOT NULL,
 	type TEXT NOT NULL,
@@ -28,6 +28,21 @@ CREATE TABLE Places (
 DROP TABLE IF EXISTS PlaceInfo;
 CREATE TABLE PlaceInfo (
 	dataVersion	TEXT NOT NULL
+);
+
+DROP TABLE IF EXISTS PlaceSuggestions;
+CREATE TABLE PlaceSuggestions (
+    id TEXT NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    name TEXT NOT NULL,
+    info TEXT NOT NULL,
+    type TEXT NOT NULL,
+    -- image1 BLOB NOT NULL,
+    -- image2 BLOB NOT NULL,
+    -- image3 BLOB,
+    -- image4 BLOB,
+    PRIMARY KEY(id)
 );
 
 -- Propagate base data

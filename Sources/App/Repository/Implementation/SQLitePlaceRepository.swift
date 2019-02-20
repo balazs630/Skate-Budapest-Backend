@@ -48,6 +48,28 @@ extension SQLitePlaceRepository: PlaceRepositoryInterface {
             }
         }
     }
+
+    func findPlaceSuggestions() -> EventLoopFuture<[PlaceSuggestionRequestDTO]> {
+        return db.withConnection { conn in
+            return PlaceSuggestion
+                .query(on: conn)
+                .all()
+                .map(to: [PlaceSuggestionRequestDTO].self) {
+                    $0.map { PlaceSuggestionRequestDTO(place: $0) }
+                }
+        }
+    }
+
+    func savePlaceSuggestion(suggestion: PlaceSuggestionRequestDTO) -> EventLoopFuture<HTTPStatus> {
+        return db.withConnection { conn in
+            return PlaceSuggestion
+                .query(on: conn)
+                .create(suggestion.toPlaceSuggestion())
+                .map(to: HTTPStatus.self) { _ in
+                    return .ok
+                }
+        }
+    }
 }
 
 // MARK: ServiceType conformances

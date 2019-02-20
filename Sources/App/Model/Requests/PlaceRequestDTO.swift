@@ -10,13 +10,13 @@ import Vapor
 struct PlaceRequestDTO: Content {
     let id: String
     let latitude: Double
-    var longitude: Double
-    var name: String
-    var info: String
-    var type: String
-    var status: String
-    var thumbnailUrl: String?
-    var imageUrls: [String]?
+    let longitude: Double
+    let name: String
+    let info: String
+    let type: String
+    let status: String
+    let thumbnailUrl: String?
+    let imageUrls: [String]?
 
     init(place: Place, placeImages: [String]?) {
         self.id = place.id!.uuidString

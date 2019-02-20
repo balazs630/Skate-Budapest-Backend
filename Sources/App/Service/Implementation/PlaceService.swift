@@ -25,4 +25,12 @@ extension PlaceService: PlaceServiceInterface {
     func getPlaceInfo() -> Future<PlaceInfoRequestDTO> {
         return placeRepository.findPlaceInfo()
     }
+
+    func getPlaceSuggestions() -> Future<[PlaceSuggestionRequestDTO]> {
+        return placeRepository.findPlaceSuggestions()
+    }
+
+    func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO) -> Future<HTTPStatus> {
+        return placeRepository.savePlaceSuggestion(suggestion: suggestion)
+    }
 }
