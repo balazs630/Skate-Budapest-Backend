@@ -7,6 +7,7 @@
 
 import Vapor
 import FluentSQLite
+import Console
 
 struct Constant {
     static let sqliteDatabaseFile = "skate-budapest.db"
@@ -15,7 +16,10 @@ struct Constant {
 
 public func populateDatabaseWithBaseData() {
     let shellScriptFilePath = DirectoryConfig.detect().workDir + Constant.insertBaseDataScriptFilePath
-    Util.runShellScript("sh \(shellScriptFilePath)")
+    let output = Util.runShellScript("sh \(shellScriptFilePath)")
+
+    let terminal = Terminal()
+    terminal.print(output)
 }
 
 public func registerSQLiteDatabase(to services: inout Services) throws {
