@@ -1,5 +1,5 @@
 //
-//  PlaceRequestDTO.swift
+//  PlaceResponseDTO.swift
 //  App
 //
 //  Created by Horváth Balázs on 2019. 02. 17..
@@ -7,8 +7,8 @@
 
 import Vapor
 
-struct PlaceRequestDTO: Content {
-    let id: String
+struct PlaceResponseDTO: Content {
+    let id: UUID?
     let latitude: Double
     let longitude: Double
     let name: String
@@ -19,7 +19,7 @@ struct PlaceRequestDTO: Content {
     let imageUrls: [String]?
 
     init(place: Place, placeImages: [String]?) {
-        self.id = place.id!.uuidString
+        self.id = place.id
         self.latitude = place.latitude
         self.longitude = place.longitude
         self.name = place.name

@@ -8,8 +8,8 @@
 import Vapor
 
 protocol PlaceServiceInterface {
-    func getPlaces() -> Future<[PlaceRequestDTO]>
-    func getPlaceInfo() -> Future<PlaceInfoRequestDTO>
-    func getPlaceSuggestions() -> Future<[PlaceSuggestionRequestDTO]>
+    func getPlaces() -> Future<[PlaceResponseDTO]>
+    func getPlaceInfo() -> Future<PlaceInfoResponseDTO>
+    func getPlaceSuggestions() -> Future<[PlaceSuggestionResponseDTO]>
     func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO) -> Future<HTTPStatus>
 }

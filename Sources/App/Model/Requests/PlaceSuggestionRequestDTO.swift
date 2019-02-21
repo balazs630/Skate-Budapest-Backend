@@ -13,16 +13,9 @@ struct PlaceSuggestionRequestDTO: Content {
     let name: String
     let info: String
     let type: String
-
-    init(place: PlaceSuggestion) {
-        self.latitude = place.latitude
-        self.longitude = place.longitude
-        self.name = place.name
-        self.info = place.info
-        self.type = place.type
-    }
 }
 
+// MARK: Mapping
 extension PlaceSuggestionRequestDTO {
     func toPlaceSuggestion() -> PlaceSuggestion {
         return PlaceSuggestion(id: UUID(),

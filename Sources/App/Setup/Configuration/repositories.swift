@@ -9,5 +9,4 @@ import Vapor
 
 public func setupRepositories(services: inout Services, config: inout Config) {
     services.register(SQLitePlaceRepository.self)
-    config.prefer(SQLitePlaceRepository.self, for: PlaceRepositoryInterface.self)
 }
