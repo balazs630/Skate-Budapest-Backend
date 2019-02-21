@@ -18,56 +18,40 @@ final class SQLitePlaceRepository {
 
 // MARK: PlaceRepositoryInterface conformances
 extension SQLitePlaceRepository: PlaceRepositoryInterface {
-    func findAllPlaces() -> Future<[PlaceRequestDTO]> {
+    func findAllPlaces() -> Future<[(Place, [PlaceImage])]> {
         return db.withConnection { conn in
-            Place.query(on: conn).all().flatMap { places in
-                let placeResponseFutures = places.map { place in
-                    PlaceImage.query(on: conn).all().map { images in
-                        return PlaceRequestDTO(
-                            place: place,
-                            placeImages: images
-                                .filter { $0.placeId == place.id }
-                                .map { $0.imageUrl }
-                        )
-                    }
-                }
-
-                return placeResponseFutures.flatten(on: conn)
-            }
-        }
-    }
-
-    func findPlaceInfo() -> Future<PlaceInfoRequestDTO> {
-        return db.withConnection { conn in
-            return PlaceInfo
-                .query(on: conn)
-                .first()
-                .unwrap(or: Abort.init(HTTPResponseStatus.notFound))
-                .map(to: PlaceInfoRequestDTO.self) {
-                    PlaceInfoRequestDTO(dataVersion: $0.dataVersion)
-            }
-        }
-    }
-
-    func findPlaceSuggestions() -> EventLoopFuture<[PlaceSuggestionRequestDTO]> {
-        return db.withConnection { conn in
-            return PlaceSuggestion
-                .query(on: conn)
+            Place.query(on: conn)
                 .all()
-                .map(to: [PlaceSuggestionRequestDTO].self) {
-                    $0.map { PlaceSuggestionRequestDTO(place: $0) }
-                }
+                .flatMap { places in
+                    places.map { place in
+                        PlaceImage.query(on: conn)
+                            .all()
+                            .map { images in
+                                return (place, images)
+                        }
+                    }.flatten(on: conn)
+            }
         }
     }
 
-    func savePlaceSuggestion(suggestion: PlaceSuggestionRequestDTO) -> EventLoopFuture<HTTPStatus> {
+    func findPlaceInfo() -> Future<PlaceInfo?> {
         return db.withConnection { conn in
-            return PlaceSuggestion
-                .query(on: conn)
-                .create(suggestion.toPlaceSuggestion())
-                .map(to: HTTPStatus.self) { _ in
-                    return .ok
-                }
+            PlaceInfo.query(on: conn)
+                .first()
+        }
+    }
+
+    func findPlaceSuggestions() -> Future<[PlaceSuggestion]> {
+        return db.withConnection { conn in
+            PlaceSuggestion.query(on: conn)
+                .all()
+        }
+    }
+
+    func savePlaceSuggestion(suggestion: PlaceSuggestion) -> Future<PlaceSuggestion> {
+        return db.withConnection { conn in
+            PlaceSuggestion.query(on: conn)
+                .create(suggestion)
         }
     }
 }

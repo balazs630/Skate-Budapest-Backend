@@ -56,8 +56,9 @@ extension PlaceController {
     func postPlaceSuggestions(req: Request) throws -> Future<HTTPStatus> {
         return try req.content
             .decode(PlaceSuggestionRequestDTO.self)
-            .flatMap(to: HTTPStatus.self) { placeSuggestion in
-                return self.placeService.postPlaceSuggestion(suggestion: placeSuggestion)
-        }
+            .flatMap { placeSuggestion in
+                self.placeService.postPlaceSuggestion(suggestion: placeSuggestion)
+            }
+
     }
 }
