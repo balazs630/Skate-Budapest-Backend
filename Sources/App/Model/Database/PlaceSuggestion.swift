@@ -14,14 +14,23 @@ final class PlaceSuggestion: SQLiteUUIDModel {
     var name: String
     var info: String
     var type: String
+    var image1: Data
+    var image2: Data
+    var image3: Data?
+    var image4: Data?
 
-    init(id: UUID?, latitude: Double, longitude: Double, name: String, info: String, type: String) {
+    init(id: UUID?, latitude: Double, longitude: Double, name: String, info: String, type: String,
+         image1: Data, image2: Data, image3: Data?, image4: Data?) {
         self.id = id
         self.latitude = latitude
         self.longitude = longitude
         self.name = name
         self.info = info
         self.type = type
+        self.image1 = image1
+        self.image2 = image2
+        self.image3 = image3
+        self.image4 = image4
     }
 }
 

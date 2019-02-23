@@ -14,6 +14,10 @@ struct PlaceSuggestionResponseDTO: Content {
     let name: String
     let info: String
     let type: String
+    let image1: Data
+    let image2: Data
+    let image3: Data?
+    let image4: Data?
 
     init(suggestion: PlaceSuggestion) {
         self.id = suggestion.id
@@ -22,5 +26,9 @@ struct PlaceSuggestionResponseDTO: Content {
         self.name = suggestion.name
         self.info = suggestion.info
         self.type = suggestion.type
+        self.image1 = suggestion.image1
+        self.image2 = suggestion.image2
+        self.image3 = suggestion.image3
+        self.image4 = suggestion.image4
     }
 }

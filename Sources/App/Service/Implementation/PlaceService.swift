@@ -24,13 +24,11 @@ extension PlaceService: PlaceServiceInterface {
             .map(to: [PlaceResponseDTO].self) { places in
                 places.map { placeContent in
                     let (place, images) = placeContent
+                    let imageUrls = images
+                        .filter { $0.placeId == place.id }
+                        .map { $0.imageUrl }
 
-                    return PlaceResponseDTO(
-                        place: place,
-                        placeImages: images
-                            .filter { $0.placeId == place.id }
-                            .map { $0.imageUrl }
-                    )
+                    return PlaceResponseDTO(place: place, placeImages: imageUrls)
                 }
             }
     }

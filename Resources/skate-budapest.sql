@@ -38,10 +38,10 @@ CREATE TABLE PlaceSuggestions (
     name TEXT NOT NULL,
     info TEXT NOT NULL,
     type TEXT NOT NULL,
-    -- image1 BLOB NOT NULL,
-    -- image2 BLOB NOT NULL,
-    -- image3 BLOB,
-    -- image4 BLOB,
+    image1 BLOB NOT NULL,
+    image2 BLOB NOT NULL,
+    image3 BLOB,
+    image4 BLOB,
     PRIMARY KEY(id)
 );
 
