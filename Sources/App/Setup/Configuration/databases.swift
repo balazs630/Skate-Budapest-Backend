@@ -10,7 +10,7 @@ import FluentSQLite
 import Console
 
 struct Constant {
-    static let sqliteDatabaseFile = "skate-budapest.db"
+    static let sqliteDatabaseFilePath = "Resources/skate-budapest.sqlite"
     static let insertBaseDataScriptFilePath = "Resources/insert-base-data.sh"
 }
 
@@ -24,7 +24,9 @@ public func populateDatabaseWithBaseData() {
 
 public func registerSQLiteDatabase(to services: inout Services) throws {
     var databasesConfig = DatabasesConfig()
-    let sqliteDatabase = try SQLiteDatabase(storage: .file(path: Constant.sqliteDatabaseFile))
+    let databaseFilePath = DirectoryConfig.detect().workDir + Constant.sqliteDatabaseFilePath
+
+    let sqliteDatabase = try SQLiteDatabase(storage: .file(path: databaseFilePath))
     databasesConfig.add(database: sqliteDatabase, as: .sqlite)
     services.register(databasesConfig)
 }

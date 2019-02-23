@@ -9,17 +9,17 @@ import Vapor
 import FluentSQLite
 
 final class SQLitePlaceRepository {
-    private let db: SQLiteDatabase.ConnectionPool
+    private let database: SQLiteDatabase.ConnectionPool
 
-    init(_ db: SQLiteDatabase.ConnectionPool) {
-        self.db = db
+    init(_ database: SQLiteDatabase.ConnectionPool) {
+        self.database = database
     }
 }
 
 // MARK: PlaceRepositoryInterface conformances
 extension SQLitePlaceRepository: PlaceRepositoryInterface {
     func findAllPlaces() -> Future<[(Place, [PlaceImage])]> {
-        return db.withConnection { conn in
+        return database.withConnection { conn in
             Place.query(on: conn)
                 .all()
                 .flatMap { places in
@@ -35,21 +35,21 @@ extension SQLitePlaceRepository: PlaceRepositoryInterface {
     }
 
     func findPlaceInfo() -> Future<PlaceInfo?> {
-        return db.withConnection { conn in
+        return database.withConnection { conn in
             PlaceInfo.query(on: conn)
                 .first()
         }
     }
 
     func findPlaceSuggestions() -> Future<[PlaceSuggestion]> {
-        return db.withConnection { conn in
+        return database.withConnection { conn in
             PlaceSuggestion.query(on: conn)
                 .all()
         }
     }
 
     func savePlaceSuggestion(suggestion: PlaceSuggestion) -> Future<PlaceSuggestion> {
-        return db.withConnection { conn in
+        return database.withConnection { conn in
             PlaceSuggestion.query(on: conn)
                 .create(suggestion)
         }
