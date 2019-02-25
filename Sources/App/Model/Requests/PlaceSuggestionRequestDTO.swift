@@ -38,3 +38,15 @@ extension PlaceSuggestionRequestDTO {
         )
     }
 }
+
+extension PlaceSuggestionRequestDTO: Validatable, Reflectable {
+    static func validations() throws -> Validations<PlaceSuggestionRequestDTO> {
+        var validations = Validations(PlaceSuggestionRequestDTO.self)
+
+        try validations.add(\.name, .count(3...))
+        try validations.add(\.info, .count(10...))
+        try validations.add(\.senderEmail, .email)
+
+        return validations
+    }
+}

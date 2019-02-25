@@ -58,7 +58,8 @@ extension PlaceController {
         return try req.content
             .decode(PlaceSuggestionRequestDTO.self)
             .flatMap { placeSuggestion in
-                self.placeService.postPlaceSuggestion(suggestion: placeSuggestion)
+                try placeSuggestion.validate()
+                return self.placeService.postPlaceSuggestion(suggestion: placeSuggestion)
             }
     }
 }
