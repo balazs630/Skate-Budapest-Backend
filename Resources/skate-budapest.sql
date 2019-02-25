@@ -38,6 +38,7 @@ CREATE TABLE PlaceSuggestions (
     name TEXT NOT NULL,
     info TEXT NOT NULL,
     type TEXT NOT NULL,
+    senderEmail TEXT NOT NULL,
     image1 BLOB NOT NULL,
     image2 BLOB NOT NULL,
     image3 BLOB,

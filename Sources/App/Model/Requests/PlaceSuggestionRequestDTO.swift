@@ -13,6 +13,7 @@ struct PlaceSuggestionRequestDTO: Content {
     let name: String
     let info: String
     let type: String
+    let senderEmail: String
     let image1: Data
     let image2: Data
     let image3: Data?
@@ -29,6 +30,7 @@ extension PlaceSuggestionRequestDTO {
             name: name,
             info: info,
             type: type,
+            senderEmail: senderEmail,
             image1: image1,
             image2: image2,
             image3: image3,

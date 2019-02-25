@@ -14,6 +14,7 @@ struct PlaceSuggestionResponseDTO: Content {
     let name: String
     let info: String
     let type: String
+    let senderEmail: String
     let image1: Data
     let image2: Data
     let image3: Data?
@@ -26,6 +27,7 @@ struct PlaceSuggestionResponseDTO: Content {
         self.name = suggestion.name
         self.info = suggestion.info
         self.type = suggestion.type
+        self.senderEmail = suggestion.senderEmail
         self.image1 = suggestion.image1
         self.image2 = suggestion.image2
         self.image3 = suggestion.image3
