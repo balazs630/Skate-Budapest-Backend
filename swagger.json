@@ -57,7 +57,7 @@
         ],
         "summary": "Get places data information",
         "operationId": "getPlaceInfo",
-        "description": "This endpoint returns the current dataVersion for the places data.  A change in the `dataVersion` string indicates a modification of  an existing place or the addition of a new one.\n",
+        "description": "This endpoint returns the current dataVersion for the places data. A change in the `dataVersion` string indicates a modification of an existing place or the addition of a new one.\n",
         "responses": {
           "200": {
             "$ref": "#/responses/PlacesInfoSuccessResponse"
@@ -87,7 +87,7 @@
         ],
         "summary": "Post a new place by a suggestion",
         "operationId": "postPlaceSuggestion",
-        "description": "This endpoint allows clients to issue request against the SkateBudapest API to suggest a new etreme sport related place in Budapest.\n",
+        "description": "This endpoint allows clients to issue request against the SkateBudapest API to suggest a new extreme sport related place in Budapest.\n",
         "consumes": [
           "multipart/form-data"
         ],
@@ -116,16 +116,23 @@
           {
             "name": "latitude",
             "in": "path",
-            "description": "Type",
+            "description": "Latitude coordinate part",
             "required": true,
             "type": "number"
           },
           {
             "name": "longitude",
             "in": "path",
-            "description": "Type",
+            "description": "Longitude coordinate part",
             "required": true,
             "type": "number"
+          },
+          {
+            "name": "senderEmail",
+            "in": "path",
+            "description": "Sender's email address",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "image1",
@@ -278,6 +285,7 @@
         "latitude",
         "longitude",
         "type",
+        "senderEmail",
         "image1",
         "image2"
       ],
@@ -308,6 +316,11 @@
           "description": "The type of the place",
           "type": "string",
           "example": "skatepark"
+        },
+        "senderEmail": {
+          "description": "E-mail address of the sender",
+          "type": "string",
+          "example": "example@gmail.com"
         },
         "image1": {
           "description": "Image file",
@@ -341,6 +354,7 @@
         "latitude",
         "longitude",
         "type",
+        "senderEmail",
         "image1",
         "image2"
       ],
@@ -376,6 +390,11 @@
           "description": "The type of the place",
           "type": "string",
           "example": "skatepark"
+        },
+        "senderEmail": {
+          "description": "E-mail address of the sender",
+          "type": "string",
+          "example": "example@gmail.com"
         },
         "image1": {
           "description": "Image file",
