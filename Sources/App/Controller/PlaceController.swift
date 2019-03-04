@@ -16,6 +16,10 @@ fileprivate enum Slug {
     static let placeSuggestionsPath = "placesuggestions"
 }
 
+fileprivate enum Parameter {
+    static let language = "lang"
+}
+
 final class PlaceController {
     private let placeService: PlaceServiceInterface
 
@@ -39,8 +43,11 @@ extension PlaceController: RouteCollection {
 
 // MARK: GET routes actions
 extension PlaceController {
-    func getPlaces(req: Request) -> Future<[PlaceResponseDTO]> {
-        return placeService.getPlaces()
+    func getPlaces(req: Request) throws -> Future<[PlaceResponseDTO]> {
+        let languageParameter = try req.query.get(String.self, at: Parameter.language)
+        let languageCode = LanguageCode(rawValue: languageParameter.uppercased()) ?? .HU
+
+        return placeService.getPlaces(for: languageCode)
     }
 
     func getPlaceInfo(req: Request) -> Future<PlaceInfoResponseDTO> {

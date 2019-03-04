@@ -16,8 +16,10 @@ CREATE TABLE Places (
 	id TEXT NOT NULL,
 	latitude REAL NOT NULL,
 	longitude REAL NOT NULL,
-	name TEXT NOT NULL,
-	info TEXT NOT NULL,
+	nameHU TEXT NOT NULL,
+    nameEN TEXT NOT NULL,
+	infoHU TEXT NOT NULL,
+    infoEN TEXT NOT NULL,
 	type TEXT NOT NULL,
 	status TEXT NOT NULL,
 	thumbnailUrl TEXT,
@@ -61,15 +63,15 @@ INSERT INTO PlaceImages (id, placeId, imageUrl) VALUES ('13E9348A-02D4-4B4F-B10E
 INSERT INTO PlaceImages (id, placeId, imageUrl) VALUES ('C2F66244-8B60-496F-B77D-6CAD142EC947', '8A5549E5-C122-47F8-B446-292A71B68A7A', 'https://libertyskate.hu/mobile/example/images/Curling.jpg');
 INSERT INTO PlaceImages (id, placeId, imageUrl) VALUES ('A13E7021-9031-4FC2-A58D-7F1CAE54A995', '8A5549E5-C122-47F8-B446-292A71B68A7A', 'https://libertyskate.hu/mobile/example/images/Curling.jpg');
 
-INSERT INTO Places (id, latitude, longitude, name, info, type, status, thumbnailUrl) VALUES ('1371AEF5-5782-49C6-B71B-F3D511ABAC90', 47.497912, 19.040235, 'Helicopter', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'skatepark', 'active', 'https://libertyskate.hu/mobile/example/images/Helicopter.png');
-INSERT INTO Places (id, latitude, longitude, name, info, type, status, thumbnailUrl) VALUES ('D16EEC15-DAB4-4E90-86BE-C5884F0C3B34', 47.539016, 19.034754, 'Top of First Run', 'Incredible views from up here.', 'skatepark', 'active', 'https://libertyskate.hu/mobile/example/images/Crag.png');
-INSERT INTO Places (id, latitude, longitude, name, info, type, status, thumbnailUrl) VALUES ('61BE013D-28BD-40ED-AB4F-D678AACD0B04', 47.420912, 19.090235, 'Nice Tracks', 'Oh no! Clouds rolling in.', 'skatepark', 'active', NULL);
-INSERT INTO Places (id, latitude, longitude, name, info, type, status, thumbnailUrl) VALUES ('FBC6DB92-9B2B-476E-978E-1F5E5939D262', 47.560912, 19.160235, 'Incoming!', 'Brace yourself for fierce wind.', 'streetspot', 'active', 'https://libertyskate.hu/mobile/example/images/HelicopterLanding.png');
-INSERT INTO Places (id, latitude, longitude, name, info, type, status, thumbnailUrl) VALUES ('6F64B5D7-4EB6-4BB6-A719-95912101A8E7', 47.380912, 19.044235, 'Valley Floor', 'Views are spectacular even from here.', 'streetspot', 'active', 'https://libertyskate.hu/mobile/example/images/Mountain.png');
-INSERT INTO Places (id, latitude, longitude, name, info, type, status, thumbnailUrl) VALUES ('0FC2EDBA-01CD-4376-81A5-A3FD872BB7EB', 47.450912, 19.320235, 'Ready for Pickup', 'This isn’t Jenga, stack ‘em neatly.', 'streetspot', 'active', 'https://libertyskate.hu/mobile/example/images/PileOfSkis.png');
-INSERT INTO Places (id, latitude, longitude, name, info, type, status, thumbnailUrl) VALUES ('62AA30F7-0D61-4006-B417-B9E34A3190DA', 47.607912, 19.120235, 'Flying', 'Wouldn’t you love to be at the controls?', 'skateshop', 'active', 'https://libertyskate.hu/mobile/example/images/Cockpit.png');
-INSERT INTO Places (id, latitude, longitude, name, info, type, status, thumbnailUrl) VALUES ('0CF937B2-C509-4677-B109-4B7E1D9E8791', 47.486818, 19.014536, 'Panorama', 'Cool iPhone feature.', 'skateshop', 'active', 'https://libertyskate.hu/mobile/example/images/Panorama.png');
-INSERT INTO Places (id, latitude, longitude, name, info, type, status, thumbnailUrl) VALUES ('8A5549E5-C122-47F8-B446-292A71B68A7A', 47.510258, 19.082678, 'Apres Ski', 'In Canada, after all.', 'skateshop', 'inactive', 'https://libertyskate.hu/mobile/example/images/Curling.png');
+INSERT INTO Places (id, latitude, longitude, nameHU, nameEN, infoHU, infoEN, type, status, thumbnailUrl) VALUES ('1371AEF5-5782-49C6-B71B-F3D511ABAC90', 47.497912, 19.040235, 'Helicopter', 'Helicopter-en', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.-en', 'skatepark', 'active', 'https://libertyskate.hu/mobile/example/images/Helicopter.png');
+INSERT INTO Places (id, latitude, longitude, nameHU, nameEN, infoHU, infoEN, type, status, thumbnailUrl) VALUES ('D16EEC15-DAB4-4E90-86BE-C5884F0C3B34', 47.539016, 19.034754, 'Top of First Run', 'Top of First Run-en', 'Incredible views from up here.', 'Incredible views from up here.-en', 'skatepark', 'active', 'https://libertyskate.hu/mobile/example/images/Crag.png');
+INSERT INTO Places (id, latitude, longitude, nameHU, nameEN, infoHU, infoEN, type, status, thumbnailUrl) VALUES ('61BE013D-28BD-40ED-AB4F-D678AACD0B04', 47.420912, 19.090235, 'Nice Tracks', 'Nice Tracks-en', 'Oh no! Clouds rolling in.', 'Oh no! Clouds rolling in.-en', 'skatepark', 'active', NULL);
+INSERT INTO Places (id, latitude, longitude, nameHU, nameEN, infoHU, infoEN, type, status, thumbnailUrl) VALUES ('FBC6DB92-9B2B-476E-978E-1F5E5939D262', 47.560912, 19.160235, 'Incoming!', 'Incoming!-en', 'Brace yourself for fierce wind.', 'Brace yourself for fierce wind.-en', 'streetspot', 'active', 'https://libertyskate.hu/mobile/example/images/HelicopterLanding.png');
+INSERT INTO Places (id, latitude, longitude, nameHU, nameEN, infoHU, infoEN, type, status, thumbnailUrl) VALUES ('6F64B5D7-4EB6-4BB6-A719-95912101A8E7', 47.380912, 19.044235, 'Valley Floor', 'Valley Floor-en', 'Views are spectacular even from here.', 'Views are spectacular even from here.-en', 'streetspot', 'active', 'https://libertyskate.hu/mobile/example/images/Mountain.png');
+INSERT INTO Places (id, latitude, longitude, nameHU, nameEN, infoHU, infoEN, type, status, thumbnailUrl) VALUES ('0FC2EDBA-01CD-4376-81A5-A3FD872BB7EB', 47.450912, 19.320235, 'Ready for Pickup', 'Ready for Pickup-en', 'This isn’t Jenga, stack ‘em neatly.', 'This isn’t Jenga, stack ‘em neatly.-en', 'streetspot', 'active', 'https://libertyskate.hu/mobile/example/images/PileOfSkis.png');
+INSERT INTO Places (id, latitude, longitude, nameHU, nameEN, infoHU, infoEN, type, status, thumbnailUrl) VALUES ('62AA30F7-0D61-4006-B417-B9E34A3190DA', 47.607912, 19.120235, 'Flying', 'Flying-en', 'Wouldn’t you love to be at the controls?', 'Wouldn’t you love to be at the controls?-en', 'skateshop', 'active', 'https://libertyskate.hu/mobile/example/images/Cockpit.png');
+INSERT INTO Places (id, latitude, longitude, nameHU, nameEN, infoHU, infoEN, type, status, thumbnailUrl) VALUES ('0CF937B2-C509-4677-B109-4B7E1D9E8791', 47.486818, 19.014536, 'Panorama', 'Panorama-en', 'Cool iPhone feature.', 'Cool iPhone feature.-en', 'skateshop', 'active', 'https://libertyskate.hu/mobile/example/images/Panorama.png');
+INSERT INTO Places (id, latitude, longitude, nameHU, nameEN, infoHU, infoEN, type, status, thumbnailUrl) VALUES ('8A5549E5-C122-47F8-B446-292A71B68A7A', 47.510258, 19.082678, 'Apres Ski', 'Apres Ski-en', 'In Canada, after all.', 'In Canada, after all.-en', 'skateshop', 'inactive', 'https://libertyskate.hu/mobile/example/images/Curling.png');
 
 INSERT INTO PlaceInfo (dataVersion) VALUES ('1.0');
 

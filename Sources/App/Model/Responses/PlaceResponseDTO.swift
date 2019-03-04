@@ -18,12 +18,20 @@ struct PlaceResponseDTO: Content {
     let thumbnailUrl: String?
     let imageUrls: [String]?
 
-    init(place: Place, placeImages: [String]?) {
+    init(place: Place, placeImages: [String]?, languageCode: LanguageCode) {
         self.id = place.id
         self.latitude = place.latitude
         self.longitude = place.longitude
-        self.name = place.name
-        self.info = place.info
+
+        switch languageCode {
+        case .HU:
+            self.name = place.nameHU
+            self.info = place.infoHU
+        case .EN:
+            self.name = place.nameEN
+            self.info = place.infoEN
+        }
+
         self.type = place.type
         self.status = place.status
         self.thumbnailUrl = place.thumbnailUrl

@@ -18,7 +18,7 @@ final class PlaceService {
 
 // MARK: PlaceServiceInterface conformances
 extension PlaceService: PlaceServiceInterface {
-    func getPlaces() -> Future<[PlaceResponseDTO]> {
+    func getPlaces(for languageCode: LanguageCode) -> Future<[PlaceResponseDTO]> {
         return placeRepository
             .findAllPlaces()
             .map(to: [PlaceResponseDTO].self) { places in
@@ -28,7 +28,7 @@ extension PlaceService: PlaceServiceInterface {
                         .filter { $0.placeId == place.id }
                         .map { $0.imageUrl }
 
-                    return PlaceResponseDTO(place: place, placeImages: imageUrls)
+                    return PlaceResponseDTO(place: place, placeImages: imageUrls, languageCode: languageCode)
                 }
             }
     }

@@ -11,8 +11,10 @@ final class Place: SQLiteUUIDModel {
     var id: UUID?
     var latitude: Double
     var longitude: Double
-    var name: String
-    var info: String
+    var nameHU: String
+    var nameEN: String
+    var infoHU: String
+    var infoEN: String
     var type: String
     var status: String
     var thumbnailUrl: String?
