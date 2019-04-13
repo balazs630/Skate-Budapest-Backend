@@ -61,7 +61,7 @@ extension PlaceController {
 
 // MARK: POST routes actions
 extension PlaceController {
-    func postPlaceSuggestions(req: Request) throws -> Future<HTTPStatus> {
+    func postPlaceSuggestions(req: Request) throws -> Future<HTTPResponse> {
         return try req.content
             .decode(PlaceSuggestionRequestDTO.self)
             .flatMap { placeSuggestion in

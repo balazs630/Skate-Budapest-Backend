@@ -50,11 +50,12 @@ extension PlaceService: PlaceServiceInterface {
             }
     }
 
-    func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO) -> Future<HTTPStatus> {
+    func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO) -> Future<HTTPResponse> {
         return placeRepository
             .savePlaceSuggestion(suggestion: suggestion.toPlaceSuggestion())
-            .map(to: HTTPStatus.self) { _ in
-                return .ok
+            .map(to: HTTPResponse.self) { _ in
+                return HTTPResponse(status: .ok,
+                                    body: GeneralSuccessDTO(message: "Place suggestion has been created!"))
             }
     }
 }
