@@ -16,4 +16,6 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     try registerSQLiteDatabase(to: &services)
     try registerFluentSQLiteProvider(to: &services)
     setupRepositories(services: &services, config: &config)
+
+    services.register(NIOServerConfig.default(maxBodySize: 20_000_000))
 }
