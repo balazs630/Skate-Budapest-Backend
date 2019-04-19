@@ -2,4 +2,4 @@
 .build
 DerivedData
 Package.resolved
-
+*.xcodeproj
