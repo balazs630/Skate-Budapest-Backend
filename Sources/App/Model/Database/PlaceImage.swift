@@ -5,15 +5,10 @@
 //  Created by Horváth Balázs on 2019. 02. 16..
 //
 
-import FluentSQLite
+import FluentPostgreSQL
 
-final class PlaceImage: SQLiteUUIDModel {
+final class PlaceImage: PostgreSQLUUIDModel {
     var id: UUID?
     var placeId: UUID
     var imageUrl: String
-}
-
-// MARK: Table name
-extension PlaceImage {
-    public static var entity = "PlaceImages"
 }

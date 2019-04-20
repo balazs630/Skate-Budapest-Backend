@@ -6,31 +6,32 @@
 //
 
 import Vapor
-import FluentSQLite
+import FluentPostgreSQL
 import Console
 
-struct Constant {
-    static let sqliteDatabaseFilePath = "Resources/skate-budapest.sqlite"
-    static let insertBaseDataScriptFilePath = "Resources/insert-base-data.sh"
+private var developmentPostgreSQLDatabaseConfig: PostgreSQLDatabaseConfig {
+    return PostgreSQLDatabaseConfig(hostname: "localhost",
+                                    port: 5432,
+                                    username: "user-1269852658",
+                                    database: "skate-budapest-1686949761",
+                                    password: nil, //1cFUJaj3Q5kirSOjFwvaAKPC
+                                    transport: .cleartext)
 }
 
-public func populateDatabaseWithBaseData() {
-    let shellScriptFilePath = DirectoryConfig.detect().workDir + Constant.insertBaseDataScriptFilePath
-    let output = Util.runShellScript("sh \(shellScriptFilePath)")
-
-    let terminal = Terminal()
-    terminal.print(output)
+private var productionPostgreSQLDatabaseConfig: PostgreSQLDatabaseConfig {
+    return PostgreSQLDatabaseConfig(hostname: Environment.get("PSQL_IP")!,
+                                    port: Int(Environment.get("PSQL_PORT")!)!,
+                                    username: Environment.get("PSQL_USERNAME")!,
+                                    database: Environment.get("PSQL_DATABASE")!,
+                                    password: Environment.get("PSQL_PASSWORD")!,
+                                    transport: .unverifiedTLS)
 }
 
-public func registerSQLiteDatabase(to services: inout Services) throws {
-    var databasesConfig = DatabasesConfig()
-    let databaseFilePath = DirectoryConfig.detect().workDir + Constant.sqliteDatabaseFilePath
-
-    let sqliteDatabase = try SQLiteDatabase(storage: .file(path: databaseFilePath))
-    databasesConfig.add(database: sqliteDatabase, as: .sqlite)
-    services.register(databasesConfig)
+public func registerPostgeSQLDatabase(to services: inout Services) throws {
+    let postgresDB = PostgreSQLDatabase(config: productionPostgreSQLDatabaseConfig)
+    services.register(postgresDB)
 }
 
-public func registerFluentSQLiteProvider(to services: inout Services) throws {
-    try services.register(FluentSQLiteProvider())
+public func registerPostgreSQLProvider(to services: inout Services) throws {
+    try services.register(FluentPostgreSQLProvider())
 }

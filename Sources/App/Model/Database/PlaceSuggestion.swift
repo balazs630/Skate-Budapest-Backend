@@ -5,9 +5,9 @@
 //  Created by Horváth Balázs on 2019. 02. 19..
 //
 
-import FluentSQLite
+import FluentPostgreSQL
 
-final class PlaceSuggestion: SQLiteUUIDModel {
+final class PlaceSuggestion: PostgreSQLUUIDModel {
     var id: UUID?
     var latitude: Double
     var longitude: Double
@@ -34,9 +34,4 @@ final class PlaceSuggestion: SQLiteUUIDModel {
         self.image3 = image3
         self.image4 = image4
     }
-}
-
-// MARK: Table name
-extension PlaceSuggestion {
-    public static var entity = "PlaceSuggestions"
 }

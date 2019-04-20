@@ -18,7 +18,7 @@ public func registerEngineRouter(to services: inout Services) throws {
 }
 
 private func makePlaceController(using container: Container) throws -> RouteCollection {
-    let placeRepository = SQLitePlaceRepository(try container.connectionPool(to: .sqlite))
+    let placeRepository = PlaceRepository(try container.connectionPool(to: .psql))
     let placeService = PlaceService(placeRepository: placeRepository)
     let placeController = PlaceController(placeService: placeService)
 

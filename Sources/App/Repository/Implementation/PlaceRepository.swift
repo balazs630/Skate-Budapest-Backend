@@ -1,23 +1,23 @@
 //
-//  SQLitePlaceRepository.swift
+//  PlaceRepository.swift
 //  SkateBudapestBackend
 //
 //  Created by Horváth Balázs on 2018. 11. 26..
 //
 
 import Vapor
-import FluentSQLite
+import FluentPostgreSQL
 
-final class SQLitePlaceRepository {
-    private let database: SQLiteDatabase.ConnectionPool
+final class PlaceRepository {
+    private let database: PostgreSQLDatabase.ConnectionPool
 
-    init(_ database: SQLiteDatabase.ConnectionPool) {
+    init(_ database: PostgreSQLDatabase.ConnectionPool) {
         self.database = database
     }
 }
 
 // MARK: PlaceRepositoryInterface conformances
-extension SQLitePlaceRepository: PlaceRepositoryInterface {
+extension PlaceRepository: PlaceRepositoryInterface {
     func findAllPlaces() -> Future<[(Place, [PlaceImage])]> {
         return database.withConnection { conn in
             Place.query(on: conn)
@@ -57,11 +57,11 @@ extension SQLitePlaceRepository: PlaceRepositoryInterface {
 }
 
 // MARK: ServiceType conformances
-extension SQLitePlaceRepository: ServiceType {
+extension PlaceRepository: ServiceType {
     static let serviceSupports: [Any.Type] = [PlaceRepositoryInterface.self]
 
     static func makeService(for worker: Container) throws -> Self {
-        return .init(try worker.connectionPool(to: .sqlite))
+        return .init(try worker.connectionPool(to: .psql))
     }
 }
 

@@ -8,5 +8,5 @@
 import Vapor
 
 public func setupRepositories(services: inout Services, config: inout Config) {
-    services.register(SQLitePlaceRepository.self)
+    services.register(PlaceRepository.self)
 }

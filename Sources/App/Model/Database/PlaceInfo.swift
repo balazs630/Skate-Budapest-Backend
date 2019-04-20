@@ -5,14 +5,9 @@
 //  Created by Horváth Balázs on 2018. 11. 23..
 //
 
-import FluentSQLite
+import FluentPostgreSQL
 
-final class PlaceInfo: SQLiteUUIDModel {
+final class PlaceInfo: PostgreSQLUUIDModel {
     var id: UUID?
     var dataVersion: String
-}
-
-// MARK: Table name
-extension PlaceInfo {
-    public static var entity = "PlaceInfo"
 }
