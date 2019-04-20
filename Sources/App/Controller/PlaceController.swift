@@ -6,7 +6,6 @@
 //
 
 import Vapor
-import FluentSQLite
 
 fileprivate enum Slug {
     static let apiVersionPath = "v1"

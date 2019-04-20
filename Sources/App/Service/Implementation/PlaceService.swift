@@ -6,7 +6,6 @@
 //
 
 import Vapor
-import FluentSQLite
 
 final class PlaceService {
     private let placeRepository: PlaceRepositoryInterface
