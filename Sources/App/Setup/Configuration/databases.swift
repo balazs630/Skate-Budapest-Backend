@@ -7,7 +7,6 @@
 
 import Vapor
 import FluentPostgreSQL
-import Console
 
 private var developmentPostgreSQLDatabaseConfig: PostgreSQLDatabaseConfig {
     return PostgreSQLDatabaseConfig(hostname: "localhost",

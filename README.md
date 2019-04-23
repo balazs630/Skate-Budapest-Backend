@@ -22,7 +22,7 @@
 <!--
 <img src="http://i.imgur.com/xxxxxxxxx.png" width="80px" />
 -->
-<h1>Skate-Budapest Backend</h1>
+<h1>Skate-Budapest Vapor Backend</h1>
 
 Simple backend for Skate-Budapest iOS app using Swift with Vapor web framework.
 
