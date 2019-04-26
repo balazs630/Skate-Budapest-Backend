@@ -18,11 +18,11 @@ private var developmentPostgreSQLDatabaseConfig: PostgreSQLDatabaseConfig {
 }
 
 private var productionPostgreSQLDatabaseConfig: PostgreSQLDatabaseConfig {
-    return PostgreSQLDatabaseConfig(hostname: Environment.get("PSQL_IP")!,
-                                    port: Int(Environment.get("PSQL_PORT")!)!,
-                                    username: Environment.get("PSQL_USERNAME")!,
-                                    database: Environment.get("PSQL_DATABASE")!,
-                                    password: Environment.get("PSQL_PASSWORD")!,
+    return PostgreSQLDatabaseConfig(hostname: Environment.get("SKTBPST_PSQL_IP")!,
+                                    port: Int(Environment.get("SKTBPST_PSQL_PORT")!)!,
+                                    username: Environment.get("SKTBPST_PSQL_USERNAME")!,
+                                    database: Environment.get("SKTBPST_PSQL_DATABASE")!,
+                                    password: Environment.get("SKTBPST_PSQL_PASSWORD")!,
                                     transport: .unverifiedTLS)
 }
 

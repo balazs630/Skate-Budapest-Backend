@@ -3,7 +3,6 @@
 
 ### Vapor ###
 Config/secrets
-app.yaml
 
 ### Vapor Patch ###
 Packages
