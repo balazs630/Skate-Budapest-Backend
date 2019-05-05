@@ -14,9 +14,6 @@ public func registerMiddlewares(to services: inout Services) throws {
 }
 
 private func middlewares(config: inout MiddlewareConfig) throws {
-    // Serves files from `Public/` directory
-    config.use(FileMiddleware.self)
-
     // Catches errors and converts to HTTP response
     config.use(ErrorMiddleware.self)
 }

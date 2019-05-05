@@ -39,7 +39,7 @@ sudo -u postgres psql postgres
 \q
 exit
 ```
- 
+
 ```bash
 sudo nano /etc/postgresql/9.6/main/pg_hba.conf
 ```
@@ -56,8 +56,8 @@ Modify to:
 ```bash
 sudo service postgresql restart
 ```
- 
- 
+
+
 ### **Enable external access for PostgreSQL**
 Google Cloud Console / VPC network / Firewall rules / + Create Firewall rule
  
@@ -68,7 +68,7 @@ Google Cloud Console / VPC network / Firewall rules / + Create Firewall rule
  >Ports: tcp:5432  
  >Action: Allow  
  
- Install pgAdmin on dev Macintosh:
+Install pgAdmin on dev Macintosh:
 ```
 brew cask install pgadmin4
 ```
@@ -122,7 +122,7 @@ sudo nano /etc/nginx/sites-enabled/skate-budapest-vapor
 >  
 >    try_files $uri @proxy;  
 >    location @proxy {  
->        proxy_pass http://127.0.0.1:8080;  
+>        proxy_pass http://localhost:8080;  
 >        proxy_pass_header Server;  
 >        proxy_set_header Host $host;  
 >        proxy_set_header X-Real-IP $remote_addr;  
@@ -143,22 +143,22 @@ Verify:
 ```bash
 sudo nginx -t
 ```
- 
+
 Expected output:
 >nginx: the configuration file /etc/nginx/nginx.conf syntax is ok  
 >nginx: configuration file /etc/nginx/nginx.conf test is successful  
- 
+
 ```bash
 sudo reboot
 ```
 
 Test connection (nginx 502 should appear): https://skatebudapest.libertyskate.hu
- 
- 
+
+
 ### **Create SSL certificate with Let's encrypt**
 Self-signed certificates are not publicly trusted, it has problems with iOS App Transport Security (ATS). So we need a Certificate Authority (CA) for this: Let's encrypt.
 Previously we pointed the domain to the VM's static public IP.
- 
+
 ```bash
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt install python-certbot-nginx
@@ -190,8 +190,8 @@ sudo certbot renew --dry-run
 ```
 
 Verify browser's security indicator. (nginx 502 should appear with a lock sign): https://skatebudapest.libertyskate.hu
- 
- 
+
+
 ### **Install Swift and Vapor**
 ```bash
 eval "$(curl -sL https://apt.vapor.sh)"
@@ -203,50 +203,55 @@ Verify:
 swift --version
 vapor --help
 ```
- 
- 
+
+
 ### **Configure Git, clone project**
 ```bash
 git config --global user.email "balazs630@icloud.com"
 git config --global user.name "Horváth Balázs"
 git clone https://github.com/balazs630/Skate-Budapest-Vapor.git
 ```
- 
- 
+
+
 ### **Set permanent env variables for Vapor API (Postgres secrets for connection)**
 ```bash
 sudo nano ~/.profile
 ```
- 
+
 Add:
 >export SKTBPST_PSQL_IP="value-here"  
 >export SKTBPST_PSQL_PORT="value-here"  
 >export SKTBPST_PSQL_USERNAME="value-here"  
 >export SKTBPST_PSQL_DATABASE="value-here"  
 >export SKTBPST_PSQL_PASSWORD="value-here"  
- 
- 
-### **Vapor build**
+
+
+### **Clean build folder after a change**
 ```bash
-sudo rm -R /home/balazs630uk/development/Skate-Budapest-Vapor/.build
-vapor build --release /home/balazs630uk/development/Skate-Budapest-Vapor
+cd ~/development/Skate-Budapest-Vapor/ ; git pull
+sudo rm -R ~/development/Skate-Budapest-Vapor/.build
 ```
- 
- 
-### **Vapor run**
+
+
+### **Run**
 ```bash
-free -m
 tmux
-/home/balazs630uk/development/Skate-Budapest-Vapor/.build/release/Run
+free -m
+swift run --package-path ~/development/Skate-Budapest-Vapor/ --configuration release
 ```
 Close tmux:
 > Ctrl+B, followed by D
 
 Close ssh session
- 
- 
+
+
 ### **Restore tmux session**
 Attach:
 ```bash
 tmux a
 ```
+
+
+### **Uptime check**
+Using: https://uptimerobot.com/ with endpoint checks in every 5 minutes. 
+Notification by e-mail.
