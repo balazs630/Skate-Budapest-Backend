@@ -23,9 +23,9 @@ CREATE TABLE "PlaceImage" (
     FOREIGN KEY ("placeId") REFERENCES "Place"("id")
 );
 
-DROP TABLE IF EXISTS "PlaceInfo";
-CREATE TABLE "PlaceInfo" (
-	"dataVersion" text not null
+DROP TABLE IF EXISTS "PlaceDataVersion";
+CREATE TABLE "PlaceDataVersion" (
+	"dataVersion" timestamp not null
 );
 
 DROP TABLE IF EXISTS "PlaceSuggestion";
@@ -41,6 +41,7 @@ CREATE TABLE "PlaceSuggestion" (
     "image2" bytea not null,
     "image3" bytea,
     "image4" bytea,
+    "status" text not null,
     PRIMARY KEY ("id")
 );
 
@@ -53,7 +54,7 @@ INSERT INTO "Place" ("id", "latitude", "longitude", "nameHU", "nameEN", "infoHU"
 INSERT INTO "Place" ("id", "latitude", "longitude", "nameHU", "nameEN", "infoHU", "infoEN", "type", "status", "thumbnailUrl") VALUES ('0FC2EDBA-01CD-4376-81A5-A3FD872BB7EB', 47.450912, 19.320235, 'Ready for Pickup', 'Ready for Pickup-en', 'This isn’t Jenga, stack ‘em neatly.', 'This isn’t Jenga, stack ‘em neatly.-en', 'streetspot', 'active', 'https://libertyskate.hu/mobile/example/images/PileOfSkis.png');
 INSERT INTO "Place" ("id", "latitude", "longitude", "nameHU", "nameEN", "infoHU", "infoEN", "type", "status", "thumbnailUrl") VALUES ('62AA30F7-0D61-4006-B417-B9E34A3190DA', 47.607912, 19.120235, 'Flying', 'Flying-en', 'Wouldn’t you love to be at the controls?', 'Wouldn’t you love to be at the controls?-en', 'skateshop', 'active', 'https://libertyskate.hu/mobile/example/images/Cockpit.png');
 INSERT INTO "Place" ("id", "latitude", "longitude", "nameHU", "nameEN", "infoHU", "infoEN", "type", "status", "thumbnailUrl") VALUES ('0CF937B2-C509-4677-B109-4B7E1D9E8791', 47.486818, 19.014536, 'Panorama', 'Panorama-en', 'Cool iPhone feature.', 'Cool iPhone feature.-en', 'skateshop', 'active', 'https://libertyskate.hu/mobile/example/images/Panorama.png');
-INSERT INTO "Place" ("id", "latitude", "longitude", "nameHU", "nameEN", "infoHU", "infoEN", "type", "status", "thumbnailUrl") VALUES ('8A5549E5-C122-47F8-B446-292A71B68A7A', 47.510258, 19.082678, 'Apres Ski', 'Apres Ski-en', 'In Canada, after all.', 'In Canada, after all.-en', 'skateshop', 'inactive', 'https://libertyskate.hu/mobile/example/images/Curling.png');
+INSERT INTO "Place" ("id", "latitude", "longitude", "nameHU", "nameEN", "infoHU", "infoEN", "type", "status", "thumbnailUrl") VALUES ('8A5549E5-C122-47F8-B446-292A71B68A7A', 47.510258, 19.082678, 'Apres Ski', 'Apres Ski-en', 'In Canada, after all.', 'In Canada, after all.-en', 'skateshop', 'deleted', 'https://libertyskate.hu/mobile/example/images/Curling.png');
 
 INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('1371AEF5-5782-49C6-B71B-F3D511ABAC90', 'https://libertyskate.hu/mobile/example/images/Helicopter.jpg');
 INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('1371AEF5-5782-49C6-B71B-F3D511ABAC90', 'https://libertyskate.hu/mobile/example/images/Helicopter.jpg');
@@ -69,6 +70,6 @@ INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('0CF937B2-C509-4677-B10
 INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('8A5549E5-C122-47F8-B446-292A71B68A7A', 'https://libertyskate.hu/mobile/example/images/Curling.jpg');
 INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('8A5549E5-C122-47F8-B446-292A71B68A7A', 'https://libertyskate.hu/mobile/example/images/Curling.jpg');
 
-INSERT INTO "PlaceInfo" ("dataVersion") VALUES ('1.0');
+INSERT INTO "PlaceDataVersion" ("dataVersion") VALUES ('2019-05-18 12:00:00');
 
 COMMIT;

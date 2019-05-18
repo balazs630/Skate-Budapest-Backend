@@ -17,12 +17,12 @@ final class PlaceService {
 
 // MARK: PlaceServiceInterface conformances
 extension PlaceService: PlaceServiceInterface {
-    func getPlaces(for languageCode: LanguageCode) -> Future<[PlaceResponseDTO]> {
+    func getPlaces(for languageCode: LanguageCode, status: PlaceStatus) -> Future<[PlaceResponseDTO]> {
         return placeRepository
-            .findAllPlaces()
-            .map(to: [PlaceResponseDTO].self) { places in
-                places.map { placeContent in
-                    let (place, images) = placeContent
+            .findAllPlaces(status: status)
+            .map(to: [PlaceResponseDTO].self) { result in
+                let (places, images) = result
+                return places.map { place in
                     let imageUrls = images
                         .filter { $0.placeId == place.id }
                         .map { $0.imageUrl }
@@ -32,18 +32,18 @@ extension PlaceService: PlaceServiceInterface {
             }
     }
 
-    func getPlaceInfo() -> Future<PlaceInfoResponseDTO> {
+    func getPlaceDataVersion() -> Future<PlaceDataVersionResponseDTO> {
         return placeRepository
-            .findPlaceInfo()
+            .findPlaceDataVersion()
             .unwrap(or: Abort.init(HTTPResponseStatus.notFound))
-            .map(to: PlaceInfoResponseDTO.self) {
-                PlaceInfoResponseDTO(dataVersion: $0.dataVersion)
+            .map(to: PlaceDataVersionResponseDTO.self) {
+                PlaceDataVersionResponseDTO(dataVersion: $0.dataVersion)
             }
     }
 
-    func getPlaceSuggestions() -> Future<[PlaceSuggestionResponseDTO]> {
+    func getPlaceSuggestions(status: PlaceSuggestionStatus) -> Future<[PlaceSuggestionResponseDTO]> {
         return placeRepository
-            .findPlaceSuggestions()
+            .findPlaceSuggestions(status: status)
             .map(to: [PlaceSuggestionResponseDTO].self) { placeSuggestions in
                 placeSuggestions.map { PlaceSuggestionResponseDTO(suggestion: $0) }
             }
@@ -54,7 +54,16 @@ extension PlaceService: PlaceServiceInterface {
             .savePlaceSuggestion(suggestion: suggestion.toPlaceSuggestion())
             .map(to: HTTPResponse.self) { _ in
                 return HTTPResponse(status: .ok,
-                                    body: GeneralSuccessDTO(message: "Place suggestion has been created!"))
+                                    body: GeneralSuccessDTO(message: "Place suggestion is created!"))
             }
+    }
+
+    func clearPlaceSuggestions() -> Future<HTTPResponse> {
+        return placeRepository
+            .clearPlaceSuggestion()
+            .map(to: HTTPResponse.self) { _ in
+                return HTTPResponse(status: .ok,
+                                    body: GeneralSuccessDTO(message: "Place suggestions are cleared!"))
+        }
     }
 }

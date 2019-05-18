@@ -10,13 +10,15 @@ import Vapor
 fileprivate enum Slug {
     static let apiVersionPath = "v1"
     static let placesPath = "places"
-    static let placeInfoPath = "\(placesPath)/info"
+    static let placeDataVersionPath = "\(placesPath)/dataversion"
     static let suggestPlace = "suggestplace"
     static let placeSuggestionsPath = "placesuggestions"
+    static let clearPlaceSuggestionsPath = "placesuggestions/clear"
 }
 
 fileprivate enum Parameter {
     static let language = "lang"
+    static let status = "status"
 }
 
 final class PlaceController {
@@ -32,40 +34,54 @@ extension PlaceController: RouteCollection {
     func boot(router: Router) throws {
         router.group(Slug.apiVersionPath) { apiVersionPath in
             apiVersionPath.get(Slug.placesPath, use: getPlaces)
-            apiVersionPath.get(Slug.placeInfoPath, use: getPlaceInfo)
+            apiVersionPath.get(Slug.placeDataVersionPath, use: getPlaceDataVersion)
             apiVersionPath.get(Slug.placeSuggestionsPath, use: getPlaceSuggestions)
 
-            apiVersionPath.post(Slug.suggestPlace, use: postPlaceSuggestions)
+            apiVersionPath.post(Slug.suggestPlace, use: postPlaceSuggestion)
+
+            apiVersionPath.put(Slug.clearPlaceSuggestionsPath, use: clearPlaceSuggestions)
         }
     }
 }
 
-// MARK: GET routes actions
+// MARK: GET endpoint methods
 extension PlaceController {
     func getPlaces(req: Request) throws -> Future<[PlaceResponseDTO]> {
         let languageParameter = try req.query.get(String.self, at: Parameter.language)
-        let languageCode = LanguageCode(rawValue: languageParameter.uppercased()) ?? .HU
+        let languageCode = LanguageCode(rawValue: languageParameter) ?? .HU
 
-        return placeService.getPlaces(for: languageCode)
+        let statusParameter = try? req.query.get(String.self, at: Parameter.status)
+        let status = PlaceStatus(rawValue: statusParameter ?? PlaceStatus.all.rawValue)
+
+        return placeService.getPlaces(for: languageCode, status: status ?? .all)
     }
 
-    func getPlaceInfo(req: Request) -> Future<PlaceInfoResponseDTO> {
-        return placeService.getPlaceInfo()
+    func getPlaceDataVersion(req: Request) -> Future<PlaceDataVersionResponseDTO> {
+        return placeService.getPlaceDataVersion()
     }
 
     func getPlaceSuggestions(req: Request) -> Future<[PlaceSuggestionResponseDTO]> {
-        return placeService.getPlaceSuggestions()
+        let statusParameter = try? req.query.get(String.self, at: Parameter.status)
+        let status = PlaceSuggestionStatus(rawValue: statusParameter ?? PlaceSuggestionStatus.all.rawValue)
+        return placeService.getPlaceSuggestions(status: status ?? .all)
     }
 }
 
-// MARK: POST routes actions
+// MARK: POST endpoint methods
 extension PlaceController {
-    func postPlaceSuggestions(req: Request) throws -> Future<HTTPResponse> {
+    func postPlaceSuggestion(req: Request) throws -> Future<HTTPResponse> {
         return try req.content
             .decode(PlaceSuggestionRequestDTO.self)
             .flatMap { placeSuggestion in
                 try placeSuggestion.validate()
                 return self.placeService.postPlaceSuggestion(suggestion: placeSuggestion)
             }
+    }
+}
+
+// MARK: PUT endpoint methods
+extension PlaceController {
+    func clearPlaceSuggestions(req: Request) -> Future<HTTPResponse> {
+        return placeService.clearPlaceSuggestions()
     }
 }

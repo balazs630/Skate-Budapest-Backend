@@ -14,7 +14,6 @@ struct PlaceResponseDTO: Content {
     let name: String
     let info: String
     let type: String
-    let status: String
     let thumbnailUrl: String?
     let imageUrls: [String]?
 
@@ -33,7 +32,6 @@ struct PlaceResponseDTO: Content {
         }
 
         self.type = place.type
-        self.status = place.status
         self.thumbnailUrl = place.thumbnailUrl
         self.imageUrls = placeImages
     }

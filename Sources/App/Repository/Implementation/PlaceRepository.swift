@@ -18,32 +18,30 @@ final class PlaceRepository {
 
 // MARK: PlaceRepositoryInterface conformances
 extension PlaceRepository: PlaceRepositoryInterface {
-    func findAllPlaces() -> Future<[(Place, [PlaceImage])]> {
+    func findAllPlaces(status: PlaceStatus) -> Future<([Place], [PlaceImage])> {
         return database.withConnection { conn in
-            Place.query(on: conn)
+            let places = Place.query(on: conn)
+                .filter(\.status ~= status.rawValue)
                 .all()
-                .flatMap { places in
-                    places.map { place in
-                        PlaceImage.query(on: conn)
-                            .all()
-                            .map { images in
-                                return (place, images)
-                        }
-                    }.flatten(on: conn)
-            }
+
+            let images = PlaceImage.query(on: conn)
+                .all()
+
+            return places.and(images)
         }
     }
 
-    func findPlaceInfo() -> Future<PlaceInfo?> {
+    func findPlaceDataVersion() -> Future<PlaceDataVersion?> {
         return database.withConnection { conn in
-            PlaceInfo.query(on: conn)
+            PlaceDataVersion.query(on: conn)
                 .first()
         }
     }
 
-    func findPlaceSuggestions() -> Future<[PlaceSuggestion]> {
+    func findPlaceSuggestions(status: PlaceSuggestionStatus) -> Future<[PlaceSuggestion]> {
         return database.withConnection { conn in
             PlaceSuggestion.query(on: conn)
+                .filter(\.status ~= status.rawValue)
                 .all()
         }
     }
@@ -52,6 +50,14 @@ extension PlaceRepository: PlaceRepositoryInterface {
         return database.withConnection { conn in
             PlaceSuggestion.query(on: conn)
                 .create(suggestion)
+        }
+    }
+
+    func clearPlaceSuggestion() -> EventLoopFuture<Void> {
+        return database.withConnection { conn in
+            PlaceSuggestion.query(on: conn)
+                .update(\.status, to: PlaceSuggestionStatus.deleted.rawValue)
+                .run()
         }
     }
 }

@@ -44,7 +44,9 @@ exit
 sudo nano /etc/postgresql/9.6/main/pg_hba.conf
 ```
 Add:
->host    all             all           my-ip-here/32         md5  
+>host    all             all           0.0.0.0/0         md5  
+
+Whitelist all IP address, I'll limit the list of incoming IP addresses with GCP Firewall rules in the next step.
 
 ```bash
 sudo nano /etc/postgresql/9.6/main/postgresql.conf

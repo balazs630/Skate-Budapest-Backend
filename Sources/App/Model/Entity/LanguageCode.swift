@@ -6,5 +6,6 @@
 //
 
 enum LanguageCode: String {
-    case HU, EN
+    case HU
+    case EN
 }
