@@ -49,11 +49,12 @@ extension PlaceService: PlaceServiceInterface {
             }
     }
 
-    func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO) -> Future<HTTPResponse> {
+    func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO, on request: Request) -> Future<HTTPResponse> {
         return placeRepository
             .savePlaceSuggestion(suggestion: suggestion.toPlaceSuggestion())
             .map(to: HTTPResponse.self) { _ in
-                return HTTPResponse(status: .ok,
+                self.sendEmailToDeveloper(on: request)
+                return HTTPResponse(status: .created,
                                     body: GeneralSuccessDTO(message: "Place suggestion is created!"))
             }
     }
@@ -65,5 +66,23 @@ extension PlaceService: PlaceServiceInterface {
                 return HTTPResponse(status: .ok,
                                     body: GeneralSuccessDTO(message: "Place suggestions are cleared!"))
         }
+    }
+}
+
+extension PlaceService {
+    private func sendEmailToDeveloper(on request: Request) {
+        let message = MailGunMessageRequestDTO(
+            from: "Skate Budapest <info@libertyskate.hu>",
+            to: "balazs630@icloud.com",
+            subject: "New place suggested",
+            html: """
+                <html>
+                <p>Dear Developer,</p>
+                <p>Someone just posted a new place suggestion from Skate Budapest iOS app.</p>
+                <p>Go and check it out.</p>
+                </html>
+            """
+        )
+        MailGun.sendEmail(message: message, on: request)
     }
 }

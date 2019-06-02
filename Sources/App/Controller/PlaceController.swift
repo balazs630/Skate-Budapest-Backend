@@ -46,22 +46,22 @@ extension PlaceController: RouteCollection {
 
 // MARK: GET endpoint methods
 extension PlaceController {
-    func getPlaces(req: Request) throws -> Future<[PlaceResponseDTO]> {
-        let languageParameter = try req.query.get(String.self, at: Parameter.language)
+    func getPlaces(request: Request) throws -> Future<[PlaceResponseDTO]> {
+        let languageParameter = try request.query.get(String.self, at: Parameter.language)
         let languageCode = LanguageCode(rawValue: languageParameter) ?? .HU
 
-        let statusParameter = try? req.query.get(String.self, at: Parameter.status)
+        let statusParameter = try? request.query.get(String.self, at: Parameter.status)
         let status = PlaceStatus(rawValue: statusParameter ?? PlaceStatus.all.rawValue)
 
         return placeService.getPlaces(for: languageCode, status: status ?? .all)
     }
 
-    func getPlaceDataVersion(req: Request) -> Future<PlaceDataVersionResponseDTO> {
+    func getPlaceDataVersion(request: Request) -> Future<PlaceDataVersionResponseDTO> {
         return placeService.getPlaceDataVersion()
     }
 
-    func getPlaceSuggestions(req: Request) -> Future<[PlaceSuggestionResponseDTO]> {
-        let statusParameter = try? req.query.get(String.self, at: Parameter.status)
+    func getPlaceSuggestions(request: Request) -> Future<[PlaceSuggestionResponseDTO]> {
+        let statusParameter = try? request.query.get(String.self, at: Parameter.status)
         let status = PlaceSuggestionStatus(rawValue: statusParameter ?? PlaceSuggestionStatus.all.rawValue)
         return placeService.getPlaceSuggestions(status: status ?? .all)
     }
@@ -69,19 +69,19 @@ extension PlaceController {
 
 // MARK: POST endpoint methods
 extension PlaceController {
-    func postPlaceSuggestion(req: Request) throws -> Future<HTTPResponse> {
-        return try req.content
+    func postPlaceSuggestion(request: Request) throws -> Future<HTTPResponse> {
+        return try request.content
             .decode(PlaceSuggestionRequestDTO.self)
             .flatMap { placeSuggestion in
                 try placeSuggestion.validate()
-                return self.placeService.postPlaceSuggestion(suggestion: placeSuggestion)
+                return self.placeService.postPlaceSuggestion(suggestion: placeSuggestion, on: request)
             }
     }
 }
 
 // MARK: PUT endpoint methods
 extension PlaceController {
-    func clearPlaceSuggestions(req: Request) -> Future<HTTPResponse> {
+    func clearPlaceSuggestions(request: Request) -> Future<HTTPResponse> {
         return placeService.clearPlaceSuggestions()
     }
 }

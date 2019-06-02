@@ -215,7 +215,7 @@ git clone https://github.com/balazs630/Skate-Budapest-Vapor.git
 ```
 
 
-### **Set permanent env variables for Vapor API (Postgres secrets for connection)**
+### **Set permanent env variables for Vapor API (Postgres & Mailgun secrets)**
 ```bash
 sudo nano ~/.profile
 ```
@@ -226,6 +226,9 @@ Add:
 >export SKTBPST_PSQL_USERNAME="value-here"  
 >export SKTBPST_PSQL_DATABASE="value-here"  
 >export SKTBPST_PSQL_PASSWORD="value-here"  
+
+>export SKTBPST_MAILGUN_API_KEY="value-here"  
+>export SKTBPST_MAILGUN_DOMAIN="value-here"  
 
 
 ### **Clean build folder after a change**
