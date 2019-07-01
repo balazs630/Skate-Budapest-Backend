@@ -8,13 +8,19 @@
 import Vapor
 
 class MailGun {
+    // MARK: Properties
+    private static let mailgunApiUrl = "https://api.mailgun.net/v3/"
+    private static let mailgunEnvApiKey = "SKTBPST_MAILGUN_API_KEY"
+    private static let mailgunDomainKey = "SKTBPST_MAILGUN_DOMAIN"
+
+    // MARK: Request to Mailgun API
     static func sendEmail(message: MailGunMessageRequestDTO, on req: Request) {
         var headers = HTTPHeaders([])
-        let apiKey = Environment.get("SKTBPST_MAILGUN_API_KEY")!
+        let apiKey = Environment.get(mailgunEnvApiKey)!
         headers.add(name: .authorization, value: "Basic \(encode(apiKey))")
 
-        let domain = Environment.get("SKTBPST_MAILGUN_DOMAIN")!
-        let url = "https://api.mailgun.net/v3/\(domain)/messages"
+        let domain = Environment.get(mailgunDomainKey)!
+        let url = "\(mailgunApiUrl)\(domain)/messages"
 
         do {
             let client = try req.make(Client.self)

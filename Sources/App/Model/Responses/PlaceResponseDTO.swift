@@ -23,10 +23,10 @@ struct PlaceResponseDTO: Content {
         self.longitude = place.longitude
 
         switch languageCode {
-        case .HU:
+        case .hu:
             self.name = place.nameHU
             self.info = place.infoHU
-        case .EN:
+        case .en:
             self.name = place.nameEN
             self.info = place.infoEN
         }

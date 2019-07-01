@@ -48,22 +48,31 @@ extension PlaceController: RouteCollection {
 extension PlaceController {
     func getPlaces(request: Request) throws -> Future<[PlaceResponseDTO]> {
         let languageParameter = try request.query.get(String.self, at: Parameter.language)
-        let languageCode = LanguageCode(rawValue: languageParameter) ?? .HU
+        guard let languageCode = LanguageCode(rawValue: languageParameter.lowercased()) else {
+            throw Abort(.badRequest, reason: "Invalid `lang` parameter.")
+        }
 
         let statusParameter = try? request.query.get(String.self, at: Parameter.status)
-        let status = PlaceStatus(rawValue: statusParameter ?? PlaceStatus.all.rawValue)
+        guard let status = PlaceStatus(rawValue: statusParameter?.lowercased()
+            ?? PlaceStatus.all.rawValue) else {
+                throw Abort(.badRequest, reason: "Invalid `status` parameter.")
+        }
 
-        return placeService.getPlaces(for: languageCode, status: status ?? .all)
+        return placeService.getPlaces(for: languageCode, status: status)
     }
 
     func getPlaceDataVersion(request: Request) -> Future<PlaceDataVersionResponseDTO> {
         return placeService.getPlaceDataVersion()
     }
 
-    func getPlaceSuggestions(request: Request) -> Future<[PlaceSuggestionResponseDTO]> {
+    func getPlaceSuggestions(request: Request) throws -> Future<[PlaceSuggestionResponseDTO]> {
         let statusParameter = try? request.query.get(String.self, at: Parameter.status)
-        let status = PlaceSuggestionStatus(rawValue: statusParameter ?? PlaceSuggestionStatus.all.rawValue)
-        return placeService.getPlaceSuggestions(status: status ?? .all)
+        guard let status = PlaceSuggestionStatus(rawValue: statusParameter?.lowercased()
+            ?? PlaceSuggestionStatus.all.rawValue) else {
+                throw Abort(.badRequest, reason: "Invalid `status` parameter.")
+        }
+
+        return placeService.getPlaceSuggestions(status: status)
     }
 }
 

@@ -28,8 +28,8 @@ Simple backend for Skate-Budapest iOS app using Swift with Vapor web framework.
 
 ## Specification
 
-- See the [API Documentation](https://balazs630.github.io/Skate-Budapest-Backend/) (Swagger with ReDoc)
-- Preview spec version for branch [`[gh-pages]`](https://github.com/balazs630/Skate-Budapest-Backend/tree/gh-pages)
+- See the [API Documentation](https://balazs630.github.io/Skate-Budapest-Vapor/) (Swagger with ReDoc)
+- Preview spec version for branch [`[gh-pages]`](https://github.com/balazs630/Skate-Budapest-Vapor/tree/gh-pages)
 
 
 ## Installation
