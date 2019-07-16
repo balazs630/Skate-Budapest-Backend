@@ -203,7 +203,7 @@ sudo apt-get install swift vapor
 Verify:
 ```bash
 swift --version
-vapor --help
+vapor --version
 ```
 
 
@@ -238,7 +238,7 @@ sudo rm -R ~/development/Skate-Budapest-Vapor/.build
 ```
 
 
-### **Run**
+### **Manual run**
 ```bash
 tmux
 free -m
@@ -247,16 +247,71 @@ swift run --package-path ~/development/Skate-Budapest-Vapor/ --configuration rel
 Close tmux:
 > Ctrl+B, followed by D
 
-Close ssh session
+Close ssh session.
 
+
+### **Automatic startup script**
+In case of any GCP service outage or maintanance, we can fire up our API automatically after a reboot.
+
+Create a startup script for the Vapor API: 
+```bash
+sudo touch ~/development/startup.sh
+sudo nano ~/development/startup.sh
+```
+
+Add:
+>#! /bin/bash  
+>  
+>swift run --package-path /home/balazs630uk/development/Skate-Budapest-Vapor/ --configuration release  
+
+```bash
+sudo chmod +x ~/development/startup.sh
+```
+
+Configure startup script for the Compute Engine instance with GCP Console.
+
+Select the instance > `Edit`,  Custom metadada `+ Add item`:
+
+Key:
+```
+startup-script
+```
+
+Value:
+```bash
+#! /bin/bash
+
+echo "User: $(whoami)"
+echo "Working directory: $(pwd)"
+
+sudo -H -u balazs630uk tmux new-session -d -s skate-budapest
+sudo -H -u balazs630uk tmux send -t skate-budapest /home/balazs630uk/development/startup.sh ENTER
+```
+We need to switch to our user account `balazs630uk` because startup scripts are executed as `root` by defualt - which is managed by GCP.
+
+Inspect startup-script logs:
+```bash
+sudo journalctl -u google-startup-scripts.service
+```
+
+Try out startup script:
+```bash
+sudo reboot
+```
 
 ### **Restore tmux session**
 Attach:
 ```bash
 tmux a
 ```
+or
+
+```bash
+tmux a -t skate-budapest
+```
 
 
 ### **Uptime check**
-Using: https://uptimerobot.com/ with endpoint checks in every 5 minutes. 
-Notification by e-mail.
+Using: https://uptimerobot.com/ with free endpoint checks in every 5 minutes. 
+
+Sends e-mail notification if the endpoints are down.
