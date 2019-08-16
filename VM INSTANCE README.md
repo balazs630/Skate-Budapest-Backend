@@ -70,14 +70,18 @@ Google Cloud Console / VPC network / Firewall rules / + Create Firewall rule
  >Ports: tcp:5432  
  >Action: Allow  
  
-Install pgAdmin on dev Macintosh:
+ ### **Manage databases**
+ 
+Install [TablePlus](https://tableplus.com) / [pgAdmin](https://www.pgadmin.org) database manager on dev Macintosh:
 ```
+brew cask install tableplus
 brew cask install pgadmin4
 ```
 
-* Add new server connection, connect with default user/pass: postgres/postgres  
-* Create new superuser, create new table (owned by new user)  
-* Create tables, insert base data into the database  
+* Add new server connection: connect with default user/pass/database: postgres/postgres/postgres
+* Create a new superuser with new database using pgAdmin
+* Create tables, insert base data into the database:
+  * `/Resources/skate-budapest.sql` 
 
 
 ### **Nginx web server install, configuration**
