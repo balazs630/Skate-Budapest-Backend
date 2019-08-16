@@ -37,7 +37,7 @@ extension PlaceService: PlaceServiceInterface {
             .findPlaceDataVersion()
             .unwrap(or: Abort.init(HTTPResponseStatus.notFound))
             .map(to: PlaceDataVersionResponseDTO.self) {
-                PlaceDataVersionResponseDTO(dataVersion: $0.dataVersion)
+                PlaceDataVersionResponseDTO(id: $0.id, dataVersion: $0.dataVersion)
             }
     }
 

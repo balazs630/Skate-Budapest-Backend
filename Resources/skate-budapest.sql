@@ -25,7 +25,9 @@ CREATE TABLE "PlaceImage" (
 
 DROP TABLE IF EXISTS "PlaceDataVersion";
 CREATE TABLE "PlaceDataVersion" (
-	"dataVersion" timestamp not null
+    "id" uuid not null,
+	"dataVersion" timestamp not null,
+    PRIMARY KEY ("id")
 );
 
 DROP TABLE IF EXISTS "PlaceSuggestion";
@@ -70,6 +72,6 @@ INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('0CF937B2-C509-4677-B10
 INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('8A5549E5-C122-47F8-B446-292A71B68A7A', 'https://libertyskate.hu/mobile/example/images/Curling.jpg');
 INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('8A5549E5-C122-47F8-B446-292A71B68A7A', 'https://libertyskate.hu/mobile/example/images/Curling.jpg');
 
-INSERT INTO "PlaceDataVersion" ("dataVersion") VALUES ('2019-05-18 12:00:00');
+INSERT INTO "PlaceDataVersion" ("id", "dataVersion") VALUES ('4728D8FE-BD81-4961-88F3-E442A795179A', '2019-08-16 02:00:00');
 
 COMMIT;
