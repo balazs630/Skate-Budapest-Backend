@@ -47,6 +47,15 @@ CREATE TABLE "PlaceSuggestion" (
     PRIMARY KEY ("id")
 );
 
+DROP TABLE IF EXISTS "PlaceReport";
+CREATE TABLE "PlaceReport" (
+    "id" uuid not null,
+    "senderEmail" text,
+    "reportText" text not null,
+    "status" text not null,
+    PRIMARY KEY ("id")
+);
+
 -- Propagate base data
 INSERT INTO "Place" ("id", "latitude", "longitude", "nameHU", "nameEN", "infoHU", "infoEN", "type", "status", "thumbnailUrl") VALUES ('1371AEF5-5782-49C6-B71B-F3D511ABAC90', 47.497912, 19.040235, 'Helicopter', 'Helicopter-en', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.-en', 'skatepark', 'active', 'https://libertyskate.hu/mobile/example/images/Helicopter.png');
 INSERT INTO "Place" ("id", "latitude", "longitude", "nameHU", "nameEN", "infoHU", "infoEN", "type", "status", "thumbnailUrl") VALUES ('D16EEC15-DAB4-4E90-86BE-C5884F0C3B34', 47.539016, 19.034754, 'Top of First Run', 'Top of First Run-en', 'Incredible views from up here.', 'Incredible views from up here.-en', 'skatepark', 'active', 'https://libertyskate.hu/mobile/example/images/Crag.png');

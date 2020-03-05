@@ -53,10 +53,33 @@ extension PlaceRepository: PlaceRepositoryInterface {
         }
     }
 
-    func clearPlaceSuggestion() -> EventLoopFuture<Void> {
+    func clearPlaceSuggestions() -> EventLoopFuture<Void> {
         return database.withConnection { conn in
             PlaceSuggestion.query(on: conn)
                 .update(\.status, to: PlaceSuggestionStatus.deleted.rawValue)
+                .run()
+        }
+    }
+
+    func findPlaceReports(status: PlaceReportStatus) -> Future<[PlaceReport]> {
+        return database.withConnection { conn in
+            PlaceReport.query(on: conn)
+                .filter(\.status ~= status.rawValue)
+                .all()
+        }
+    }
+
+    func savePlaceReport(report: PlaceReport) -> Future<PlaceReport> {
+        return database.withConnection { conn in
+            PlaceReport.query(on: conn)
+                .create(report)
+        }
+    }
+
+    func clearPlaceReports() -> EventLoopFuture<Void> {
+        return database.withConnection { conn in
+            PlaceReport.query(on: conn)
+                .update(\.status, to: PlaceReportStatus.deleted.rawValue)
                 .run()
         }
     }

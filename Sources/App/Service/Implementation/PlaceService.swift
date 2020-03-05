@@ -61,10 +61,36 @@ extension PlaceService: PlaceServiceInterface {
 
     func clearPlaceSuggestions() -> Future<HTTPResponse> {
         return placeRepository
-            .clearPlaceSuggestion()
+            .clearPlaceSuggestions()
             .map(to: HTTPResponse.self) { _ in
                 return HTTPResponse(status: .ok,
                                     body: GeneralSuccessDTO(message: "Place suggestions are cleared!"))
+        }
+    }
+
+    func getPlaceReports(status: PlaceReportStatus) -> EventLoopFuture<[PlaceReportResponseDTO]> {
+        return placeRepository
+             .findPlaceReports(status: status)
+             .map(to: [PlaceReportResponseDTO].self) { placeReports in
+                 placeReports.map { PlaceReportResponseDTO(report: $0) }
+             }
+    }
+
+    func postPlaceReport(report: PlaceReportRequestDTO, on request: Request) -> EventLoopFuture<HTTPResponse> {
+        return placeRepository
+            .savePlaceReport(report: report.toPlaceReport())
+            .map(to: HTTPResponse.self) { _ in
+                return HTTPResponse(status: .created,
+                                    body: GeneralSuccessDTO(message: "Place report is created!"))
+            }
+    }
+
+    func clearPlaceReports() -> EventLoopFuture<HTTPResponse> {
+        return placeRepository
+            .clearPlaceReports()
+            .map(to: HTTPResponse.self) { _ in
+                return HTTPResponse(status: .ok,
+                                    body: GeneralSuccessDTO(message: "Place reports are cleared!"))
         }
     }
 }
@@ -83,6 +109,7 @@ extension PlaceService {
                 </html>
             """
         )
+
         MailGun.sendEmail(message: message, on: request)
     }
 }

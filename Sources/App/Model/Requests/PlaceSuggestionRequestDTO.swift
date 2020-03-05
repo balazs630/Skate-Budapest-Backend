@@ -39,6 +39,7 @@ extension PlaceSuggestionRequestDTO {
     }
 }
 
+// MARK: Validation
 extension PlaceSuggestionRequestDTO: Validatable, Reflectable {
     static func validations() throws -> Validations<PlaceSuggestionRequestDTO> {
         var validations = Validations(PlaceSuggestionRequestDTO.self)
