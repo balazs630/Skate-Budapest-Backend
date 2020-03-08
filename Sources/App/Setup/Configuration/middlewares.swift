@@ -8,12 +8,5 @@
 import Vapor
 
 public func registerMiddlewares(to services: inout Services) throws {
-    var middlewaresConfig = MiddlewareConfig()
-    try middlewares(config: &middlewaresConfig)
-    services.register(middlewaresConfig)
-}
-
-private func middlewares(config: inout MiddlewareConfig) throws {
-    // Catches errors and converts to HTTP response
-    config.use(ErrorMiddleware.self)
+    services.register(MiddlewareConfig.default())
 }
