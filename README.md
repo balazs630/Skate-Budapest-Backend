@@ -26,6 +26,7 @@
 
 Simple backend for Skate-Budapest iOS app using Swift with Vapor web framework.
 
+
 ## Specification
 
 - See the [API Documentation](https://balazs630.github.io/Skate-Budapest-Vapor/) (Swagger with ReDoc)
@@ -46,3 +47,14 @@ vapor update
 ```
 
 It will download the dependencies and generate an Xcode project for you.
+
+
+## Deployment
+
+See [this guide](VM%20INSTANCE%20README.md) how I managed to host the service with Google Cloud on Compute Engine VM.
+
+
+## Uptime check
+Using Uptime Robot with endpoint checks in every minute, see [public status page](http://uptimerobot.libertyskate.hu/).
+
+Sends e-mail notification/SMS if the endpoints are down.

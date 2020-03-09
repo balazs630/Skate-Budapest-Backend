@@ -225,6 +225,8 @@ sudo nano ~/.profile
 ```
 
 Add:
+>export SKTBPST_SERVER_PROD_API_KEY="value-here"  
+
 >export SKTBPST_PSQL_IP="value-here"  
 >export SKTBPST_PSQL_PORT="value-here"  
 >export SKTBPST_PSQL_USERNAME="value-here"  
@@ -266,7 +268,8 @@ sudo nano ~/development/startup.sh
 Add:
 >#! /bin/bash  
 >  
->swift run --package-path /home/balazs630uk/development/Skate-Budapest-Vapor/ --configuration release  
+>swift build --package-path /home/balazs630uk/development/Skate-Budapest-Vapor/ --configuration release  
+>/home/balazs630uk/development/Skate-Budapest-Vapor/.build/release/Run serve --env production  
 
 ```bash
 sudo chmod +x ~/development/startup.sh
@@ -303,6 +306,7 @@ Try out startup script:
 sudo reboot
 ```
 
+
 ### **Restore tmux session**
 Attach:
 ```bash
@@ -313,9 +317,3 @@ or
 ```bash
 tmux a -t skate-budapest
 ```
-
-
-### **Uptime check**
-Using: https://uptimerobot.com/ with free endpoint checks in every 5 minutes. 
-
-Sends e-mail notification if the endpoints are down.
