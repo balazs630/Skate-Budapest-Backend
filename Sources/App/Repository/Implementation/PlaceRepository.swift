@@ -95,5 +95,5 @@ extension PlaceRepository: ServiceType {
 }
 
 extension Database {
-    public typealias ConnectionPool = DatabaseConnectionPool<ConfiguredDatabase<Self>>
+    typealias ConnectionPool = DatabaseConnectionPool<ConfiguredDatabase<Self>>
 }

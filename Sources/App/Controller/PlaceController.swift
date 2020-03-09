@@ -7,8 +7,11 @@
 
 import Vapor
 
-fileprivate enum Slug {
-    static let apiVersionPath = "v1"
+fileprivate enum ApiVersionPath: String {
+    case v1
+}
+
+fileprivate struct Slug {
     static let listPlacesPath = "places"
     static let placeDataVersionPath = "\(listPlacesPath)/data_version"
 
@@ -21,7 +24,7 @@ fileprivate enum Slug {
     static let clearPlaceReportsPath = "\(listPlaceReportsPath)/clear"
 }
 
-fileprivate enum Parameter {
+fileprivate struct Parameter {
     static let language = "lang"
     static let status = "status"
 }
@@ -37,18 +40,19 @@ final class PlaceController {
 // MARK: Routes definitions
 extension PlaceController: RouteCollection {
     func boot(router: Router) throws {
-        router.group(Slug.apiVersionPath) { apiVersionPath in
-            apiVersionPath.get(Slug.listPlacesPath, use: getPlaces)
-            apiVersionPath.get(Slug.placeDataVersionPath, use: getPlaceDataVersion)
-            apiVersionPath.get(Slug.listPlaceSuggestionsPath, use: getPlaceSuggestions)
-            apiVersionPath.get(Slug.listPlaceReportsPath, use: getPlaceReports)
+        let secretGroup = router.grouped(SecretMiddleware.self)
+        let v1 = secretGroup.grouped(ApiVersionPath.v1.rawValue)
 
-            apiVersionPath.post(Slug.suggestPlacePath, use: postPlaceSuggestion)
-            apiVersionPath.post(Slug.reportPlacePath, use: postPlaceReport)
+        v1.get(Slug.listPlacesPath, use: getPlaces)
+        v1.get(Slug.placeDataVersionPath, use: getPlaceDataVersion)
+        v1.get(Slug.listPlaceSuggestionsPath, use: getPlaceSuggestions)
+        v1.get(Slug.listPlaceReportsPath, use: getPlaceReports)
 
-            apiVersionPath.put(Slug.clearPlaceSuggestionsPath, use: clearPlaceSuggestions)
-            apiVersionPath.put(Slug.clearPlaceReportsPath, use: clearPlaceReports)
-        }
+        v1.post(Slug.suggestPlacePath, use: postPlaceSuggestion)
+        v1.post(Slug.reportPlacePath, use: postPlaceReport)
+
+        v1.put(Slug.clearPlaceSuggestionsPath, use: clearPlaceSuggestions)
+        v1.put(Slug.clearPlaceReportsPath, use: clearPlaceReports)
     }
 }
 

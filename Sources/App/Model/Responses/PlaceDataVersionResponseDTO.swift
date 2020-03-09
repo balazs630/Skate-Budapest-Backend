@@ -10,9 +10,4 @@ import Vapor
 struct PlaceDataVersionResponseDTO: Content {
     let id: UUID?
     let dataVersion: Date
-
-    init(id: UUID?, dataVersion: Date) {
-        self.id = id
-        self.dataVersion = dataVersion
-    }
 }
