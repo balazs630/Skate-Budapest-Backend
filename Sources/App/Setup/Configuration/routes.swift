@@ -19,7 +19,7 @@ public func registerEngineRouter(to services: inout Services) throws {
 
 private func makePlaceController(using container: Container) throws -> RouteCollection {
     let placeRepository = PlaceRepository(try container.connectionPool(to: .psql))
-    let placeService = PlaceService(placeRepository: placeRepository)
+    let placeService = PlaceService(emailService: MailGunService(), placeRepository: placeRepository)
     let placeController = PlaceController(placeService: placeService)
 
     return placeController

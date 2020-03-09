@@ -1,5 +1,5 @@
 //
-//  MailGunRequestDTO.swift
+//  EmailMessageRequestDTO.swift
 //  App
 //
 //  Created by Horváth Balázs on 2019. 06. 02..
@@ -7,14 +7,14 @@
 
 import Vapor
 
-struct MailGunMessageRequestDTO: Content {
+struct EmailMessageRequestDTO: Content {
     let from: String
     let to: String
     let subject: String
     let text: String?
     let html: String?
 
-    public init(from: String, to: String, subject: String, text: String? = nil, html: String? = nil) {
+    init(from: String, to: String, subject: String, text: String? = nil, html: String? = nil) {
         self.from = from
         self.to = to
         self.subject = subject

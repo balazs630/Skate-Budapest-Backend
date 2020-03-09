@@ -8,9 +8,11 @@
 import Vapor
 
 final class PlaceService {
+    private let emailService: EmailServiceInterface
     private let placeRepository: PlaceRepositoryInterface
 
-    init(placeRepository: PlaceRepositoryInterface) {
+    init(emailService: EmailServiceInterface, placeRepository: PlaceRepositoryInterface) {
+        self.emailService = emailService
         self.placeRepository = placeRepository
     }
 }
@@ -35,7 +37,7 @@ extension PlaceService: PlaceServiceInterface {
     func getPlaceDataVersion() -> Future<PlaceDataVersionResponseDTO> {
         return placeRepository
             .findPlaceDataVersion()
-            .unwrap(or: Abort.init(HTTPResponseStatus.notFound))
+            .unwrap(or: Abort(.notFound))
             .map(to: PlaceDataVersionResponseDTO.self) {
                 PlaceDataVersionResponseDTO(id: $0.id, dataVersion: $0.dataVersion)
             }
@@ -52,8 +54,8 @@ extension PlaceService: PlaceServiceInterface {
     func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO, on request: Request) -> Future<HTTPResponse> {
         return placeRepository
             .savePlaceSuggestion(suggestion: suggestion.toPlaceSuggestion())
-            .map(to: HTTPResponse.self) { _ in
-                self.sendEmailToDeveloper(on: request)
+            .map(to: HTTPResponse.self) { [weak self] _ in
+                try self?.emailService.sendPlaceSuggestionEmail(on: request)
                 return HTTPResponse(status: .created,
                                     body: GeneralSuccessDTO(message: "Place suggestion is created!"))
             }
@@ -92,24 +94,5 @@ extension PlaceService: PlaceServiceInterface {
                 return HTTPResponse(status: .ok,
                                     body: GeneralSuccessDTO(message: "Place reports are cleared!"))
         }
-    }
-}
-
-extension PlaceService {
-    private func sendEmailToDeveloper(on request: Request) {
-        let message = MailGunMessageRequestDTO(
-            from: "Skate Budapest <info@libertyskate.hu>",
-            to: "balazs630@icloud.com",
-            subject: "New place suggested",
-            html: """
-                <html>
-                <p>Dear Developer,</p>
-                <p>Someone just posted a new place suggestion from Skate Budapest iOS app.</p>
-                <p>Go and check it out.</p>
-                </html>
-            """
-        )
-
-        MailGun.sendEmail(message: message, on: request)
     }
 }
