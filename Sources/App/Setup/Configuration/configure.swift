@@ -9,7 +9,7 @@ import Vapor
 
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
     try registerEngineRouter(to: &services)
-    try registerMiddlewares(to: &services)
+    registerMiddlewares(to: &services)
 
     try registerPostgreSQLProvider(to: &services)
     try registerPostgeSQLDatabase(to: &services, environment: env)

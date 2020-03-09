@@ -7,6 +7,7 @@
 
 import Vapor
 
-public func registerMiddlewares(to services: inout Services) throws {
+public func registerMiddlewares(to services: inout Services) {
     services.register(MiddlewareConfig.default())
+    services.register(SecretMiddleware.self)
 }
