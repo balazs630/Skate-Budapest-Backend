@@ -79,9 +79,8 @@ brew cask install pgadmin4
 ```
 
 * Add new server connection: connect with default user/pass/database: postgres/postgres/postgres
-* Create a new superuser with new database using pgAdmin
-* Create tables, insert base data into the database:
-  * `/Resources/skate-budapest.sql` 
+* Create a new main database with a new user using pgAdmin
+* Execute seed data/migration sql scripts into the database from the `/Resources` folder.
 
 
 ### **Nginx web server install, configuration**
@@ -248,7 +247,8 @@ sudo rm -R ~/development/Skate-Budapest-Vapor/.build
 ```bash
 tmux
 free -m
-swift run --package-path ~/development/Skate-Budapest-Vapor/ --configuration release
+swift build --package-path /home/balazs630uk/development/Skate-Budapest-Vapor/ --configuration release
+/home/balazs630uk/development/Skate-Budapest-Vapor/.build/release/Run serve --env production
 ```
 Close tmux:
 > Ctrl+B, followed by D

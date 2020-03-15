@@ -35,11 +35,26 @@ Simple backend for Skate-Budapest iOS app using Swift with Vapor web framework.
 
 ## Installation
 
-Install Vapor and PostgreSQL with [Homebrew](https://brew.sh):
+Install Vapor, PostgreSQL and pgAdmin with [Homebrew](https://brew.sh):
 ```
 brew install vapor/tap/vapor
-brew install postgresql
+brew cask install pgadmin4
+brew install postgresql@9.6
 ```
+
+Start PostgreSQL service:
+```
+brew services start postgresql@9.6
+```
+
+Create separate user and database for development and testing environment with pgAdmin. For initial connection, use:
+
+- host: localhost
+- port: 5432
+- maintenance database: postgres
+- username: `whoami` (default user)
+
+Execute seed data/migration sql scripts into the database from the `/Resources` folder.
 
 Clone the project, then execute:
 ```
