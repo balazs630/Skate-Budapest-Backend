@@ -20,10 +20,7 @@ final class SecretMiddleware {
 // MARK: ServiceType methods
 extension SecretMiddleware: ServiceType {
     static func makeService(for worker: Container) throws -> SecretMiddleware {
-        let apiKey = worker.environment.isRelease
-            ? try EnvironmentVariable.serverProdApiKey.value()
-            : LocalConstant.serverDevApiKey
-
+        let apiKey = try worker.environment.serverApiKey()
         return SecretMiddleware(apiKey: apiKey)
     }
 }

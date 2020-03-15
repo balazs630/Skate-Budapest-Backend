@@ -8,7 +8,7 @@
 import Vapor
 
 enum EnvironmentVariable: String {
-    case serverProdApiKey = "SKTBPST_SERVER_PROD_API_KEY"
+    case serverApiKey = "SKTBPST_SERVER_PROD_API_KEY"
 
     case mailGunApiKey = "SKTBPST_MAILGUN_API_KEY"
     case mailGunDomain = "SKTBPST_MAILGUN_DOMAIN"
@@ -23,11 +23,11 @@ enum EnvironmentVariable: String {
 // MARK: Utility, reading environment variables
 extension EnvironmentVariable {
     func value() throws -> Int {
-        guard let portNumber = Int(try value()) else {
+        guard let value = Int(try value()) else {
             throw Abort(.internalServerError, reason: "Environment variable: \(rawValue) cannot be parsed to Int type")
         }
 
-        return portNumber
+        return value
     }
 
     func value() throws -> String {
