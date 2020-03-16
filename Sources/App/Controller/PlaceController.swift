@@ -12,6 +12,7 @@ fileprivate enum ApiVersionPath: String {
 }
 
 fileprivate struct Slug {
+    static let api = "api"
     static let listPlacesPath = "places"
     static let placeDataVersionPath = "\(listPlacesPath)/data_version"
 
@@ -41,18 +42,18 @@ final class PlaceController {
 extension PlaceController: RouteCollection {
     func boot(router: Router) throws {
         let secretGroup = router.grouped(SecretMiddleware.self)
-        let v1 = secretGroup.grouped(ApiVersionPath.v1.rawValue)
+        let apiV1 = secretGroup.grouped(Slug.api, ApiVersionPath.v1.rawValue)
 
-        v1.get(Slug.listPlacesPath, use: getPlaces)
-        v1.get(Slug.placeDataVersionPath, use: getPlaceDataVersion)
-        v1.get(Slug.listPlaceSuggestionsPath, use: getPlaceSuggestions)
-        v1.get(Slug.listPlaceReportsPath, use: getPlaceReports)
+        apiV1.get(Slug.listPlacesPath, use: getPlaces)
+        apiV1.get(Slug.placeDataVersionPath, use: getPlaceDataVersion)
+        apiV1.get(Slug.listPlaceSuggestionsPath, use: getPlaceSuggestions)
+        apiV1.get(Slug.listPlaceReportsPath, use: getPlaceReports)
 
-        v1.post(Slug.suggestPlacePath, use: postPlaceSuggestion)
-        v1.post(Slug.reportPlacePath, use: postPlaceReport)
+        apiV1.post(Slug.suggestPlacePath, use: postPlaceSuggestion)
+        apiV1.post(Slug.reportPlacePath, use: postPlaceReport)
 
-        v1.put(Slug.clearPlaceSuggestionsPath, use: clearPlaceSuggestions)
-        v1.put(Slug.clearPlaceReportsPath, use: clearPlaceReports)
+        apiV1.put(Slug.clearPlaceSuggestionsPath, use: clearPlaceSuggestions)
+        apiV1.put(Slug.clearPlaceReportsPath, use: clearPlaceReports)
     }
 }
 
