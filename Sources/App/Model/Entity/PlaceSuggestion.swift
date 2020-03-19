@@ -19,10 +19,10 @@ final class PlaceSuggestion: PostgreSQLUUIDModel {
     var image2: Data
     var image3: Data?
     var image4: Data?
-    var status: String
+    var status: PlaceSuggestionStatus
 
     init(id: UUID?, latitude: Double, longitude: Double, name: String, info: String, type: String,
-         senderEmail: String, image1: Data, image2: Data, image3: Data?, image4: Data?, status: String = PlaceSuggestionStatus.active.rawValue) {
+         senderEmail: String, image1: Data, image2: Data, image3: Data?, image4: Data?, status: PlaceSuggestionStatus = .active) {
         self.id = id
         self.latitude = latitude
         self.longitude = longitude

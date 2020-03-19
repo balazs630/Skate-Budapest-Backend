@@ -5,7 +5,9 @@
 //  Created by Horváth Balázs on 2019. 05. 17..
 //
 
-enum PlaceStatus: String {
+import FluentPostgreSQL
+
+enum PlaceStatus: String, PostgreSQLEnum {
     case active
     case pending
     case deleted

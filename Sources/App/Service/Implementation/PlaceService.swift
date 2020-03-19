@@ -21,7 +21,7 @@ final class PlaceService {
 extension PlaceService: PlaceServiceInterface {
     func getPlaces(for languageCode: LanguageCode, status: PlaceStatus) -> Future<[PlaceResponseDTO]> {
         return placeRepository
-            .findAllPlaces(status: status)
+            .findAllPlacesWithImages(status: status)
             .map(to: [PlaceResponseDTO].self) { result in
                 let (places, images) = result
                 return places.map { place in
@@ -65,8 +65,8 @@ extension PlaceService: PlaceServiceInterface {
         return placeRepository
             .clearPlaceSuggestions()
             .map(to: HTTPResponse.self) { _ in
-                return HTTPResponse(status: .ok,
-                                    body: GeneralSuccessDTO(message: "Place suggestions are cleared!"))
+                HTTPResponse(status: .ok,
+                             body: GeneralSuccessDTO(message: "Place suggestions are cleared!"))
         }
     }
 
@@ -82,8 +82,8 @@ extension PlaceService: PlaceServiceInterface {
         return placeRepository
             .savePlaceReport(report: report.toPlaceReport())
             .map(to: HTTPResponse.self) { _ in
-                return HTTPResponse(status: .created,
-                                    body: GeneralSuccessDTO(message: "Place report is created!"))
+                HTTPResponse(status: .created,
+                             body: GeneralSuccessDTO(message: "Place report is created!"))
             }
     }
 
@@ -91,8 +91,8 @@ extension PlaceService: PlaceServiceInterface {
         return placeRepository
             .clearPlaceReports()
             .map(to: HTTPResponse.self) { _ in
-                return HTTPResponse(status: .ok,
-                                    body: GeneralSuccessDTO(message: "Place reports are cleared!"))
+                HTTPResponse(status: .ok,
+                             body: GeneralSuccessDTO(message: "Place reports are cleared!"))
         }
     }
 }

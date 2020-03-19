@@ -11,9 +11,9 @@ final class PlaceReport: PostgreSQLUUIDModel {
     var id: UUID?
     var senderEmail: String?
     var reportText: String
-    var status: String
+    var status: PlaceReportStatus
 
-    init(id: UUID?, senderEmail: String?, reportText: String, status: String = PlaceReportStatus.active.rawValue) {
+    init(id: UUID?, senderEmail: String?, reportText: String, status: PlaceReportStatus = .active) {
         self.id = id
         self.senderEmail = senderEmail
         self.reportText = reportText

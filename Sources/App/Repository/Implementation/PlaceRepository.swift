@@ -18,10 +18,10 @@ final class PlaceRepository {
 
 // MARK: PlaceRepositoryInterface conformances
 extension PlaceRepository: PlaceRepositoryInterface {
-    func findAllPlaces(status: PlaceStatus) -> Future<([Place], [PlaceImage])> {
+    func findAllPlacesWithImages(status: PlaceStatus) -> Future<([Place], [PlaceImage])> {
         return database.withConnection { conn in
             let places = Place.query(on: conn)
-                .filter(\.status ~= status.rawValue)
+                .filter(\.status, .like, status)
                 .all()
 
             let images = PlaceImage.query(on: conn)
@@ -41,7 +41,7 @@ extension PlaceRepository: PlaceRepositoryInterface {
     func findPlaceSuggestions(status: PlaceSuggestionStatus) -> Future<[PlaceSuggestion]> {
         return database.withConnection { conn in
             PlaceSuggestion.query(on: conn)
-                .filter(\.status ~= status.rawValue)
+                .filter(\.status, .like, status)
                 .all()
         }
     }
@@ -56,7 +56,7 @@ extension PlaceRepository: PlaceRepositoryInterface {
     func clearPlaceSuggestions() -> EventLoopFuture<Void> {
         return database.withConnection { conn in
             PlaceSuggestion.query(on: conn)
-                .update(\.status, to: PlaceSuggestionStatus.deleted.rawValue)
+                .update(\.status, to: .deleted)
                 .run()
         }
     }
@@ -64,7 +64,7 @@ extension PlaceRepository: PlaceRepositoryInterface {
     func findPlaceReports(status: PlaceReportStatus) -> Future<[PlaceReport]> {
         return database.withConnection { conn in
             PlaceReport.query(on: conn)
-                .filter(\.status ~= status.rawValue)
+                .filter(\.status, .like, status)
                 .all()
         }
     }
@@ -79,7 +79,7 @@ extension PlaceRepository: PlaceRepositoryInterface {
     func clearPlaceReports() -> EventLoopFuture<Void> {
         return database.withConnection { conn in
             PlaceReport.query(on: conn)
-                .update(\.status, to: PlaceReportStatus.deleted.rawValue)
+                .update(\.status, to: .deleted)
                 .run()
         }
     }

@@ -8,7 +8,7 @@
 import Vapor
 
 protocol PlaceRepositoryInterface {
-    func findAllPlaces(status: PlaceStatus) -> Future<([Place], [PlaceImage])>
+    func findAllPlacesWithImages(status: PlaceStatus) -> Future<([Place], [PlaceImage])>
     func findPlaceDataVersion() -> Future<PlaceDataVersion?>
 
     func findPlaceSuggestions(status: PlaceSuggestionStatus) -> Future<[PlaceSuggestion]>

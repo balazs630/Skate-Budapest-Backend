@@ -16,6 +16,6 @@ final class Place: PostgreSQLUUIDModel {
     var infoHU: String
     var infoEN: String
     var type: String
-    var status: String
+    var status: PlaceStatus
     var thumbnailUrl: String?
 }
