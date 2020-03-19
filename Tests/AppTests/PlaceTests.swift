@@ -29,7 +29,40 @@ final class PlaceTests: XCTestCase {
     }
 }
 
-// MARK: Place tests
+// MARK: Happy test cases
+extension PlaceTests {
+    func testPlacesCanBeRetrievedWithHULanguageAndActiveStatus() throws {
+        let queryParams = "?lang=hu&status=active"
+        let places = try app.getResponse(to: placesURI + queryParams,
+                                        method: .GET,
+                                        headers: testingHeaders,
+                                        decodeTo: [PlaceResponseDTO].self)
+
+        XCTAssertNotNil(places)
+    }
+
+    func testPlacesCanBeRetrievedWithENLanguageAndDeletedStatus() throws {
+        let queryParams = "?lang=en&status=deleted"
+        let places = try app.getResponse(to: placesURI + queryParams,
+                                        method: .GET,
+                                        headers: testingHeaders,
+                                        decodeTo: [PlaceResponseDTO].self)
+
+        XCTAssertNotNil(places)
+    }
+
+    func testPlacesCanBeRetrievedWithHULanguage() throws {
+        let queryParams = "?lang=hu"
+        let places = try app.getResponse(to: placesURI + queryParams,
+                                        method: .GET,
+                                        headers: testingHeaders,
+                                        decodeTo: [PlaceResponseDTO].self)
+
+        XCTAssertNotNil(places)
+    }
+}
+
+// MARK: Error test cases
 extension PlaceTests {
     func testPlacesCannotBeRetrievedWithoutApiKey() throws {
         let error = try app.getResponse(to: placesURI,

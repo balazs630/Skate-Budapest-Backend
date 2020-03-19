@@ -16,3 +16,11 @@ struct PlaceReportResponseDTO: Content {
         self.reportText = report.reportText
     }
 }
+
+// MARK: Compare objects
+extension PlaceReportResponseDTO {
+    func isEqual(to requestDTO: PlaceReportRequestDTO) -> Bool {
+        return senderEmail == requestDTO.senderEmail
+            && reportText == requestDTO.reportText
+    }
+}

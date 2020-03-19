@@ -1,13 +1,13 @@
 //
-//  Util.swift
+//  Application+RunShellScript.swift
 //  App
 //
 //  Created by Horváth Balázs on 2019. 02. 19..
 //
 
-import Foundation
+import Vapor
 
-class Util {
+extension Application {
     @discardableResult
     static func runShellScript(_ arguments: String) -> String {
         var output = ""

@@ -34,3 +34,19 @@ struct PlaceSuggestionResponseDTO: Content {
         self.image4 = suggestion.image4
     }
 }
+
+// MARK: Compare objects
+extension PlaceSuggestionResponseDTO {
+    func isEqual(to requestDTO: PlaceSuggestionRequestDTO) -> Bool {
+        return latitude == requestDTO.latitude
+            && longitude == requestDTO.longitude
+            && name == requestDTO.name
+            && info == requestDTO.info
+            && type == requestDTO.type
+            && senderEmail == requestDTO.senderEmail
+            && image1 == requestDTO.image1
+            && image2 == requestDTO.image2
+            && image3 == requestDTO.image3
+            && image4 == requestDTO.image4
+    }
+}
