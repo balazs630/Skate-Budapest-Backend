@@ -8,6 +8,8 @@
 import Vapor
 
 struct PlaceReportRequestDTO: Content {
+    let placeId: String
+    let placeName: String
     let senderEmail: String?
     let reportText: String
 }
@@ -17,6 +19,8 @@ extension PlaceReportRequestDTO {
     func toPlaceReport() -> PlaceReport {
         return PlaceReport(
             id: UUID(),
+            placeId: placeId,
+            placeName: placeName,
             senderEmail: senderEmail,
             reportText: reportText
         )

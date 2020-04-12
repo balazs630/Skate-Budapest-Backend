@@ -52,6 +52,8 @@ CREATE TABLE "PlaceReport" (
     "id" uuid not null,
     "senderEmail" text,
     "reportText" text not null,
+    "placeId" text not null,
+    "placeName" text not null,
     "status" text not null,
     PRIMARY KEY ("id")
 );

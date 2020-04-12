@@ -62,7 +62,9 @@ extension PlaceReportTests {
     }
 
     func testPlaceReportCanBeSavedAndRetrived() throws {
-        let newReport = PlaceReportRequestDTO(senderEmail: "\(String.random(length: 8))@test.com",
+        let newReport = PlaceReportRequestDTO(placeId: UUID().uuidString,
+                                              placeName: String.random(length: 15),
+                                              senderEmail: "\(String.random(length: 8))@test.com",
                                               reportText: String.random(length: 30))
 
         _ = try app.sendRequest(to: reportPlaceURI,
@@ -112,7 +114,9 @@ extension PlaceReportTests {
     }
 
     func testPlaceReportCannotBeSavedWithInvalidFields() throws {
-        let newReport = PlaceReportRequestDTO(senderEmail: String.random(length: 5),
+        let newReport = PlaceReportRequestDTO(placeId: UUID().uuidString,
+                                              placeName: String.random(length: 15),
+                                              senderEmail: String.random(length: 5),
                                               reportText: String.random(length: 5))
 
         let response = try app.sendRequest(to: reportPlaceURI,
