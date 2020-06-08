@@ -1,99 +1,68 @@
 //
 //  PlaceRepository.swift
-//  SkateBudapestBackend
+//  App
 //
 //  Created by Horváth Balázs on 2018. 11. 26..
 //
 
 import Vapor
-import FluentPostgreSQL
+import Fluent
 
 final class PlaceRepository {
-    private let database: PostgreSQLDatabase.ConnectionPool
+    private let database: Database
 
-    init(_ database: PostgreSQLDatabase.ConnectionPool) {
+    init(database: Database) {
         self.database = database
     }
 }
 
 // MARK: PlaceRepositoryInterface conformances
 extension PlaceRepository: PlaceRepositoryInterface {
-    func findAllPlacesWithImages(status: PlaceStatus) -> Future<([Place], [PlaceImage])> {
-        return database.withConnection { conn in
-            let places = Place.query(on: conn)
-                .filter(\.status, .like, status)
-                .all()
+    func findAllPlacesWithImages(status: PlaceStatus) -> EventLoopFuture<([Place], [PlaceImage])> {
+        let places = Place.query(on: database)
+            .filter(\.$status, DatabaseQuery.Filter.Method.like, status)
+            .all()
 
-            let images = PlaceImage.query(on: conn)
-                .all()
+        let images = PlaceImage.query(on: database)
+            .all()
 
-            return places.and(images)
-        }
+        return places.and(images)
     }
 
-    func findPlaceDataVersion() -> Future<PlaceDataVersion?> {
-        return database.withConnection { conn in
-            PlaceDataVersion.query(on: conn)
-                .first()
-        }
+    func findPlaceDataVersion() -> EventLoopFuture<PlaceDataVersion?> {
+        PlaceDataVersion.query(on: database)
+            .first()
     }
 
-    func findPlaceSuggestions(status: PlaceSuggestionStatus) -> Future<[PlaceSuggestion]> {
-        return database.withConnection { conn in
-            PlaceSuggestion.query(on: conn)
-                .filter(\.status, .like, status)
-                .all()
-        }
+    func findPlaceSuggestions(status: PlaceSuggestionStatus) -> EventLoopFuture<[PlaceSuggestion]> {
+        PlaceSuggestion.query(on: database)
+            .filter(\.$status, DatabaseQuery.Filter.Method.like, status)
+            .all()
     }
 
-    func savePlaceSuggestion(suggestion: PlaceSuggestion) -> Future<PlaceSuggestion> {
-        return database.withConnection { conn in
-            PlaceSuggestion.query(on: conn)
-                .create(suggestion)
-        }
+    func savePlaceSuggestion(suggestion: PlaceSuggestion) -> EventLoopFuture<Void> {
+        suggestion.create(on: database)
     }
 
     func clearPlaceSuggestions() -> EventLoopFuture<Void> {
-        return database.withConnection { conn in
-            PlaceSuggestion.query(on: conn)
-                .update(\.status, to: .deleted)
-                .run()
-        }
+        PlaceSuggestion.query(on: database)
+            .set(\.$status, to: .deleted)
+            .update()
     }
 
-    func findPlaceReports(status: PlaceReportStatus) -> Future<[PlaceReport]> {
-        return database.withConnection { conn in
-            PlaceReport.query(on: conn)
-                .filter(\.status, .like, status)
-                .all()
-        }
+    func findPlaceReports(status: PlaceReportStatus) -> EventLoopFuture<[PlaceReport]> {
+        PlaceReport.query(on: database)
+            .filter(\.$status, DatabaseQuery.Filter.Method.like, status)
+            .all()
     }
 
-    func savePlaceReport(report: PlaceReport) -> Future<PlaceReport> {
-        return database.withConnection { conn in
-            PlaceReport.query(on: conn)
-                .create(report)
-        }
+    func savePlaceReport(report: PlaceReport) -> EventLoopFuture<Void> {
+        report.create(on: database)
     }
 
     func clearPlaceReports() -> EventLoopFuture<Void> {
-        return database.withConnection { conn in
-            PlaceReport.query(on: conn)
-                .update(\.status, to: .deleted)
-                .run()
-        }
+        PlaceReport.query(on: database)
+            .set(\.$status, to: .deleted)
+            .update()
     }
-}
-
-// MARK: ServiceType conformances
-extension PlaceRepository: ServiceType {
-    static let serviceSupports: [Any.Type] = [PlaceRepositoryInterface.self]
-
-    static func makeService(for worker: Container) throws -> Self {
-        return .init(try worker.connectionPool(to: .psql))
-    }
-}
-
-extension Database {
-    typealias ConnectionPool = DatabaseConnectionPool<ConfiguredDatabase<Self>>
 }

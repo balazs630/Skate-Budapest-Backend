@@ -1,6 +1,6 @@
 //
 //  PlaceRepositoryInterface.swift
-//  SkateBudapestBackend
+//  App
 //
 //  Created by Horváth Balázs on 2018. 11. 26..
 //
@@ -8,14 +8,14 @@
 import Vapor
 
 protocol PlaceRepositoryInterface {
-    func findAllPlacesWithImages(status: PlaceStatus) -> Future<([Place], [PlaceImage])>
-    func findPlaceDataVersion() -> Future<PlaceDataVersion?>
+    func findAllPlacesWithImages(status: PlaceStatus) -> EventLoopFuture<([Place], [PlaceImage])>
+    func findPlaceDataVersion() -> EventLoopFuture<PlaceDataVersion?>
 
-    func findPlaceSuggestions(status: PlaceSuggestionStatus) -> Future<[PlaceSuggestion]>
-    func savePlaceSuggestion(suggestion: PlaceSuggestion) -> Future<PlaceSuggestion>
-    func clearPlaceSuggestions() -> Future<Void>
+    func findPlaceSuggestions(status: PlaceSuggestionStatus) -> EventLoopFuture<[PlaceSuggestion]>
+    func savePlaceSuggestion(suggestion: PlaceSuggestion) -> EventLoopFuture<Void>
+    func clearPlaceSuggestions() -> EventLoopFuture<Void>
 
-    func findPlaceReports(status: PlaceReportStatus) -> Future<[PlaceReport]>
-    func savePlaceReport(report: PlaceReport) -> Future<PlaceReport>
-    func clearPlaceReports() -> Future<Void>
+    func findPlaceReports(status: PlaceReportStatus) -> EventLoopFuture<[PlaceReport]>
+    func savePlaceReport(report: PlaceReport) -> EventLoopFuture<Void>
+    func clearPlaceReports() -> EventLoopFuture<Void>
 }
