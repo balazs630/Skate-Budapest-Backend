@@ -6,18 +6,18 @@
 //
 
 import Vapor
-import FluentPostgreSQL
+import Fluent
 
 // MARK: Retrieve configuration for environment
 extension Environment {
-    func postgreSQLDatabaseConfig() throws -> PostgreSQLDatabaseConfig {
+    func postgreSQLDatabaseConfig() throws -> DatabaseConfigurationFactory {
         switch self {
         case .development:
-            return makeDevelopmentPostgreSQLDatabaseConfig()
+            return makeDevelopmentPostgresDatabaseConfig()
         case .testing:
-            return makeTestingPostgreSQLDatabaseConfig()
+            return makeTestingPostgresDatabaseConfig()
         case .production:
-            return try makeProductionPostgreSQLDatabaseConfig()
+            return try makeProductionPostgresDatabaseConfig()
         default:
             throw Abort(.internalServerError, reason: "No Database configuration found for \(self) environment!")
         }
@@ -39,31 +39,30 @@ extension Environment {
 
 // MARK: Factory utility methods
 extension Environment {
-    private func makeDevelopmentPostgreSQLDatabaseConfig() -> PostgreSQLDatabaseConfig {
-        return PostgreSQLDatabaseConfig(hostname: LocalConstant.Development.psqlIP,
-                                        port: LocalConstant.Development.psqlPort,
-                                        username: LocalConstant.Development.psqlUsername,
-                                        database: LocalConstant.Development.psqlDatabase,
-                                        password: LocalConstant.Development.psqlPassword,
-                                        transport: .cleartext)
+    private func makeDevelopmentPostgresDatabaseConfig() -> DatabaseConfigurationFactory {
+        return .postgres(
+            hostname: LocalConstant.Development.psqlIP,
+            username: LocalConstant.Development.psqlUsername,
+            password: LocalConstant.Development.psqlPassword,
+            database: LocalConstant.Development.psqlDatabase
+        )
     }
 
-    private func makeTestingPostgreSQLDatabaseConfig() -> PostgreSQLDatabaseConfig {
-        return PostgreSQLDatabaseConfig(hostname: LocalConstant.Testing.psqlIP,
-                                        port: LocalConstant.Testing.psqlPort,
-                                        username: LocalConstant.Testing.psqlUsername,
-                                        database: LocalConstant.Testing.psqlDatabase,
-                                        password: LocalConstant.Testing.psqlPassword,
-                                        transport: .cleartext)
+    private func makeTestingPostgresDatabaseConfig() -> DatabaseConfigurationFactory {
+        return .postgres(
+            hostname: LocalConstant.Testing.psqlIP,
+            username: LocalConstant.Testing.psqlUsername,
+            password: LocalConstant.Testing.psqlPassword,
+            database: LocalConstant.Testing.psqlDatabase
+        )
     }
 
-    private func makeProductionPostgreSQLDatabaseConfig() throws -> PostgreSQLDatabaseConfig {
-        return PostgreSQLDatabaseConfig(hostname: try EnvironmentVariable.psqlIP.value(),
-                                        port: try EnvironmentVariable.psqlPort.value(),
-                                        username: try EnvironmentVariable.psqlUsername.value(),
-                                        database: try EnvironmentVariable.psqlDatabase.value(),
-                                        password: try EnvironmentVariable.psqlPassword.value(),
-                                        transport: .unverifiedTLS)
+    private func makeProductionPostgresDatabaseConfig() throws -> DatabaseConfigurationFactory {
+        return .postgres(
+            hostname: try EnvironmentVariable.psqlIP.value(),
+            username: try EnvironmentVariable.psqlUsername.value(),
+            password: try EnvironmentVariable.psqlPassword.value(),
+            database: try EnvironmentVariable.psqlDatabase.value()
+        )
     }
 }
-
