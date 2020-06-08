@@ -30,8 +30,8 @@ extension MailGunService: EmailServiceInterface {
         try sendEmail(message: message, on: request)
     }
 
-    func sendEmail(message: EmailMessageRequestDTO, on req: Request) throws {
-        guard req.environment.isRelease else {
+    func sendEmail(message: EmailMessageRequestDTO, on request: Request) throws {
+        guard request.application.environment.isRelease else {
             return
         }
 
@@ -40,15 +40,10 @@ extension MailGunService: EmailServiceInterface {
         headers.add(name: .authorization, value: "Basic \(try encode(apiKey))")
 
         let domain: String = try EnvironmentVariable.mailGunDomain.value()
-        let url = "\(mailgunApiUrl)\(domain)/messages"
+        let url = URI(string: "\(mailgunApiUrl)\(domain)/messages")
 
-        do {
-            let client = try req.make(Client.self)
-            _ = client.post(url, headers: headers) { request in
-                try request.content.encode(message, as: .formData)
-            }
-        } catch {
-            throw Abort(.multiStatus, reason: "Failed to send e-mail to the recipient!")
+        _ = request.client.post(url, headers: headers) { request in
+            try request.content.encode(message, as: .formData)
         }
     }
 }

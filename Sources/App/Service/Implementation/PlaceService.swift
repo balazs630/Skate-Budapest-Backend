@@ -1,6 +1,6 @@
 //
 //  PlaceService.swift
-//  SkateBudapestBackend
+//  App
 //
 //  Created by Horváth Balázs on 2018. 11. 21..
 //
@@ -19,14 +19,14 @@ final class PlaceService {
 
 // MARK: PlaceServiceInterface conformances
 extension PlaceService: PlaceServiceInterface {
-    func getPlaces(for languageCode: LanguageCode, status: PlaceStatus) -> Future<[PlaceResponseDTO]> {
+    func getPlaces(for languageCode: LanguageCode, status: PlaceStatus) -> EventLoopFuture<[PlaceResponseDTO]> {
         return placeRepository
             .findAllPlacesWithImages(status: status)
-            .map(to: [PlaceResponseDTO].self) { result in
+            .map { result in
                 let (places, images) = result
                 return places.map { place in
                     let imageUrls = images
-                        .filter { $0.placeId == place.id }
+                        .filter { $0.id == place.id }
                         .map { $0.imageUrl }
 
                     return PlaceResponseDTO(place: place, placeImages: imageUrls, languageCode: languageCode)
@@ -34,65 +34,57 @@ extension PlaceService: PlaceServiceInterface {
             }
     }
 
-    func getPlaceDataVersion() -> Future<PlaceDataVersionResponseDTO> {
+    func getPlaceDataVersion() -> EventLoopFuture<PlaceDataVersionResponseDTO> {
         return placeRepository
             .findPlaceDataVersion()
             .unwrap(or: Abort(.notFound))
-            .map(to: PlaceDataVersionResponseDTO.self) {
+            .map {
                 PlaceDataVersionResponseDTO(id: $0.id, dataVersion: $0.dataVersion)
             }
     }
 
-    func getPlaceSuggestions(status: PlaceSuggestionStatus) -> Future<[PlaceSuggestionResponseDTO]> {
+    func getPlaceSuggestions(status: PlaceSuggestionStatus) -> EventLoopFuture<[PlaceSuggestionResponseDTO]> {
         return placeRepository
             .findPlaceSuggestions(status: status)
-            .map(to: [PlaceSuggestionResponseDTO].self) { placeSuggestions in
-                placeSuggestions.map { PlaceSuggestionResponseDTO(suggestion: $0) }
-            }
+            .mapEach { PlaceSuggestionResponseDTO(suggestion: $0) }
     }
 
-    func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO, on request: Request) -> Future<HTTPResponse> {
+    func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO, on request: Request) -> EventLoopFuture<Response> {
         return placeRepository
             .savePlaceSuggestion(suggestion: suggestion.toPlaceSuggestion())
-            .map(to: HTTPResponse.self) { [weak self] _ in
+            .flatMapThrowing { [weak self] _ in
                 try self?.emailService.sendPlaceSuggestionEmail(on: request)
-                return HTTPResponse(status: .created,
-                                    body: GeneralSuccessDTO(message: "Place suggestion is created!"))
+                return Response(status: .created, body: "Place suggestion is created!")
             }
     }
 
-    func clearPlaceSuggestions() -> Future<HTTPResponse> {
+    func clearPlaceSuggestions() -> EventLoopFuture<Response> {
         return placeRepository
             .clearPlaceSuggestions()
-            .map(to: HTTPResponse.self) { _ in
-                HTTPResponse(status: .ok,
-                             body: GeneralSuccessDTO(message: "Place suggestions are cleared!"))
+            .map {
+                Response(status: .ok, body: "Place suggestions are cleared!")
         }
     }
 
     func getPlaceReports(status: PlaceReportStatus) -> EventLoopFuture<[PlaceReportResponseDTO]> {
         return placeRepository
-             .findPlaceReports(status: status)
-             .map(to: [PlaceReportResponseDTO].self) { placeReports in
-                 placeReports.map { PlaceReportResponseDTO(report: $0) }
-             }
+            .findPlaceReports(status: status)
+            .mapEach { PlaceReportResponseDTO(report: $0) }
     }
 
-    func postPlaceReport(report: PlaceReportRequestDTO, on request: Request) -> EventLoopFuture<HTTPResponse> {
+    func postPlaceReport(report: PlaceReportRequestDTO, on request: Request) -> EventLoopFuture<Response> {
         return placeRepository
             .savePlaceReport(report: report.toPlaceReport())
-            .map(to: HTTPResponse.self) { _ in
-                HTTPResponse(status: .created,
-                             body: GeneralSuccessDTO(message: "Place report is created!"))
+            .map {
+                Response(status: .created, body: "Place report is created!")
             }
     }
 
-    func clearPlaceReports() -> EventLoopFuture<HTTPResponse> {
+    func clearPlaceReports() -> EventLoopFuture<Response> {
         return placeRepository
             .clearPlaceReports()
-            .map(to: HTTPResponse.self) { _ in
-                HTTPResponse(status: .ok,
-                             body: GeneralSuccessDTO(message: "Place reports are cleared!"))
+            .map {
+                Response(status: .ok, body: "Place reports are cleared!")
         }
     }
 }

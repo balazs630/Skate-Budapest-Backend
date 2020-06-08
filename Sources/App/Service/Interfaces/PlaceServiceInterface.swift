@@ -1,6 +1,6 @@
 //
 //  PlaceServiceInterface.swift
-//  SkateBudapestBackend
+//  App
 //
 //  Created by Horváth Balázs on 2018. 11. 21..
 //
@@ -8,14 +8,14 @@
 import Vapor
 
 protocol PlaceServiceInterface {
-    func getPlaces(for languageCode: LanguageCode, status: PlaceStatus) -> Future<[PlaceResponseDTO]>
-    func getPlaceDataVersion() -> Future<PlaceDataVersionResponseDTO>
+    func getPlaces(for languageCode: LanguageCode, status: PlaceStatus) -> EventLoopFuture<[PlaceResponseDTO]>
+    func getPlaceDataVersion() -> EventLoopFuture<PlaceDataVersionResponseDTO>
 
-    func getPlaceSuggestions(status: PlaceSuggestionStatus) -> Future<[PlaceSuggestionResponseDTO]>
-    func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO, on request: Request) -> Future<HTTPResponse>
-    func clearPlaceSuggestions() -> Future<HTTPResponse>
+    func getPlaceSuggestions(status: PlaceSuggestionStatus) -> EventLoopFuture<[PlaceSuggestionResponseDTO]>
+    func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO, on request: Request) -> EventLoopFuture<Response>
+    func clearPlaceSuggestions() -> EventLoopFuture<Response>
 
-    func getPlaceReports(status: PlaceReportStatus) -> Future<[PlaceReportResponseDTO]>
-    func postPlaceReport(report: PlaceReportRequestDTO, on request: Request) -> Future<HTTPResponse>
-    func clearPlaceReports() -> Future<HTTPResponse>
+    func getPlaceReports(status: PlaceReportStatus) -> EventLoopFuture<[PlaceReportResponseDTO]>
+    func postPlaceReport(report: PlaceReportRequestDTO, on request: Request) -> EventLoopFuture<Response>
+    func clearPlaceReports() -> EventLoopFuture<Response>
 }
