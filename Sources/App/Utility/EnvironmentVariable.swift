@@ -14,7 +14,6 @@ enum EnvironmentVariable: String {
     case mailGunDomain = "SKTBPST_MAILGUN_DOMAIN"
 
     case psqlIP = "SKTBPST_PSQL_IP"
-    case psqlPort = "SKTBPST_PSQL_PORT"
     case psqlDatabase = "SKTBPST_PSQL_DATABASE"
     case psqlUsername = "SKTBPST_PSQL_USERNAME"
     case psqlPassword = "SKTBPST_PSQL_PASSWORD"
