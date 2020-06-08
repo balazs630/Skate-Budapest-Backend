@@ -5,16 +5,22 @@
 //  Created by Horváth Balázs on 2020. 03. 05..
 //
 
-import FluentPostgreSQL
+import Fluent
+import Vapor
 
-final class PlaceReport: PostgreSQLUUIDModel {
-    var id: UUID?
-    var placeId: String
-    var placeName: String
-    var senderEmail: String?
-    var reportText: String
+final class PlaceReport: Model {
+    static let schema = String(describing: PlaceReport.self)
 
-    var status: PlaceReportStatus
+    // MARK: Fields
+    @ID() var id: UUID?
+    @Field(key: "placeId") var placeId: String
+    @Field(key: "placeName") var placeName: String
+    @Field(key: "senderEmail") var senderEmail: String?
+    @Field(key: "reportText") var reportText: String
+    @Field(key: "status") var status: PlaceReportStatus
+
+    // MARK: Initializers
+    init() { }
 
     init(id: UUID?,
          placeId: String,

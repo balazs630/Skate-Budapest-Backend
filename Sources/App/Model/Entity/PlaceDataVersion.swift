@@ -1,13 +1,26 @@
 //
 //  PlaceDataVersion.swift
-//  SkateBudapestBackend
+//  App
 //
 //  Created by Horváth Balázs on 2018. 11. 23..
 //
 
-import FluentPostgreSQL
+import Fluent
+import Vapor
 
-final class PlaceDataVersion: PostgreSQLUUIDModel {
-    var id: UUID?
-    var dataVersion: Date
+final class PlaceDataVersion: Model {
+    static let schema = String(describing: PlaceDataVersion.self)
+
+    // MARK: Fields
+    @ID() var id: UUID?
+    @Field(key: "dataVersion") var dataVersion: Date
+
+    // MARK: Initializers
+    init() { }
+
+    init(id: UUID? = nil,
+         dataVersion: Date) {
+        self.id = id
+        self.dataVersion = dataVersion
+    }
 }

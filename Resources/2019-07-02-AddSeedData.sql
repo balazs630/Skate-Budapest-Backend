@@ -18,9 +18,9 @@ CREATE TABLE "Place" (
 
 DROP TABLE IF EXISTS "PlaceImage";
 CREATE TABLE "PlaceImage" (
-    "placeId" uuid not null,
+    "id" uuid not null,
     "imageUrl" text not null,
-    FOREIGN KEY ("placeId") REFERENCES "Place"("id")
+    FOREIGN KEY ("id") REFERENCES "Place"("id")
 );
 
 DROP TABLE IF EXISTS "PlaceDataVersion";
@@ -69,19 +69,19 @@ INSERT INTO "Place" ("id", "latitude", "longitude", "nameHU", "nameEN", "infoHU"
 INSERT INTO "Place" ("id", "latitude", "longitude", "nameHU", "nameEN", "infoHU", "infoEN", "type", "status", "thumbnailUrl") VALUES ('0CF937B2-C509-4677-B109-4B7E1D9E8791', 47.486818, 19.014536, 'Panorama', 'Panorama-en', 'Cool iPhone feature.', 'Cool iPhone feature.-en', 'skateshop', 'active', 'https://libertyskate.hu/mobile/example/images/Panorama.png');
 INSERT INTO "Place" ("id", "latitude", "longitude", "nameHU", "nameEN", "infoHU", "infoEN", "type", "status", "thumbnailUrl") VALUES ('8A5549E5-C122-47F8-B446-292A71B68A7A', 47.510258, 19.082678, 'Apres Ski', 'Apres Ski-en', 'In Canada, after all.', 'In Canada, after all.-en', 'skateshop', 'deleted', 'https://libertyskate.hu/mobile/example/images/Curling.png');
 
-INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('1371AEF5-5782-49C6-B71B-F3D511ABAC90', 'https://libertyskate.hu/mobile/example/images/Helicopter.jpg');
-INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('1371AEF5-5782-49C6-B71B-F3D511ABAC90', 'https://libertyskate.hu/mobile/example/images/Helicopter.jpg');
-INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('D16EEC15-DAB4-4E90-86BE-C5884F0C3B34', 'https://libertyskate.hu/mobile/example/images/Crag.jpg');
-INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('61BE013D-28BD-40ED-AB4F-D678AACD0B04', 'https://libertyskate.hu/mobile/example/images/FreshTracks.jpg');
-INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('61BE013D-28BD-40ED-AB4F-D678AACD0B04', 'https://libertyskate.hu/mobile/example/images/FreshTracks.jpg');
-INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('6F64B5D7-4EB6-4BB6-A719-95912101A8E7', 'https://libertyskate.hu/mobile/example/images/Mountain.jpg');
-INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('6F64B5D7-4EB6-4BB6-A719-95912101A8E7', 'https://libertyskate.hu/mobile/example/images/Mountain.jpg');
-INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('0FC2EDBA-01CD-4376-81A5-A3FD872BB7EB', 'https://libertyskate.hu/mobile/example/images/PileOfSkis.jpg');
-INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('62AA30F7-0D61-4006-B417-B9E34A3190DA', 'https://libertyskate.hu/mobile/example/images/Cockpit.jpg');
-INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('62AA30F7-0D61-4006-B417-B9E34A3190DA', 'https://libertyskate.hu/mobile/example/images/Cockpit.jpg');
-INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('0CF937B2-C509-4677-B109-4B7E1D9E8791', 'https://libertyskate.hu/mobile/example/images/Panorama.jpg');
-INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('8A5549E5-C122-47F8-B446-292A71B68A7A', 'https://libertyskate.hu/mobile/example/images/Curling.jpg');
-INSERT INTO "PlaceImage" ("placeId", "imageUrl") VALUES ('8A5549E5-C122-47F8-B446-292A71B68A7A', 'https://libertyskate.hu/mobile/example/images/Curling.jpg');
+INSERT INTO "PlaceImage" ("id", "imageUrl") VALUES ('1371AEF5-5782-49C6-B71B-F3D511ABAC90', 'https://libertyskate.hu/mobile/example/images/Helicopter.jpg');
+INSERT INTO "PlaceImage" ("id", "imageUrl") VALUES ('1371AEF5-5782-49C6-B71B-F3D511ABAC90', 'https://libertyskate.hu/mobile/example/images/Helicopter.jpg');
+INSERT INTO "PlaceImage" ("id", "imageUrl") VALUES ('D16EEC15-DAB4-4E90-86BE-C5884F0C3B34', 'https://libertyskate.hu/mobile/example/images/Crag.jpg');
+INSERT INTO "PlaceImage" ("id", "imageUrl") VALUES ('61BE013D-28BD-40ED-AB4F-D678AACD0B04', 'https://libertyskate.hu/mobile/example/images/FreshTracks.jpg');
+INSERT INTO "PlaceImage" ("id", "imageUrl") VALUES ('61BE013D-28BD-40ED-AB4F-D678AACD0B04', 'https://libertyskate.hu/mobile/example/images/FreshTracks.jpg');
+INSERT INTO "PlaceImage" ("id", "imageUrl") VALUES ('6F64B5D7-4EB6-4BB6-A719-95912101A8E7', 'https://libertyskate.hu/mobile/example/images/Mountain.jpg');
+INSERT INTO "PlaceImage" ("id", "imageUrl") VALUES ('6F64B5D7-4EB6-4BB6-A719-95912101A8E7', 'https://libertyskate.hu/mobile/example/images/Mountain.jpg');
+INSERT INTO "PlaceImage" ("id", "imageUrl") VALUES ('0FC2EDBA-01CD-4376-81A5-A3FD872BB7EB', 'https://libertyskate.hu/mobile/example/images/PileOfSkis.jpg');
+INSERT INTO "PlaceImage" ("id", "imageUrl") VALUES ('62AA30F7-0D61-4006-B417-B9E34A3190DA', 'https://libertyskate.hu/mobile/example/images/Cockpit.jpg');
+INSERT INTO "PlaceImage" ("id", "imageUrl") VALUES ('62AA30F7-0D61-4006-B417-B9E34A3190DA', 'https://libertyskate.hu/mobile/example/images/Cockpit.jpg');
+INSERT INTO "PlaceImage" ("id", "imageUrl") VALUES ('0CF937B2-C509-4677-B109-4B7E1D9E8791', 'https://libertyskate.hu/mobile/example/images/Panorama.jpg');
+INSERT INTO "PlaceImage" ("id", "imageUrl") VALUES ('8A5549E5-C122-47F8-B446-292A71B68A7A', 'https://libertyskate.hu/mobile/example/images/Curling.jpg');
+INSERT INTO "PlaceImage" ("id", "imageUrl") VALUES ('8A5549E5-C122-47F8-B446-292A71B68A7A', 'https://libertyskate.hu/mobile/example/images/Curling.jpg');
 
 INSERT INTO "PlaceDataVersion" ("id", "dataVersion") VALUES ('4728D8FE-BD81-4961-88F3-E442A795179A', '2019-08-16 02:00:00');
 

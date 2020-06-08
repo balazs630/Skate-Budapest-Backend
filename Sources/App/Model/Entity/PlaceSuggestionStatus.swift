@@ -5,9 +5,9 @@
 //  Created by Horváth Balázs on 2019. 05. 18..
 //
 
-import FluentPostgreSQL
+import Vapor
 
-enum PlaceSuggestionStatus: String, PostgreSQLEnum {
+enum PlaceSuggestionStatus: String, Content {
     case active
     case deleted
     case all = "%"
