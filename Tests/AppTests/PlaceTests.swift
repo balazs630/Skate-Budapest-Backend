@@ -6,108 +6,122 @@
 //
 
 @testable import App
-import Vapor
-import XCTest
-import FluentPostgreSQL
+import XCTVapor
 
 final class PlaceTests: XCTestCase {
     // MARK: Properties
-    let placesURI = "/api/v1/places"
+    let listPlacesURI = "/api/v1/places"
     let testingHeaders = HTTPHeaders([("Api-Key", LocalConstant.Testing.serverApiKey)])
-    var app: Application!
-    var connection: PostgreSQLConnection!
-
-    // MARK: Setup - teardown
-    override func setUp() {
-        app = try? Application.testable()
-        connection = try? app.newConnection(to: .psql).wait()
-    }
-
-    override func tearDown() {
-        connection.close()
-        try? app.syncShutdownGracefully()
-    }
 }
 
 // MARK: Happy test cases
 extension PlaceTests {
     func testPlacesCanBeRetrievedWithHULanguageAndActiveStatus() throws {
-        let queryParams = "?lang=hu&status=active"
-        let places = try app.getResponse(to: placesURI + queryParams,
-                                        method: .GET,
-                                        headers: testingHeaders,
-                                        decodeTo: [PlaceResponseDTO].self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertNotNil(places)
+        let queryParams = "?lang=hu&status=active"
+
+        try app.test(.GET, listPlacesURI + queryParams, headers: testingHeaders) { response in
+            let result = try response.content.decode([PlaceResponseDTO].self)
+
+            XCTAssertNotNil(result)
+        }
     }
 
     func testPlacesCanBeRetrievedWithENLanguageAndDeletedStatus() throws {
-        let queryParams = "?lang=en&status=deleted"
-        let places = try app.getResponse(to: placesURI + queryParams,
-                                        method: .GET,
-                                        headers: testingHeaders,
-                                        decodeTo: [PlaceResponseDTO].self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertNotNil(places)
+        let queryParams = "?lang=en&status=deleted"
+
+        try app.test(.GET, listPlacesURI + queryParams, headers: testingHeaders) { response in
+            let result = try response.content.decode([PlaceResponseDTO].self)
+
+            XCTAssertNotNil(result)
+        }
     }
 
     func testPlacesCanBeRetrievedWithHULanguage() throws {
-        let queryParams = "?lang=hu"
-        let places = try app.getResponse(to: placesURI + queryParams,
-                                        method: .GET,
-                                        headers: testingHeaders,
-                                        decodeTo: [PlaceResponseDTO].self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertNotNil(places)
+        let queryParams = "?lang=hu"
+
+        try app.test(.GET, listPlacesURI + queryParams, headers: testingHeaders) { response in
+            let result = try response.content.decode([PlaceResponseDTO].self)
+
+            XCTAssertNotNil(result)
+        }
     }
 }
 
 // MARK: Error test cases
 extension PlaceTests {
     func testPlacesCannotBeRetrievedWithoutApiKey() throws {
-        let error = try app.getResponse(to: placesURI,
-                                        method: .GET,
-                                        headers: [:],
-                                        decodeTo: GeneralErrorDTO.self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertEqual(error.reason, "Your request did not include an API-Key!")
+        try app.test(.GET, listPlacesURI, headers: [:]) { response in
+            let error = try response.content.decode(GeneralErrorDTO.self)
+
+            XCTAssertEqual(error.reason, "Your request did not include an API-Key!")
+        }
     }
 
     func testPlacesCannotBeRetrievedWitInvalidApiKey() throws {
-        let error = try app.getResponse(to: placesURI,
-                                        method: .GET,
-                                        headers: ["Api-Key": "00000000-0000-0000-0000-000000000000"],
-                                        decodeTo: GeneralErrorDTO.self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertEqual(error.reason, "Invalid Api-Key!")
+        try app.test(.GET, listPlacesURI, headers: ["Api-Key": "00000000-0000-0000-0000-000000000000"]) { response in
+            let error = try response.content.decode(GeneralErrorDTO.self)
+
+            XCTAssertEqual(error.reason, "Invalid Api-Key!")
+        }
     }
 
     func testPlacesCannotBeRetrievedWithoutLangParam() throws {
-        let error = try app.getResponse(to: placesURI,
-                                        method: .GET,
-                                        headers: testingHeaders,
-                                        decodeTo: GeneralErrorDTO.self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertEqual(error.reason, "Value of type \'String\' required for key \'lang\'.")
+        try app.test(.GET, listPlacesURI, headers: testingHeaders) { response in
+            let error = try response.content.decode(GeneralErrorDTO.self)
+
+            XCTAssertEqual(error.reason, "Value of type 'String' required for key 'lang'.")
+        }
     }
 
     func testPlacesCannotBeRetrievedWithInvalidLangParam() throws {
-        let queryParams = "?lang=invalid"
-        let error = try app.getResponse(to: placesURI + queryParams,
-                                        method: .GET,
-                                        headers: testingHeaders,
-                                        decodeTo: GeneralErrorDTO.self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertEqual(error.reason, "Invalid `lang` parameter.")
+        let queryParams = "?lang=invalid"
+
+        try app.test(.GET, listPlacesURI + queryParams, headers: testingHeaders) { response in
+            let error = try response.content.decode(GeneralErrorDTO.self)
+
+            XCTAssertEqual(error.reason, "Invalid `lang` parameter.")
+        }
     }
 
     func testPlacesCannotBeRetrievedWithInvalidStatusParam() throws {
-        let queryParams = "?lang=hu&status=invalid"
-        let error = try app.getResponse(to: placesURI + queryParams,
-                                        method: .GET,
-                                        headers: testingHeaders,
-                                        decodeTo: GeneralErrorDTO.self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertEqual(error.reason, "Invalid `status` parameter.")
+        let queryParams = "?lang=hu&status=invalid"
+
+        try app.test(.GET, listPlacesURI + queryParams, headers: testingHeaders) { response in
+            let error = try response.content.decode(GeneralErrorDTO.self)
+
+            XCTAssertEqual(error.reason, "Invalid `status` parameter.")
+        }
     }
 }

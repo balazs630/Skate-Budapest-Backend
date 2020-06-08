@@ -6,120 +6,131 @@
 //
 
 @testable import App
-import Vapor
-import XCTest
-import FluentPostgreSQL
+import XCTVapor
 
 final class PlaceSuggestionTests: XCTestCase {
     // MARK: Properties
     let suggestPlaceURI = "/api/v1/suggest_place"
     let listPlaceSuggestionsURI = "/api/v1/place_suggestions"
     let testingHeaders = HTTPHeaders([("Api-Key", LocalConstant.Testing.serverApiKey)])
-    var app: Application!
-    var connection: PostgreSQLConnection!
-
-    // MARK: Setup - teardown
-    override func setUp() {
-        app = try? Application.testable()
-        connection = try? app.newConnection(to: .psql).wait()
-    }
-
-    override func tearDown() {
-        connection.close()
-        try? app.syncShutdownGracefully()
-    }
 }
 
 // MARK: Happy test cases
 extension PlaceSuggestionTests {
     func testPlaceSuggestionsCanBeRetrieved() throws {
-        let placeSuggestions = try app.getResponse(to: listPlaceSuggestionsURI,
-                                                   method: .GET,
-                                                   headers: testingHeaders,
-                                                   decodeTo: [PlaceSuggestionResponseDTO].self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertNotNil(placeSuggestions)
+        try app.test(.GET, listPlaceSuggestionsURI, headers: testingHeaders) { response in
+            let result = try response.content.decode([PlaceSuggestionResponseDTO].self)
+
+            XCTAssertNotNil(result)
+        }
     }
 
     func testPlaceSuggestionsCanBeRetrievedWithActiveStatus() throws {
-        let queryParams = "?status=active"
-        let placeSuggestions = try app.getResponse(to: listPlaceSuggestionsURI + queryParams,
-                                                   method: .GET,
-                                                   headers: testingHeaders,
-                                                   decodeTo: [PlaceSuggestionResponseDTO].self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertNotNil(placeSuggestions)
+        let queryParams = "?status=active"
+
+        try app.test(.GET, listPlaceSuggestionsURI + queryParams, headers: testingHeaders) { response in
+            let result = try response.content.decode([PlaceSuggestionResponseDTO].self)
+
+            XCTAssertNotNil(result)
+        }
     }
 
     func testPlaceSuggestionsCanBeRetrievedWithDeletedStatus() throws {
-        let queryParams = "?status=deleted"
-        let placeSuggestions = try app.getResponse(to: listPlaceSuggestionsURI + queryParams,
-                                                   method: .GET,
-                                                   headers: testingHeaders,
-                                                   decodeTo: [PlaceSuggestionResponseDTO].self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertNotNil(placeSuggestions)
+        let queryParams = "?status=deleted"
+
+        try app.test(.GET, listPlaceSuggestionsURI + queryParams, headers: testingHeaders) { response in
+            let result = try response.content.decode([PlaceSuggestionResponseDTO].self)
+
+            XCTAssertNotNil(result)
+        }
     }
 
     func testPlaceSuggestionCanBeSavedAndRetrived() throws {
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
+
         let newSuggestion = PlaceSuggestionRequestDTO(latitude: 47.497913360595703,
                                                       longitude: 19.034753799438477,
                                                       name: String.random(length: 12),
                                                       info: String.random(length: 50),
                                                       type: String.random(length: 8),
                                                       senderEmail: "\(String.random(length: 8))@test.com",
-                                                      image1: Data(),
-                                                      image2: Data(),
-                                                      image3: Data(),
-                                                      image4: Data())
+            image1: Data(),
+            image2: Data(),
+            image3: Data(),
+            image4: Data())
 
-        _ = try app.sendRequest(to: suggestPlaceURI,
-                                method: .POST,
-                                headers: testingHeaders,
-                                body: newSuggestion)
+        try app.test(.POST, suggestPlaceURI, headers: testingHeaders, beforeRequest: { request in
+            try request.content.encode(newSuggestion)
+        })
 
-        let placeSuggestions = try app.getResponse(to: listPlaceSuggestionsURI,
-                                                   method: .GET,
-                                                   headers: testingHeaders,
-                                                   decodeTo: [PlaceSuggestionResponseDTO].self)
+        try app.test(.GET, listPlaceSuggestionsURI, headers: testingHeaders) { response in
+            let result = try response.content.decode([PlaceSuggestionResponseDTO].self)
+            let matchingResults = result.filter { $0.isEqual(to: newSuggestion) }
 
-        let matchingResults = placeSuggestions.filter { $0.isEqual(to: newSuggestion) }
-
-        XCTAssertEqual(matchingResults.count, 1)
+            XCTAssertEqual(matchingResults.count, 1)
+        }
     }
 }
 
 // MARK: Error test cases
 extension PlaceSuggestionTests {
     func testPlaceSuggestionsCannotBeRetrievedWithoutApiKey() throws {
-        let error = try app.getResponse(to: listPlaceSuggestionsURI,
-                                        method: .GET,
-                                        headers: [:],
-                                        decodeTo: GeneralErrorDTO.self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertEqual(error.reason, "Your request did not include an API-Key!")
+        try app.test(.GET, listPlaceSuggestionsURI, headers: [:]) { response in
+            let error = try response.content.decode(GeneralErrorDTO.self)
+
+            XCTAssertEqual(error.reason, "Your request did not include an API-Key!")
+        }
     }
 
     func testPlaceSuggestionsCannotBeRetrievedWitInvalidApiKey() throws {
-        let error = try app.getResponse(to: listPlaceSuggestionsURI,
-                                        method: .GET,
-                                        headers: ["Api-Key": "00000000-0000-0000-0000-000000000000"],
-                                        decodeTo: GeneralErrorDTO.self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertEqual(error.reason, "Invalid Api-Key!")
+        try app.test(.GET, listPlaceSuggestionsURI, headers: ["Api-Key": "00000000-0000-0000-0000-000000000000"]) { response in
+            let error = try response.content.decode(GeneralErrorDTO.self)
+
+            XCTAssertEqual(error.reason, "Invalid Api-Key!")
+        }
     }
 
     func testPlaceSuggestionsCannotBeRetrievedWithInvalidStatusParam() throws {
-        let queryParams = "?lang=hu&status=invalid"
-        let error = try app.getResponse(to: listPlaceSuggestionsURI + queryParams,
-                                        method: .GET,
-                                        headers: testingHeaders,
-                                        decodeTo: GeneralErrorDTO.self)
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
 
-        XCTAssertEqual(error.reason, "Invalid `status` parameter.")
+        let queryParams = "?lang=hu&status=invalid"
+
+        try app.test(.GET, listPlaceSuggestionsURI + queryParams, headers: testingHeaders) { response in
+            let error = try response.content.decode(GeneralErrorDTO.self)
+
+            XCTAssertEqual(error.reason, "Invalid `status` parameter.")
+        }
     }
 
     func testPlaceSuggestionCannotBeSavedWithInvalidFields() throws {
+        let app = Application(.testing)
+        defer { app.shutdown() }
+        try configure(app)
+
         let newSuggestion = PlaceSuggestionRequestDTO(latitude: 47,
                                                       longitude: 19,
                                                       name: String.random(length: 2),
@@ -131,17 +142,14 @@ extension PlaceSuggestionTests {
                                                       image3: nil,
                                                       image4: nil)
 
-        let response = try app.sendRequest(to: suggestPlaceURI,
-                                           method: .POST,
-                                           headers: testingHeaders,
-                                           body: newSuggestion)
+        try app.test(.POST, suggestPlaceURI, headers: testingHeaders, beforeRequest: { request in
+            try request.content.encode(newSuggestion)
+        }, afterResponse: { response in
+            let error = try response.content.decode(GeneralErrorDTO.self)
 
-        _ = try response.content.decode(GeneralErrorDTO.self).map { error in
-            XCTAssertEqual(error.reason, "'name' is less than required minimum of 3 characters,"
-                + " 'info' is less than required minimum of 10 characters,"
-                + " 'senderEmail' is not a valid email address")
-        }
+            XCTAssertEqual(error.reason, "name is less than minimum of 3 character(s),"
+            + " info is less than minimum of 10 character(s),"
+            + " senderEmail is not a valid email address")
+        })
     }
 }
-
-
