@@ -28,13 +28,9 @@ extension PlaceReportRequestDTO {
 }
 
 // MARK: Validation
-extension PlaceReportRequestDTO: Validatable, Reflectable {
-    static func validations() throws -> Validations<PlaceReportRequestDTO> {
-        var validations = Validations(PlaceReportRequestDTO.self)
-
-        try validations.add(\.senderEmail, .email || .nil)
-        try validations.add(\.reportText, .count(10...))
-
-        return validations
+extension PlaceReportRequestDTO: Validatable {
+    static func validations(_ validations: inout Validations) {
+        validations.add("senderEmail", as: String?.self, is: .email || .nil)
+        validations.add("reportText", as: String.self, is: .count(10...))
     }
 }

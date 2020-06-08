@@ -14,7 +14,11 @@ struct EmailMessageRequestDTO: Content {
     let text: String?
     let html: String?
 
-    init(from: String, to: String, subject: String, text: String? = nil, html: String? = nil) {
+    init(from: String,
+         to: String,
+         subject: String,
+         text: String? = nil,
+         html: String? = nil) {
         self.from = from
         self.to = to
         self.subject = subject
