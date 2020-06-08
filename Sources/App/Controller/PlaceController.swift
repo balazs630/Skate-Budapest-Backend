@@ -1,6 +1,6 @@
 //
 //  PlaceController.swift
-//  SkateBudapestBackend
+//  App
 //
 //  Created by Horváth Balázs on 2018. 11. 21..
 //
@@ -40,26 +40,28 @@ final class PlaceController {
 
 // MARK: Routes definitions
 extension PlaceController: RouteCollection {
-    func boot(router: Router) throws {
-        let secretGroup = router.grouped(SecretMiddleware.self)
-        let apiV1 = secretGroup.grouped(Slug.api, ApiVersionPath.v1.rawValue)
+    func boot(routes: RoutesBuilder) throws {
+        let apiV1 = routes.grouped(
+            PathComponent(stringLiteral: Slug.api),
+            PathComponent(stringLiteral: ApiVersionPath.v1.rawValue)
+        )
 
-        apiV1.get(Slug.listPlacesPath, use: getPlaces)
-        apiV1.get(Slug.placeDataVersionPath, use: getPlaceDataVersion)
-        apiV1.get(Slug.listPlaceSuggestionsPath, use: getPlaceSuggestions)
-        apiV1.get(Slug.listPlaceReportsPath, use: getPlaceReports)
+        apiV1.get(Slug.listPlacesPath.pathComponents, use: getPlaces)
+        apiV1.get(Slug.placeDataVersionPath.pathComponents, use: getPlaceDataVersion)
+        apiV1.get(Slug.listPlaceSuggestionsPath.pathComponents, use: getPlaceSuggestions)
+        apiV1.get(Slug.listPlaceReportsPath.pathComponents, use: getPlaceReports)
 
-        apiV1.post(Slug.suggestPlacePath, use: postPlaceSuggestion)
-        apiV1.post(Slug.reportPlacePath, use: postPlaceReport)
+        apiV1.post(Slug.suggestPlacePath.pathComponents, use: postPlaceSuggestion)
+        apiV1.post(Slug.reportPlacePath.pathComponents, use: postPlaceReport)
 
-        apiV1.put(Slug.clearPlaceSuggestionsPath, use: clearPlaceSuggestions)
-        apiV1.put(Slug.clearPlaceReportsPath, use: clearPlaceReports)
+        apiV1.put(Slug.clearPlaceSuggestionsPath.pathComponents, use: clearPlaceSuggestions)
+        apiV1.put(Slug.clearPlaceReportsPath.pathComponents, use: clearPlaceReports)
     }
 }
 
 // MARK: GET endpoint methods
 extension PlaceController {
-    private func getPlaces(request: Request) throws -> Future<[PlaceResponseDTO]> {
+    private func getPlaces(request: Request) throws -> EventLoopFuture<[PlaceResponseDTO]> {
         let languageParameter = try request.query.get(String.self, at: Parameter.language)
         guard let languageCode = LanguageCode(rawValue: languageParameter.lowercased()) else {
             throw Abort(.badRequest, reason: "Invalid `lang` parameter.")
@@ -74,11 +76,11 @@ extension PlaceController {
         return placeService.getPlaces(for: languageCode, status: status)
     }
 
-    private func getPlaceDataVersion(request: Request) -> Future<PlaceDataVersionResponseDTO> {
+    private func getPlaceDataVersion(request: Request) -> EventLoopFuture<PlaceDataVersionResponseDTO> {
         return placeService.getPlaceDataVersion()
     }
 
-    private func getPlaceSuggestions(request: Request) throws -> Future<[PlaceSuggestionResponseDTO]> {
+    private func getPlaceSuggestions(request: Request) throws -> EventLoopFuture<[PlaceSuggestionResponseDTO]> {
         let statusParameter = try? request.query.get(String.self, at: Parameter.status)
         guard let status = PlaceSuggestionStatus(rawValue: statusParameter?.lowercased()
             ?? PlaceSuggestionStatus.all.rawValue) else {
@@ -88,7 +90,7 @@ extension PlaceController {
         return placeService.getPlaceSuggestions(status: status)
     }
 
-    private func getPlaceReports(request: Request) throws -> Future<[PlaceReportResponseDTO]> {
+    private func getPlaceReports(request: Request) throws -> EventLoopFuture<[PlaceReportResponseDTO]> {
         let statusParameter = try? request.query.get(String.self, at: Parameter.status)
         guard let status = PlaceReportStatus(rawValue: statusParameter?.lowercased()
             ?? PlaceReportStatus.all.rawValue) else {
@@ -101,32 +103,32 @@ extension PlaceController {
 
 // MARK: POST endpoint methods
 extension PlaceController {
-    private func postPlaceSuggestion(request: Request) throws -> Future<HTTPResponse> {
-        return try request.content
+    private func postPlaceSuggestion(request: Request) throws -> EventLoopFuture<Response> {
+        try PlaceSuggestionRequestDTO.validate(request)
+
+        let placeSuggestion = try request.content
             .decode(PlaceSuggestionRequestDTO.self)
-            .flatMap { placeSuggestion in
-                try placeSuggestion.validate()
-                return self.placeService.postPlaceSuggestion(suggestion: placeSuggestion, on: request)
-            }
+
+        return placeService.postPlaceSuggestion(suggestion: placeSuggestion, on: request)
     }
 
-    private func postPlaceReport(request: Request) throws -> Future<HTTPResponse> {
-        return try request.content
+    private func postPlaceReport(request: Request) throws -> EventLoopFuture<Response> {
+        try PlaceReportRequestDTO.validate(request)
+
+        let placeReport = try request.content
             .decode(PlaceReportRequestDTO.self)
-            .flatMap { placeReport in
-                try placeReport.validate()
-                return self.placeService.postPlaceReport(report: placeReport, on: request)
-        }
+
+        return placeService.postPlaceReport(report: placeReport, on: request)
     }
 }
 
 // MARK: PUT endpoint methods
 extension PlaceController {
-    private func clearPlaceSuggestions(request: Request) -> Future<HTTPResponse> {
+    private func clearPlaceSuggestions(request: Request) -> EventLoopFuture<Response> {
         return placeService.clearPlaceSuggestions()
     }
 
-    private func clearPlaceReports(request: Request) -> Future<HTTPResponse> {
+    private func clearPlaceReports(request: Request) -> EventLoopFuture<Response> {
         return placeService.clearPlaceReports()
     }
 }
