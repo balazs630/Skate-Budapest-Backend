@@ -17,25 +17,21 @@ final class SecretMiddleware {
     }
 }
 
-// MARK: ServiceType methods
-extension SecretMiddleware: ServiceType {
-    static func makeService(for worker: Container) throws -> SecretMiddleware {
-        let apiKey = try worker.environment.serverApiKey()
-        return SecretMiddleware(apiKey: apiKey)
-    }
-}
-
 // MARK: Middleware methods
 extension SecretMiddleware: Middleware {
-    func respond(to request: Request, chainingTo next: Responder) throws -> Future<Response> {
-        guard let requestedApiKey = request.http.headers.firstValue(name: HTTPHeaderName("Api-Key")) else {
-            throw Abort(.forbidden, reason: "Your request did not include an API-Key!")
+    func respond(to request: Request, chainingTo next: Responder) -> EventLoopFuture<Response> {
+        guard let requestedApiKey = request.headers.first(name: "Api-Key") else {
+            return request.eventLoop.makeFailedFuture(
+                Abort(.forbidden, reason: "Your request did not include an API-Key!")
+            )
         }
 
         guard apiKey == requestedApiKey else {
-            throw Abort(.forbidden, reason: "Invalid Api-Key!")
+            return request.eventLoop.makeFailedFuture(
+                Abort(.forbidden, reason: "Invalid Api-Key!")
+            )
         }
 
-        return try next.respond(to: request)
+        return next.respond(to: request)
     }
 }
