@@ -197,16 +197,40 @@ sudo certbot renew --dry-run
 Verify browser's security indicator. (nginx 502 should appear with a lock sign): https://skatebudapest.libertyskate.hu
 
 
-### **Install Swift and Vapor**
+### **Install Swift**
+Install Swift Dependencies:
 ```bash
-eval "$(curl -sL https://apt.vapor.sh)"
-sudo apt-get install swift vapor
+sudo apt-get update
+sudo apt-get install clang libicu-dev libatomic1 build-essential pkg-config
+```
+
+Install Vapor's system dependencies:
+```bash
+sudo apt-get install openssl libssl-dev zlib1g-dev libsqlite3-dev
+```
+
+Take a look at Linux install notes on [Swift's Downloads page](https://swift.org/download/#using-downloads)
+
+Download and decompress the Swift toolchain:
+```bash
+wget https://swift.org/builds/swift-5.2.4-release/ubuntu1804/swift-5.2.4-RELEASE/swift-5.2.4-RELEASE-ubuntu18.04.tar.gz
+tar xzf swift-5.2.4-RELEASE-ubuntu18.04.tar.gz
+```
+
+Move Swift somewhere easy to acess:
+```bash
+sudo mkdir /swift
+sudo mv swift-5.2.4-RELEASE-ubuntu18.04 /swift/5.2.4
+```
+
+Add Swift to /usr/bin so it can be executed by vapor and root:
+```bash
+sudo ln -s /swift/5.2.4/usr/bin/swift /usr/bin/swift
 ```
 
 Verify:
 ```bash
 swift --version
-vapor --version
 ```
 
 
