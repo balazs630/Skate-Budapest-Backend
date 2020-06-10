@@ -68,12 +68,10 @@ extension PlaceService: PlaceServiceInterface {
             .mapEach { PlaceReportResponseDTO(report: $0) }
     }
 
-    func postPlaceReport(report: PlaceReportRequestDTO, on request: Request) -> EventLoopFuture<Response> {
+    func postPlaceReport(report: PlaceReportRequestDTO, on request: Request) -> EventLoopFuture<GeneralSuccessDTO> {
         return placeRepository
             .savePlaceReport(report: report.toPlaceReport())
-            .map {
-                Response(status: .created, body: "Place report is created!")
-            }
+            .map { GeneralSuccessDTO(status: .created, message: "Place report is created!") }
     }
 
     func clearPlaceReports() -> EventLoopFuture<Response> {

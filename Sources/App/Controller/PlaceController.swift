@@ -112,7 +112,7 @@ extension PlaceController {
         return placeService.postPlaceSuggestion(suggestion: placeSuggestion, on: request)
     }
 
-    private func postPlaceReport(request: Request) throws -> EventLoopFuture<Response> {
+    private func postPlaceReport(request: Request) throws -> EventLoopFuture<GeneralSuccessDTO> {
         try PlaceReportRequestDTO.validate(request)
 
         let placeReport = try request.content
