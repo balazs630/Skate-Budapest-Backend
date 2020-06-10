@@ -12,7 +12,7 @@ protocol PlaceServiceInterface {
     func getPlaceDataVersion() -> EventLoopFuture<PlaceDataVersionResponseDTO>
 
     func getPlaceSuggestions(status: PlaceSuggestionStatus) -> EventLoopFuture<[PlaceSuggestionResponseDTO]>
-    func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO, on request: Request) -> EventLoopFuture<Response>
+    func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO, on request: Request) -> EventLoopFuture<GeneralSuccessDTO>
     func clearPlaceSuggestions() -> EventLoopFuture<Response>
 
     func getPlaceReports(status: PlaceReportStatus) -> EventLoopFuture<[PlaceReportResponseDTO]>

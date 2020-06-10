@@ -38,9 +38,7 @@ extension PlaceService: PlaceServiceInterface {
         return placeRepository
             .findPlaceDataVersion()
             .unwrap(or: Abort(.notFound))
-            .map {
-                PlaceDataVersionResponseDTO(id: $0.id, dataVersion: $0.dataVersion)
-            }
+            .map { PlaceDataVersionResponseDTO(id: $0.id, dataVersion: $0.dataVersion) }
     }
 
     func getPlaceSuggestions(status: PlaceSuggestionStatus) -> EventLoopFuture<[PlaceSuggestionResponseDTO]> {
@@ -49,21 +47,19 @@ extension PlaceService: PlaceServiceInterface {
             .mapEach { PlaceSuggestionResponseDTO(suggestion: $0) }
     }
 
-    func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO, on request: Request) -> EventLoopFuture<Response> {
+    func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO, on request: Request) -> EventLoopFuture<GeneralSuccessDTO> {
         return placeRepository
             .savePlaceSuggestion(suggestion: suggestion.toPlaceSuggestion())
             .flatMapThrowing { [weak self] _ in
                 try self?.emailService.sendPlaceSuggestionEmail(on: request)
-                return Response(status: .created, body: "Place suggestion is created!")
+                return GeneralSuccessDTO(status: .created, message: "Place suggestion is created!")
             }
     }
 
     func clearPlaceSuggestions() -> EventLoopFuture<Response> {
         return placeRepository
             .clearPlaceSuggestions()
-            .map {
-                Response(status: .ok, body: "Place suggestions are cleared!")
-        }
+            .map { Response(status: .ok, body: "Place suggestions are cleared!") }
     }
 
     func getPlaceReports(status: PlaceReportStatus) -> EventLoopFuture<[PlaceReportResponseDTO]> {
@@ -83,8 +79,6 @@ extension PlaceService: PlaceServiceInterface {
     func clearPlaceReports() -> EventLoopFuture<Response> {
         return placeRepository
             .clearPlaceReports()
-            .map {
-                Response(status: .ok, body: "Place reports are cleared!")
-        }
+            .map { Response(status: .ok, body: "Place reports are cleared!") }
     }
 }
