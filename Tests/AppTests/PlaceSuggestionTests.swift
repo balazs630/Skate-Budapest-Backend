@@ -10,18 +10,25 @@ import XCTVapor
 
 final class PlaceSuggestionTests: XCTestCase {
     // MARK: Properties
-    let suggestPlaceURI = "/api/v1/suggest_place"
-    let listPlaceSuggestionsURI = "/api/v1/place_suggestions"
-    let testingHeaders = HTTPHeaders([("Api-Key", LocalConstant.Testing.serverApiKey)])
+    private let suggestPlaceURI = "/api/v1/suggest_place"
+    private let listPlaceSuggestionsURI = "/api/v1/place_suggestions"
+    private let testingHeaders = HTTPHeaders([("Api-Key", LocalConstant.Testing.serverApiKey)])
+    private var app: Application!
+    
+    // MARK: Setup & Teardown
+    override func setUpWithError() throws {
+        app = Application(.testing)
+        try configure(app)
+    }
+    
+    override func tearDown() {
+        app.shutdown()
+    }
 }
 
 // MARK: Happy test cases
 extension PlaceSuggestionTests {
     func testPlaceSuggestionsCanBeRetrieved() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         try app.test(.GET, listPlaceSuggestionsURI, headers: testingHeaders) { response in
             let result = try response.content.decode([PlaceSuggestionResponseDTO].self)
 
@@ -30,10 +37,6 @@ extension PlaceSuggestionTests {
     }
 
     func testPlaceSuggestionsCanBeRetrievedWithActiveStatus() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let queryParams = "?status=active"
 
         try app.test(.GET, listPlaceSuggestionsURI + queryParams, headers: testingHeaders) { response in
@@ -44,10 +47,6 @@ extension PlaceSuggestionTests {
     }
 
     func testPlaceSuggestionsCanBeRetrievedWithDeletedStatus() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let queryParams = "?status=deleted"
 
         try app.test(.GET, listPlaceSuggestionsURI + queryParams, headers: testingHeaders) { response in
@@ -58,10 +57,6 @@ extension PlaceSuggestionTests {
     }
 
     func testPlaceSuggestionCanBeSavedAndRetrived() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let newSuggestion = PlaceSuggestionRequestDTO(latitude: 47.497913360595703,
                                                       longitude: 19.034753799438477,
                                                       name: String.random(length: 12),
@@ -89,10 +84,6 @@ extension PlaceSuggestionTests {
 // MARK: Error test cases
 extension PlaceSuggestionTests {
     func testPlaceSuggestionsCannotBeRetrievedWithoutApiKey() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         try app.test(.GET, listPlaceSuggestionsURI, headers: [:]) { response in
             let error = try response.content.decode(GeneralErrorDTO.self)
 
@@ -101,10 +92,6 @@ extension PlaceSuggestionTests {
     }
 
     func testPlaceSuggestionsCannotBeRetrievedWitInvalidApiKey() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         try app.test(.GET, listPlaceSuggestionsURI, headers: ["Api-Key": "00000000-0000-0000-0000-000000000000"]) { response in
             let error = try response.content.decode(GeneralErrorDTO.self)
 
@@ -113,10 +100,6 @@ extension PlaceSuggestionTests {
     }
 
     func testPlaceSuggestionsCannotBeRetrievedWithInvalidStatusParam() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let queryParams = "?lang=hu&status=invalid"
 
         try app.test(.GET, listPlaceSuggestionsURI + queryParams, headers: testingHeaders) { response in
@@ -127,10 +110,6 @@ extension PlaceSuggestionTests {
     }
 
     func testPlaceSuggestionCannotBeSavedWithInvalidFields() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let newSuggestion = PlaceSuggestionRequestDTO(latitude: 47,
                                                       longitude: 19,
                                                       name: String.random(length: 2),
@@ -148,8 +127,8 @@ extension PlaceSuggestionTests {
             let error = try response.content.decode(GeneralErrorDTO.self)
 
             XCTAssertEqual(error.reason, "name is less than minimum of 3 character(s),"
-            + " info is less than minimum of 10 character(s),"
-            + " senderEmail is not a valid email address")
+                + " info is less than minimum of 10 character(s),"
+                + " senderEmail is not a valid email address")
         })
     }
 }

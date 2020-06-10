@@ -10,18 +10,25 @@ import XCTVapor
 
 final class PlaceReportTests: XCTestCase {
     // MARK: Properties
-    let reportPlaceURI = "/api/v1/report_place"
-    let listPlaceReportsURI = "/api/v1/place_reports"
-    let testingHeaders = HTTPHeaders([("Api-Key", LocalConstant.Testing.serverApiKey)])
+    private let reportPlaceURI = "/api/v1/report_place"
+    private let listPlaceReportsURI = "/api/v1/place_reports"
+    private let testingHeaders = HTTPHeaders([("Api-Key", LocalConstant.Testing.serverApiKey)])
+    private var app: Application!
+
+    // MARK: Setup & Teardown
+    override func setUpWithError() throws {
+        app = Application(.testing)
+        try configure(app)
+    }
+
+    override func tearDown() {
+        app.shutdown()
+    }
 }
 
 // MARK: Happy test cases
 extension PlaceReportTests {
     func testPlaceReportsCanBeRetrieved() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         try app.test(.GET, listPlaceReportsURI, headers: testingHeaders) { response in
             let result = try response.content.decode([PlaceReportResponseDTO].self)
 
@@ -30,10 +37,6 @@ extension PlaceReportTests {
     }
 
     func testPlaceReportsCanBeRetrievedWithActiveStatus() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let queryParams = "?status=active"
 
         try app.test(.GET, listPlaceReportsURI + queryParams, headers: testingHeaders) { response in
@@ -44,10 +47,6 @@ extension PlaceReportTests {
     }
 
     func testPlaceReportsCanBeRetrievedWithDeletedStatus() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let queryParams = "?status=deleted"
 
         try app.test(.GET, listPlaceReportsURI + queryParams, headers: testingHeaders) { response in
@@ -58,10 +57,6 @@ extension PlaceReportTests {
     }
 
     func testPlaceReportCanBeSavedAndRetrived() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let newReport = PlaceReportRequestDTO(placeId: UUID().uuidString,
                                               placeName: String.random(length: 15),
                                               senderEmail: "\(String.random(length: 8))@test.com",
@@ -83,34 +78,22 @@ extension PlaceReportTests {
 // MARK: Error test cases
 extension PlaceReportTests {
     func testPlaceReportsCannotBeRetrievedWithoutApiKey() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         try app.test(.GET, listPlaceReportsURI, headers: [:]) { response in
-             let error = try response.content.decode(GeneralErrorDTO.self)
+            let error = try response.content.decode(GeneralErrorDTO.self)
 
-             XCTAssertEqual(error.reason, "Your request did not include an API-Key!")
-         }
+            XCTAssertEqual(error.reason, "Your request did not include an API-Key!")
+        }
     }
 
     func testPlaceReportsCannotBeRetrievedWitInvalidApiKey() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         try app.test(.GET, listPlaceReportsURI, headers: ["Api-Key": "00000000-0000-0000-0000-000000000000"]) { response in
-             let error = try response.content.decode(GeneralErrorDTO.self)
+            let error = try response.content.decode(GeneralErrorDTO.self)
 
-             XCTAssertEqual(error.reason, "Invalid Api-Key!")
-         }
+            XCTAssertEqual(error.reason, "Invalid Api-Key!")
+        }
     }
 
     func testPlaceReportsCannotBeRetrievedWithInvalidStatusParam() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let queryParams = "?lang=hu&status=invalid"
 
         try app.test(.GET, listPlaceReportsURI + queryParams, headers: testingHeaders) { response in
@@ -121,10 +104,6 @@ extension PlaceReportTests {
     }
 
     func testPlaceReportCannotBeSavedWithInvalidFields() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let newReport = PlaceReportRequestDTO(placeId: UUID().uuidString,
                                               placeName: String.random(length: 15),
                                               senderEmail: String.random(length: 5),
@@ -136,7 +115,7 @@ extension PlaceReportTests {
             let error = try response.content.decode(GeneralErrorDTO.self)
 
             XCTAssertEqual(error.reason, "senderEmail is not a valid email address and is not null,"
-            + " reportText is less than minimum of 10 character(s)")
+                + " reportText is less than minimum of 10 character(s)")
         })
     }
 }

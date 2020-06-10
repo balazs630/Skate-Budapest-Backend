@@ -10,17 +10,24 @@ import XCTVapor
 
 final class PlaceDataVersionTests: XCTestCase {
     // MARK: Properties
-    let placeDataVersionURI = "/api/v1/places/data_version"
-    let testingHeaders = HTTPHeaders([("Api-Key", LocalConstant.Testing.serverApiKey)])
+    private let placeDataVersionURI = "/api/v1/places/data_version"
+    private let testingHeaders = HTTPHeaders([("Api-Key", LocalConstant.Testing.serverApiKey)])
+    private var app: Application!
+
+    // MARK: Setup & Teardown
+    override func setUpWithError() throws {
+        app = Application(.testing)
+        try configure(app)
+    }
+
+    override func tearDown() {
+        app.shutdown()
+    }
 }
 
 // MARK: Happy test cases
 extension PlaceDataVersionTests {
     func testPlaceDataVersionCanBeRetrievedAndInPast() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         try app.test(.GET, placeDataVersionURI, headers: testingHeaders) { response in
             let result = try response.content.decode(PlaceDataVersionResponseDTO.self)
 
@@ -32,10 +39,6 @@ extension PlaceDataVersionTests {
 // MARK: Error test cases
 extension PlaceDataVersionTests {
     func testPlaceDataVersionCannotBeRetrievedWithoutApiKey() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         try app.test(.GET, placeDataVersionURI, headers: [:]) { response in
             let error = try response.content.decode(GeneralErrorDTO.self)
 
@@ -44,10 +47,6 @@ extension PlaceDataVersionTests {
     }
 
     func testPlaceDataVersionCannotBeRetrievedWitInvalidApiKey() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         try app.test(.GET, placeDataVersionURI, headers: ["Api-Key": "00000000-0000-0000-0000-000000000000"]) { response in
             let error = try response.content.decode(GeneralErrorDTO.self)
 

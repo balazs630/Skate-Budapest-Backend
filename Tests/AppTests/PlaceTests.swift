@@ -10,17 +10,24 @@ import XCTVapor
 
 final class PlaceTests: XCTestCase {
     // MARK: Properties
-    let listPlacesURI = "/api/v1/places"
-    let testingHeaders = HTTPHeaders([("Api-Key", LocalConstant.Testing.serverApiKey)])
+    private let listPlacesURI = "/api/v1/places"
+    private let testingHeaders = HTTPHeaders([("Api-Key", LocalConstant.Testing.serverApiKey)])
+    private var app: Application!
+
+    // MARK: Setup & Teardown
+    override func setUpWithError() throws {
+        app = Application(.testing)
+        try configure(app)
+    }
+
+    override func tearDown() {
+        app.shutdown()
+    }
 }
 
 // MARK: Happy test cases
 extension PlaceTests {
     func testPlacesCanBeRetrievedWithHULanguageAndActiveStatus() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let queryParams = "?lang=hu&status=active"
 
         try app.test(.GET, listPlacesURI + queryParams, headers: testingHeaders) { response in
@@ -31,10 +38,6 @@ extension PlaceTests {
     }
 
     func testPlacesCanBeRetrievedWithENLanguageAndDeletedStatus() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let queryParams = "?lang=en&status=deleted"
 
         try app.test(.GET, listPlacesURI + queryParams, headers: testingHeaders) { response in
@@ -45,10 +48,6 @@ extension PlaceTests {
     }
 
     func testPlacesCanBeRetrievedWithHULanguage() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let queryParams = "?lang=hu"
 
         try app.test(.GET, listPlacesURI + queryParams, headers: testingHeaders) { response in
@@ -62,10 +61,6 @@ extension PlaceTests {
 // MARK: Error test cases
 extension PlaceTests {
     func testPlacesCannotBeRetrievedWithoutApiKey() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         try app.test(.GET, listPlacesURI, headers: [:]) { response in
             let error = try response.content.decode(GeneralErrorDTO.self)
 
@@ -74,10 +69,6 @@ extension PlaceTests {
     }
 
     func testPlacesCannotBeRetrievedWitInvalidApiKey() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         try app.test(.GET, listPlacesURI, headers: ["Api-Key": "00000000-0000-0000-0000-000000000000"]) { response in
             let error = try response.content.decode(GeneralErrorDTO.self)
 
@@ -86,10 +77,6 @@ extension PlaceTests {
     }
 
     func testPlacesCannotBeRetrievedWithoutLangParam() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         try app.test(.GET, listPlacesURI, headers: testingHeaders) { response in
             let error = try response.content.decode(GeneralErrorDTO.self)
 
@@ -98,10 +85,6 @@ extension PlaceTests {
     }
 
     func testPlacesCannotBeRetrievedWithInvalidLangParam() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let queryParams = "?lang=invalid"
 
         try app.test(.GET, listPlacesURI + queryParams, headers: testingHeaders) { response in
@@ -112,10 +95,6 @@ extension PlaceTests {
     }
 
     func testPlacesCannotBeRetrievedWithInvalidStatusParam() throws {
-        let app = Application(.testing)
-        defer { app.shutdown() }
-        try configure(app)
-
         let queryParams = "?lang=hu&status=invalid"
 
         try app.test(.GET, listPlacesURI + queryParams, headers: testingHeaders) { response in
