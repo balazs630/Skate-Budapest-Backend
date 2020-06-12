@@ -1,27 +1,24 @@
 <p align="center">
-<img src="https://user-images.githubusercontent.com/1342803/36623515-7293b4ec-18d3-11e8-85ab-4e2f8fb38fbd.png" width="320" alt="API Template">
-<br>
-<br>
-<a href="http://docs.vapor.codes/3.0/">
-<img src="http://img.shields.io/badge/read_the-docs-2196f3.svg" alt="Documentation">
-</a>
-<a href="https://discord.gg/vapor">
-<img src="https://img.shields.io/discord/431917998102675485.svg" alt="Team Chat">
-</a>
-<a href="LICENSE">
-<img src="http://img.shields.io/badge/license-MIT-brightgreen.svg" alt="MIT License">
-</a>
-<a href="https://circleci.com/gh/vapor/api-template">
-<img src="https://circleci.com/gh/vapor/api-template.svg?style=shield" alt="Continuous Integration">
-</a>
-<a href="https://swift.org">
-<img src="http://img.shields.io/badge/swift-4.1-brightgreen.svg" alt="Swift 4.1">
-</a>
+    <img src="https://user-images.githubusercontent.com/1342803/36623515-7293b4ec-18d3-11e8-85ab-4e2f8fb38fbd.png" width="320" alt="API Template">
+    <br>
+    <br>
+    <a href="http://docs.vapor.codes/3.0/">
+        <img src="http://img.shields.io/badge/read_the-docs-2196f3.svg" alt="Documentation">
+    </a>
+    <a href="https://discord.gg/vapor">
+        <img src="https://img.shields.io/discord/431917998102675485.svg" alt="Team Chat">
+    </a>
+    <a href="LICENSE">
+        <img src="http://img.shields.io/badge/license-MIT-brightgreen.svg" alt="MIT License">
+    </a>
+    <a href="https://circleci.com/gh/vapor/api-template">
+        <img src="https://circleci.com/gh/vapor/api-template.svg?style=shield" alt="Continuous Integration">
+    </a>
+    <a href="https://swift.org">
+        <img src="http://img.shields.io/badge/swift-5.2-brightgreen.svg" alt="Swift 5.2">
+    </a>
 </p>
 
-<!--
-<img src="http://i.imgur.com/xxxxxxxxx.png" width="80px" />
--->
 <h1>Skate-Budapest Vapor Backend</h1>
 
 Simple backend for Skate-Budapest iOS app using Swift with Vapor web framework.
@@ -35,9 +32,10 @@ Simple backend for Skate-Budapest iOS app using Swift with Vapor web framework.
 
 ## Installation
 
-Install Vapor, PostgreSQL and pgAdmin with [Homebrew](https://brew.sh):
+Install [Xcode 11.4 or greater](https://itunes.apple.com/us/app/xcode/id497799835?mt=12) from the Mac App Store. Vapor 4 requires Swift 5.2 or greater.
+
+Install PostgreSQL and pgAdmin with [Homebrew](https://brew.sh):
 ```
-brew install vapor/tap/vapor
 brew cask install pgadmin4
 brew install postgresql@9.6
 ```
@@ -56,12 +54,7 @@ Create separate user and database for development and testing environment with p
 
 Execute seed data/migration sql scripts into the database from the `/Resources` folder.
 
-Clone the project, then execute:
-```
-vapor update
-```
-
-It will download the dependencies and generate an Xcode project for you.
+Clone the project, then open `Package.swift` in Xcode. It will download the dependencies and prepare the targets.
 
 
 ## Deployment
