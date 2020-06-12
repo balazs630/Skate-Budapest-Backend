@@ -63,13 +63,17 @@ extension PlaceSuggestionTests {
                                                       info: String.random(length: 50),
                                                       type: String.random(length: 8),
                                                       senderEmail: "\(String.random(length: 8))@test.com",
-            image1: Data(),
-            image2: Data(),
-            image3: Data(),
-            image4: Data())
+                                                      image1: Data(),
+                                                      image2: Data(),
+                                                      image3: Data(),
+                                                      image4: Data())
 
         try app.test(.POST, suggestPlaceURI, headers: testingHeaders, beforeRequest: { request in
             try request.content.encode(newSuggestion)
+        }, afterResponse: { res in
+            let responseModel = try res.content.decode(GeneralSuccessDTO.self)
+            XCTAssertEqual(responseModel.status, .created)
+            XCTAssertEqual(responseModel.message, "Place suggestion is created!")
         })
 
         try app.test(.GET, listPlaceSuggestionsURI, headers: testingHeaders) { response in

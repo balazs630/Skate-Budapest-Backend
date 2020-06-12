@@ -64,6 +64,10 @@ extension PlaceReportTests {
 
         try app.test(.POST, reportPlaceURI, headers: testingHeaders, beforeRequest: { request in
             try request.content.encode(newReport)
+        }, afterResponse: { res in
+            let responseModel = try res.content.decode(GeneralSuccessDTO.self)
+            XCTAssertEqual(responseModel.status, .created)
+            XCTAssertEqual(responseModel.message, "Place report is created!")
         })
 
         try app.test(.GET, listPlaceReportsURI, headers: testingHeaders) { response in
