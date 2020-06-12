@@ -11,4 +11,7 @@ xcuserdata
 DerivedData/
 *.xcodeproj
 
+### Swift Package Manager ###
+.swiftpm/
+
 # End of https://www.gitignore.io/api/vapor
