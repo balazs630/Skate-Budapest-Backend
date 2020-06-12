@@ -124,11 +124,11 @@ extension PlaceController {
 
 // MARK: PUT endpoint methods
 extension PlaceController {
-    private func clearPlaceSuggestions(request: Request) -> EventLoopFuture<Response> {
+    private func clearPlaceSuggestions(request: Request) -> EventLoopFuture<GeneralSuccessDTO> {
         return placeService.clearPlaceSuggestions()
     }
 
-    private func clearPlaceReports(request: Request) -> EventLoopFuture<Response> {
+    private func clearPlaceReports(request: Request) -> EventLoopFuture<GeneralSuccessDTO> {
         return placeService.clearPlaceReports()
     }
 }

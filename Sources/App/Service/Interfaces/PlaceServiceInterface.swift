@@ -13,9 +13,9 @@ protocol PlaceServiceInterface {
 
     func getPlaceSuggestions(status: PlaceSuggestionStatus) -> EventLoopFuture<[PlaceSuggestionResponseDTO]>
     func postPlaceSuggestion(suggestion: PlaceSuggestionRequestDTO, on request: Request) -> EventLoopFuture<GeneralSuccessDTO>
-    func clearPlaceSuggestions() -> EventLoopFuture<Response>
+    func clearPlaceSuggestions() -> EventLoopFuture<GeneralSuccessDTO>
 
     func getPlaceReports(status: PlaceReportStatus) -> EventLoopFuture<[PlaceReportResponseDTO]>
     func postPlaceReport(report: PlaceReportRequestDTO, on request: Request) -> EventLoopFuture<GeneralSuccessDTO>
-    func clearPlaceReports() -> EventLoopFuture<Response>
+    func clearPlaceReports() -> EventLoopFuture<GeneralSuccessDTO>
 }

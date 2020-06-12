@@ -56,10 +56,10 @@ extension PlaceService: PlaceServiceInterface {
             }
     }
 
-    func clearPlaceSuggestions() -> EventLoopFuture<Response> {
+    func clearPlaceSuggestions() -> EventLoopFuture<GeneralSuccessDTO> {
         return placeRepository
             .clearPlaceSuggestions()
-            .map { Response(status: .ok, body: "Place suggestions are cleared!") }
+            .map { GeneralSuccessDTO(status: .noContent, message: "Place suggestions are cleared!") }
     }
 
     func getPlaceReports(status: PlaceReportStatus) -> EventLoopFuture<[PlaceReportResponseDTO]> {
@@ -74,9 +74,9 @@ extension PlaceService: PlaceServiceInterface {
             .map { GeneralSuccessDTO(status: .created, message: "Place report is created!") }
     }
 
-    func clearPlaceReports() -> EventLoopFuture<Response> {
+    func clearPlaceReports() -> EventLoopFuture<GeneralSuccessDTO> {
         return placeRepository
             .clearPlaceReports()
-            .map { Response(status: .ok, body: "Place reports are cleared!") }
+            .map { GeneralSuccessDTO(status: .noContent, message: "Place reports are cleared!") }
     }
 }
