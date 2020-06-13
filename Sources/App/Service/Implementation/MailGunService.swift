@@ -32,6 +32,7 @@ extension MailGunService: EmailServiceInterface {
 
     func sendEmail(message: EmailMessageRequestDTO, on request: Request) throws {
         guard request.application.environment.isRelease else {
+            Logger(label: "custom").info("Skipping e-mail sending when not running in production")
             return
         }
 
@@ -44,6 +45,13 @@ extension MailGunService: EmailServiceInterface {
 
         _ = request.client.post(url, headers: headers) { request in
             try request.content.encode(message, as: .formData)
+        }.map { response in
+            do {
+                let result = try response.content.decode(MailGunSuccessDTO.self)
+                Logger(label: "custom").info("POST \(self.mailgunApiUrl), message: \(result.message), id: \(result.id)")
+            } catch {
+                Logger(label: "custom").info("Failed sending e-mail, status: \(response.status)")
+            }
         }
     }
 }
