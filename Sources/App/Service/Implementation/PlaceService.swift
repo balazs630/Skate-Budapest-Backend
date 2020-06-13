@@ -51,7 +51,8 @@ extension PlaceService: PlaceServiceInterface {
         return placeRepository
             .savePlaceSuggestion(suggestion: suggestion.toPlaceSuggestion())
             .flatMapThrowing { [weak self] _ in
-                try self?.emailService.sendPlaceSuggestionEmail(on: request)
+                let message = MailGunEmailTemplateFactory.makePlaceSuggestionEmail()
+                try self?.emailService.sendEmail(message: message, on: request)
                 return GeneralSuccessDTO(status: .created, message: "Place suggestion is created!")
             }
     }
@@ -71,7 +72,11 @@ extension PlaceService: PlaceServiceInterface {
     func postPlaceReport(report: PlaceReportRequestDTO, on request: Request) -> EventLoopFuture<GeneralSuccessDTO> {
         return placeRepository
             .savePlaceReport(report: report.toPlaceReport())
-            .map { GeneralSuccessDTO(status: .created, message: "Place report is created!") }
+            .flatMapThrowing { [weak self] _ in
+                let message = MailGunEmailTemplateFactory.makePlaceReportEmail()
+                try self?.emailService.sendEmail(message: message, on: request)
+                return GeneralSuccessDTO(status: .created, message: "Place report is created!")
+            }
     }
 
     func clearPlaceReports() -> EventLoopFuture<GeneralSuccessDTO> {

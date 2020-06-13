@@ -8,6 +8,5 @@
 import Vapor
 
 protocol EmailServiceInterface {
-    func sendPlaceSuggestionEmail(on request: Request) throws
     func sendEmail(message: EmailMessageRequestDTO, on req: Request) throws
 }

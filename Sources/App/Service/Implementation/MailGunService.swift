@@ -13,23 +13,6 @@ final class MailGunService {
 
 // MARK: EmailServiceInterface methods
 extension MailGunService: EmailServiceInterface {
-    func sendPlaceSuggestionEmail(on request: Request) throws {
-        let message = EmailMessageRequestDTO(
-            from: "Skate Budapest <info@libertyskate.hu>",
-            to: "balazs630@icloud.com",
-            subject: "New place suggested",
-            html: """
-                <html>
-                <p>Dear Developer,</p>
-                <p>Someone just posted a new place suggestion from Skate Budapest iOS app.</p>
-                <p>Go and check it out.</p>
-                </html>
-            """
-        )
-
-        try sendEmail(message: message, on: request)
-    }
-
     func sendEmail(message: EmailMessageRequestDTO, on request: Request) throws {
         guard request.application.environment.isRelease else {
             Logger(label: "custom").info("Skipping e-mail sending when not running in production")
