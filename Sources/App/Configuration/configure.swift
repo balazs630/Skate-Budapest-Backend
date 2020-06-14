@@ -10,11 +10,16 @@ import FluentPostgresDriver
 import Vapor
 
 public func configure(_ app: Application) throws {
-    let databaseConfiguration = try app.environment.postgreSQLDatabaseConfig()
-    app.databases.use(databaseConfiguration, as: .psql)
+    app.databases.use(.postgres(
+        hostname: try EnvironmentVariable.psqlIP.value(),
+        username: try EnvironmentVariable.psqlUsername.value(),
+        password: try EnvironmentVariable.psqlPassword.value(),
+        database: try EnvironmentVariable.psqlDatabase.value()
+    ), as: .psql)
 
-    let apiKey = try app.environment.serverApiKey()
-    app.middleware.use(SecretMiddleware(apiKey: apiKey))
+    app.middleware.use(
+        SecretMiddleware(apiKey: try EnvironmentVariable.serverApiKey.value())
+    )
 
     try routes(app)
 }

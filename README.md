@@ -2,7 +2,7 @@
     <img src="https://user-images.githubusercontent.com/1342803/36623515-7293b4ec-18d3-11e8-85ab-4e2f8fb38fbd.png" width="320" alt="API Template">
     <br>
     <br>
-    <a href="http://docs.vapor.codes/3.0/">
+    <a href="http://docs.vapor.codes/4.0/">
         <img src="http://img.shields.io/badge/read_the-docs-2196f3.svg" alt="Documentation">
     </a>
     <a href="https://discord.gg/vapor">
@@ -45,21 +45,27 @@ Start PostgreSQL service:
 brew services start postgresql@9.6
 ```
 
-Create separate user and database for development and testing environment with pgAdmin. For initial connection, use:
-
+For initial connection in pgamin use:
 - host: localhost
 - port: 5432
 - maintenance database: postgres
 - username: `whoami` (default user)
 
-Execute seed data/migration sql scripts into the database from the `/Resources` folder.
+Create separate user and database for `development` and `testing` environments with pgAdmin. See dotenv configurations as an example.
+Execute seed data/migration sql scripts into the databases from the `/Resources` folder.
 
-Clone the project, then open `Package.swift` in Xcode. It will download the dependencies and prepare the targets.
+Clone the project, then open `Package.swift` in Xcode. It will download the dependencies and prepare the targets with Swift Package Manager.
 
 
 ## Deployment
 
-See [this guide](VM%20INSTANCE%20README.md) how I managed to host the service with Google Cloud on Compute Engine VM.
+If you're running the service from Xcode, make sure to add a custom working directory:
+
+`SkateBudapestVapor > Edit Scheme... > Run > Options >  Use custom working directory > 'browse project root here...'`
+
+It's needed to load dotenv files properly.
+
+See [this guide](VM%20INSTANCE%20README.md) how I managed to host the service on Ubuntu with Google Cloud on a Compute Engine instance.
 
 
 ## Uptime check

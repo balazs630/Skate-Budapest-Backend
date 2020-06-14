@@ -79,8 +79,8 @@ brew cask install pgadmin4
 ```
 
 * Add new server connection: connect with default user/pass/database: postgres/postgres/postgres
-* Create a new main database with a new user using pgAdmin
-* Execute seed data/migration sql scripts into the database from the `/Resources` folder.
+* Create a new user and database for production. Use the config from the `.env.production` dotenv file.
+* Execute seed data/migration sql scripts into the production database from the `/Resources` folder.
 
 
 ### **Nginx web server install, configuration**
@@ -242,42 +242,16 @@ git clone https://github.com/balazs630/Skate-Budapest-Vapor.git
 ```
 
 
-### **Set permanent env variables for Vapor API (Postgres & Mailgun secrets)**
-```bash
-sudo nano ~/.profile
-```
-
-Add:
->export SKTBPST_SERVER_PROD_API_KEY="value-here"  
-
->export SKTBPST_PSQL_IP="value-here"  
->export SKTBPST_PSQL_PORT="value-here"  
->export SKTBPST_PSQL_USERNAME="value-here"  
->export SKTBPST_PSQL_DATABASE="value-here"  
->export SKTBPST_PSQL_PASSWORD="value-here"  
-
->export SKTBPST_MAILGUN_API_KEY="value-here"  
->export SKTBPST_MAILGUN_DOMAIN="value-here"  
+### **Copy production dotenv file**
+Copy `.env.production` to the projects root folder, into: `~/development/Skate-Budapest-Vapor/`
+This file contains API keys, Postgres & Mailgun secrets and therefore it's not checked into source control.
 
 
-### **Clean build folder after a change**
+### **Clean build folder (if necessary)**
 ```bash
 cd ~/development/Skate-Budapest-Vapor/ ; git pull
 sudo rm -R ~/development/Skate-Budapest-Vapor/.build
 ```
-
-
-### **Manual run**
-```bash
-tmux
-free -m
-swift build --package-path /home/balazs630uk/development/Skate-Budapest-Vapor/ --configuration release
-/home/balazs630uk/development/Skate-Budapest-Vapor/.build/release/Run serve --env production
-```
-Close tmux:
-> Ctrl+B, followed by D
-
-Close ssh session.
 
 
 ### **Automatic startup script**
@@ -292,8 +266,12 @@ sudo nano ~/development/startup.sh
 Add:
 >#! /bin/bash  
 >  
->swift build --package-path /home/balazs630uk/development/Skate-Budapest-Vapor/ --configuration release  
->/home/balazs630uk/development/Skate-Budapest-Vapor/.build/release/Run serve --env production  
+>cd ~/development/Skate-Budapest-Vapor/  
+>swift build --configuration release  
+>  
+>cp -R .env.production .build/release/  
+>cd .build/release/  
+>./Run serve --env production  
 
 ```bash
 sudo chmod +x ~/development/startup.sh
@@ -341,3 +319,6 @@ or
 ```bash
 tmux a -t skate-budapest
 ```
+
+Close tmux:
+> Ctrl+B, followed by D

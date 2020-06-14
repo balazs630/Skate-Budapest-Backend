@@ -8,7 +8,7 @@
 import Vapor
 
 enum EnvironmentVariable: String {
-    case serverApiKey = "SKTBPST_SERVER_PROD_API_KEY"
+    case serverApiKey = "SKTBPST_SERVER_API_KEY"
 
     case mailGunApiKey = "SKTBPST_MAILGUN_API_KEY"
     case mailGunDomain = "SKTBPST_MAILGUN_DOMAIN"

@@ -10,13 +10,17 @@ import XCTVapor
 
 final class PlaceTests: XCTestCase {
     // MARK: Properties
-    private let listPlacesURI = "/api/v1/places"
-    private let testingHeaders = HTTPHeaders([("Api-Key", LocalConstant.Testing.serverApiKey)])
     private var app: Application!
+    private var testingHeaders: HTTPHeaders!
+    private let listPlacesURI = "/api/v1/places"
 
     // MARK: Setup & Teardown
     override func setUpWithError() throws {
         app = Application(.testing)
+        testingHeaders = HTTPHeaders([
+            ("Api-Key", try! EnvironmentVariable.serverApiKey.value())
+        ])
+
         try configure(app)
     }
 
