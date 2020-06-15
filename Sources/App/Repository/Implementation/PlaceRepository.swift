@@ -20,7 +20,7 @@ final class PlaceRepository {
 extension PlaceRepository: PlaceRepositoryInterface {
     func findAllPlacesWithImages(status: PlaceStatus) -> EventLoopFuture<([Place], [PlaceImage])> {
         let places = Place.query(on: database)
-            .filter(\.$status, DatabaseQuery.Filter.Method.like, status)
+            .filter(\.$status =~ status)
             .all()
 
         let images = PlaceImage.query(on: database)
@@ -36,7 +36,7 @@ extension PlaceRepository: PlaceRepositoryInterface {
 
     func findPlaceSuggestions(status: PlaceSuggestionStatus) -> EventLoopFuture<[PlaceSuggestion]> {
         PlaceSuggestion.query(on: database)
-            .filter(\.$status, DatabaseQuery.Filter.Method.like, status)
+            .filter(\.$status =~ status)
             .all()
     }
 
@@ -52,7 +52,7 @@ extension PlaceRepository: PlaceRepositoryInterface {
 
     func findPlaceReports(status: PlaceReportStatus) -> EventLoopFuture<[PlaceReport]> {
         PlaceReport.query(on: database)
-            .filter(\.$status, DatabaseQuery.Filter.Method.like, status)
+            .filter(\.$status =~ status)
             .all()
     }
 

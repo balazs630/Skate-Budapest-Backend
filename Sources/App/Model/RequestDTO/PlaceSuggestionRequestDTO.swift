@@ -24,7 +24,6 @@ struct PlaceSuggestionRequestDTO: Content {
 extension PlaceSuggestionRequestDTO {
     func toPlaceSuggestion() -> PlaceSuggestion {
         return PlaceSuggestion(
-            id: UUID(),
             latitude: latitude,
             longitude: longitude,
             name: name,

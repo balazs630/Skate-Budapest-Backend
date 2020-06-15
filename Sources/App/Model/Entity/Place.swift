@@ -21,7 +21,7 @@ final class Place: Model {
     @Field(key: "infoEN") var infoEN: String
     @Field(key: "type") var type: String
     @Field(key: "status") var status: PlaceStatus
-    @Field(key: "thumbnailUrl") var thumbnailUrl: String?
+    @OptionalField(key: "thumbnailUrl") var thumbnailUrl: String?
 
     // MARK: Initializers
     init() { }

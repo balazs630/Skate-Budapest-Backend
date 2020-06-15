@@ -21,14 +21,14 @@ final class PlaceSuggestion: Model {
     @Field(key: "senderEmail") var senderEmail: String
     @Field(key: "image1") var image1: Data
     @Field(key: "image2") var image2: Data
-    @Field(key: "image3") var image3: Data?
-    @Field(key: "image4") var image4: Data?
+    @OptionalField(key: "image3") var image3: Data?
+    @OptionalField(key: "image4") var image4: Data?
     @Field(key: "status") var status: PlaceSuggestionStatus
 
     // MARK: Initializers
     init() { }
 
-    init(id: UUID?,
+    init(id: UUID? = UUID(),
          latitude: Double,
          longitude: Double,
          name: String,

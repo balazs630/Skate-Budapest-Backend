@@ -7,8 +7,16 @@
 
 import Vapor
 
-enum PlaceReportStatus: String, Content {
+enum PlaceReportStatus: String {
     case active
     case deleted
     case all = "%"
 }
+
+extension PlaceReportStatus: CustomStringConvertible {
+    var description: String {
+        return rawValue
+    }
+}
+
+extension PlaceReportStatus: Codable {}

@@ -18,7 +18,6 @@ struct PlaceReportRequestDTO: Content {
 extension PlaceReportRequestDTO {
     func toPlaceReport() -> PlaceReport {
         return PlaceReport(
-            id: UUID(),
             placeId: placeId,
             placeName: placeName,
             senderEmail: senderEmail,

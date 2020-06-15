@@ -15,14 +15,14 @@ final class PlaceReport: Model {
     @ID() var id: UUID?
     @Field(key: "placeId") var placeId: String
     @Field(key: "placeName") var placeName: String
-    @Field(key: "senderEmail") var senderEmail: String?
+    @OptionalField(key: "senderEmail") var senderEmail: String?
     @Field(key: "reportText") var reportText: String
     @Field(key: "status") var status: PlaceReportStatus
 
     // MARK: Initializers
     init() { }
 
-    init(id: UUID?,
+    init(id: UUID? = UUID(),
          placeId: String,
          placeName: String,
          senderEmail: String?,
