@@ -267,7 +267,7 @@ Add:
 >#! /bin/bash  
 >  
 >cd ~/development/Skate-Budapest-Vapor/  
->swift build --configuration release  
+>swift build --enable-test-discovery --configuration release -Xswiftc -g  
 >  
 >cp -R .env.production .build/release/  
 >cd .build/release/  
