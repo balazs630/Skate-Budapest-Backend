@@ -17,7 +17,7 @@ struct PlaceResponseDTO: Content {
     let thumbnailUrl: String?
     let imageUrls: [String]?
 
-    init(place: Place, placeImages: [String]?, languageCode: LanguageCode) {
+    init(place: Place, languageCode: LanguageCode) {
         self.id = place.id
         self.latitude = place.latitude
         self.longitude = place.longitude
@@ -33,6 +33,8 @@ struct PlaceResponseDTO: Content {
 
         self.type = place.type
         self.thumbnailUrl = place.thumbnailUrl
-        self.imageUrls = placeImages
+        self.imageUrls = !place.images.isEmpty
+            ? place.images.map { $0.imageUrl }
+            : nil
     }
 }

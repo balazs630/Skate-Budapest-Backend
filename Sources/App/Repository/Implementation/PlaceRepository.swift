@@ -18,15 +18,11 @@ final class PlaceRepository {
 
 // MARK: PlaceRepositoryInterface conformances
 extension PlaceRepository: PlaceRepositoryInterface {
-    func findAllPlacesWithImages(status: PlaceStatus) -> EventLoopFuture<([Place], [PlaceImage])> {
-        let places = Place.query(on: database)
+    func findAllPlaces(status: PlaceStatus) -> EventLoopFuture<[Place]> {
+        Place.query(on: database)
+            .with(\.$images)
             .filter(\.$status =~ status)
             .all()
-
-        let images = PlaceImage.query(on: database)
-            .all()
-
-        return places.and(images)
     }
 
     func findPlaceDataVersion() -> EventLoopFuture<PlaceDataVersion?> {
