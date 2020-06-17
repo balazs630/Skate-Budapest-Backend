@@ -8,28 +8,12 @@
 @testable import App
 import XCTVapor
 
-final class PlaceTests: XCTestCase {
+final class PlaceTests: XCTVaporTests {
     // MARK: Properties
-    private var app: Application!
-    private var testingHeaders: HTTPHeaders!
     private let listPlacesURI = "/api/v1/places"
-
-    // MARK: Setup & Teardown
-    override func setUpWithError() throws {
-        app = Application(.testing)
-        testingHeaders = HTTPHeaders([
-            ("Api-Key", try! EnvironmentVariable.serverApiKey.value())
-        ])
-
-        try configure(app)
-    }
-
-    override func tearDown() {
-        app.shutdown()
-    }
 }
 
-// MARK: Happy test cases
+// MARK: Happy case tests
 extension PlaceTests {
     func testPlacesCanBeRetrievedWithHULanguageAndActiveStatus() throws {
         let queryParams = "?lang=hu&status=active"
@@ -62,7 +46,7 @@ extension PlaceTests {
     }
 }
 
-// MARK: Error test cases
+// MARK: Error case tests
 extension PlaceTests {
     func testPlacesCannotBeRetrievedWithoutApiKey() throws {
         try app.test(.GET, listPlacesURI, headers: [:]) { response in

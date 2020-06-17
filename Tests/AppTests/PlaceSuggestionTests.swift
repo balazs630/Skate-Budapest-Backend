@@ -8,29 +8,13 @@
 @testable import App
 import XCTVapor
 
-final class PlaceSuggestionTests: XCTestCase {
+final class PlaceSuggestionTests: XCTVaporTests {
     // MARK: Properties
-    private var app: Application!
-    private var testingHeaders: HTTPHeaders!
     private let suggestPlaceURI = "/api/v1/suggest_place"
     private let listPlaceSuggestionsURI = "/api/v1/place_suggestions"
-    
-    // MARK: Setup & Teardown
-    override func setUpWithError() throws {
-        app = Application(.testing)
-        testingHeaders = HTTPHeaders([
-            ("Api-Key", try! EnvironmentVariable.serverApiKey.value())
-        ])
-
-        try configure(app)
-    }
-    
-    override func tearDown() {
-        app.shutdown()
-    }
 }
 
-// MARK: Happy test cases
+// MARK: Happy case tests
 extension PlaceSuggestionTests {
     func testPlaceSuggestionsCanBeRetrieved() throws {
         try app.test(.GET, listPlaceSuggestionsURI, headers: testingHeaders) { response in
@@ -89,7 +73,7 @@ extension PlaceSuggestionTests {
     }
 }
 
-// MARK: Error test cases
+// MARK: Error case tests
 extension PlaceSuggestionTests {
     func testPlaceSuggestionsCannotBeRetrievedWithoutApiKey() throws {
         try app.test(.GET, listPlaceSuggestionsURI, headers: [:]) { response in
