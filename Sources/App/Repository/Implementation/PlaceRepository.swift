@@ -21,7 +21,7 @@ extension PlaceRepository: PlaceRepositoryInterface {
     func findAllPlaces(status: PlaceStatus) -> EventLoopFuture<[Place]> {
         Place.query(on: database)
             .with(\.$images)
-            .filter(\.$status =~ status)
+            .filter(\.$status, .contains(inverse: false, .anywhere), status)
             .all()
     }
 
@@ -32,7 +32,7 @@ extension PlaceRepository: PlaceRepositoryInterface {
 
     func findPlaceSuggestions(status: PlaceSuggestionStatus) -> EventLoopFuture<[PlaceSuggestion]> {
         PlaceSuggestion.query(on: database)
-            .filter(\.$status =~ status)
+            .filter(\.$status, .contains(inverse: false, .anywhere), status)
             .all()
     }
 
@@ -48,7 +48,7 @@ extension PlaceRepository: PlaceRepositoryInterface {
 
     func findPlaceReports(status: PlaceReportStatus) -> EventLoopFuture<[PlaceReport]> {
         PlaceReport.query(on: database)
-            .filter(\.$status =~ status)
+            .filter(\.$status,  .contains(inverse: false, .anywhere), status)
             .all()
     }
 
