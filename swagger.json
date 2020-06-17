@@ -1,379 +1,589 @@
 {
-  "swagger" : "2.0",
-  "info" : {
-    "description" : "Skate Budapest Backend API documentation - design document.\n\n**GitHub projects:**\n  - [Skate Budapest iOS app](https://github.com/balazs630/Skate-Budapest)\n  - [Skate Budapest backend](https://github.com/balazs630/Skate-Budapest-Backend)\n",
-    "version" : "2019.07.02.",
-    "title" : "Skate Budapest Backend",
-    "contact" : {
-      "email" : "balazs630@icloud.com"
+  "swagger": "2.0",
+  "info": {
+    "description": "Skate Budapest Backend API documentation - design document.\n\n**GitHub projects:**\n  - [Skate Budapest iOS app](https://github.com/balazs630/Skate-Budapest)\n  - [Skate Budapest backend](https://github.com/balazs630/Skate-Budapest-Backend)\n",
+    "version": "2019.07.02.",
+    "title": "Skate Budapest Backend",
+    "contact": {
+      "email": "balazs630@icloud.com"
     },
-    "license" : {
-      "name" : "Apache 2.0",
-      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
     "x-logo": {
-        "url": "logo.png"
+      "url": "logo.png"
     }
   },
-  "host" : "skatebudapest.libertyskate.hu",
-  "basePath" : "/v1",
-  "schemes" : [ "https" ],
-  "consumes" : [ "application/json"],
-  "produces" : [ "application/json"],
-  "paths" : {
-    "/places" : {
-      "get" : {
-        "summary" : "Get all the places",
-        "description" : "This endpoint allows clients to issue requests against the SkateBudapest API to get a collection of extreme sport related  places in Budapest.\n",
-        "parameters" : [ {
-          "name" : "lang",
-          "in" : "query",
-          "required" : true,
-          "type" : "string",
-          "description" : "Language code",
-          "x-example" : "hu"
-        }, {
-          "name" : "status",
-          "in" : "query",
-          "required" : false,
-          "type" : "string",
-          "description" : "Place status",
-          "x-example" : "active"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Success",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/PlaceResponseDTO"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/places/dataversion" : {
-      "get" : {
-        "summary" : "Get places data version",
-        "description" : "This endpoint returns the current dataVersion for the places data. A change in the `dataVersion` string indicates a modification of an existing place or the addition of a new one.\n",
-        "parameters" : [ ],
-        "responses" : {
-          "200" : {
-            "description" : "Success",
-            "schema" : {
-              "$ref" : "#/definitions/PlaceDataVersionResponseDTO"
-            }
-          }
-        }
-      }
-    },
-    "/placesuggestions" : {
-      "get" : {
-        "summary" : "Get all the place suggestions",
-        "description" : "This endpoint allows clients to issue requests against the SkateBudapest API to get a collection of user suggested new places in Budapest.\n",
-        "parameters" : [ {
-          "name" : "status",
-          "in" : "query",
-          "required" : false,
-          "type" : "string",
-          "description" : "Place status",
-          "x-example" : "active"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Success",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/PlaceSuggestionResponseDTO"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/suggestplace" : {
-      "post" : {
-        "summary" : "Post a new place by a suggestion",
-        "description" : "This endpoint allows clients to issue request against the SkateBudapest API to suggest a new extreme sport related place in Budapest.\n",
-        "consumes" : [ "multipart/form-data" ],
-        "parameters" : [ {
-          "name" : "name",
-          "in" : "formData",
-          "required" : true,
-          "type" : "string",
-          "description" : "The name of the place",
-          "x-example" : "Example Skatepark name"
-        }, {
-          "name" : "info",
-          "in" : "formData",
-          "required" : true,
-          "type" : "string",
-          "description" : "The description of the place",
-          "x-example" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
-        }, {
-          "name" : "latitude",
-          "in" : "formData",
-          "required" : true,
-          "type" : "number",
-          "format" : "float",
-          "description" : "The latitude coordinate part of the place",
-          "x-example" : 47.123455
-        }, {
-          "name" : "longitude",
-          "in" : "formData",
-          "required" : true,
-          "type" : "number",
-          "format" : "float",
-          "description" : "The longitude coordinate part of the place",
-          "x-example" : 19.123455
-        }, {
-          "name" : "type",
-          "in" : "formData",
-          "required" : true,
-          "type" : "string",
-          "description" : "The type of the place",
-          "x-example" : "skatepark"
-        }, {
-          "name" : "senderEmail",
-          "in" : "formData",
-          "required" : true,
-          "type" : "string",
-          "description" : "E-mail address of the sender",
-          "x-example" : "example@gmail.com"
-        }, {
-          "name" : "image1",
-          "in" : "formData",
-          "required" : true,
-          "type" : "file",
-          "description" : "Image file"
-        }, {
-          "name" : "image2",
-          "in" : "formData",
-          "required" : true,
-          "type" : "file",
-          "description" : "Image file"
-        }, {
-          "name" : "image3",
-          "in" : "formData",
-          "required" : false,
-          "type" : "file",
-          "description" : "Image file"
-        }, {
-          "name" : "image4",
-          "in" : "formData",
-          "required" : false,
-          "type" : "file",
-          "description" : "Image file"
-        } ],
-        "responses" : {
-          "201" : {
-            "description" : "Created"
-          }
-        }
-      }
-    },
-    "/placesuggestions/clear" : {
-      "put" : {
-        "summary" : "Clear place suggestions",
-        "description" : "This endpoint sets a delete flag on all place suggestions. Help to filter out new suggestions from already reviewed ones.",
-        "parameters" : [ ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          }
-        }
-      }
-    }
-  },
-  "definitions" : {
-    "PlaceResponseDTO" : {
-      "type" : "object",
-      "required" : [ "id", "info", "latitude", "longitude", "name", "type" ],
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "The ID of the place",
-          "example" : "8541AEF5-5782-49A6-B71B-F3D511ABAC40"
-        },
-        "name" : {
-          "type" : "string",
-          "description" : "The name of the place",
-          "example" : "Example Skatepark name"
-        },
-        "info" : {
-          "type" : "string",
-          "description" : "The description of the place",
-          "example" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
-        },
-        "latitude" : {
-          "type" : "number",
-          "format" : "float",
-          "description" : "The latitude coordinate part of the place",
-          "example" : 47.123455
-        },
-        "longitude" : {
-          "type" : "number",
-          "format" : "float",
-          "description" : "The longitude coordinate part of the place",
-          "example" : 19.123455
-        },
-        "type" : {
-          "type" : "string",
-          "description" : "The type of the place",
-          "enum" : [ "skatepark", "skateshop", "streetspot" ]
-        },
-        "thumbnailUrl" : {
-          "type" : "string",
-          "description" : "Thumnbnail image url of the place",
-          "example" : "https://images.com/skatepark.png"
-        },
-        "imageUrls" : {
-          "type" : "array",
-          "description" : "The gallery images of the place",
-          "items" : {
-            "type" : "string"
+  "host": "skatebudapest.libertyskate.hu",
+  "basePath": "/v1",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/places": {
+      "get": {
+        "summary": "Get all the places",
+        "description": "This endpoint allows clients to issue requests against the SkateBudapest API to get a collection of extreme sport related  places in Budapest.\n",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Language code",
+            "x-example": "hu"
           },
-          "example" : "[\"https://images.com/skatepark-1.jpg\",\"https://images.com/skatepark-2.jpg\"]"
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Place status",
+            "x-example": "active"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PlaceResponseDTO"
+              }
+            }
+          }
         }
-      },
-      "description" : "Place object"
+      }
     },
-    "PlaceSuggestionRequestDTO" : {
-      "type" : "object",
-      "required" : [ "image1", "image2", "info", "latitude", "longitude", "name", "senderEmail", "type" ],
-      "properties" : {
-        "name" : {
-          "type" : "string",
-          "description" : "The name of the place",
-          "example" : "Example Skatepark name"
-        },
-        "info" : {
-          "type" : "string",
-          "description" : "The description of the place",
-          "example" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
-        },
-        "latitude" : {
-          "type" : "number",
-          "format" : "float",
-          "description" : "The latitude coordinate part of the place",
-          "example" : 47.123455
-        },
-        "longitude" : {
-          "type" : "number",
-          "format" : "float",
-          "description" : "The longitude coordinate part of the place",
-          "example" : 19.123455
-        },
-        "type" : {
-          "type" : "string",
-          "description" : "The type of the place",
-          "example" : "skatepark"
-        },
-        "senderEmail" : {
-          "type" : "string",
-          "description" : "E-mail address of the sender",
-          "example" : "example@gmail.com"
-        },
-        "image1" : {
-          "type" : "string",
-          "format" : "binary",
-          "description" : "Image file"
-        },
-        "image2" : {
-          "type" : "string",
-          "format" : "binary",
-          "description" : "Image file"
-        },
-        "image3" : {
-          "type" : "string",
-          "format" : "binary",
-          "description" : "Image file"
-        },
-        "image4" : {
-          "type" : "string",
-          "format" : "binary",
-          "description" : "Image file"
+    "/places/dataversion": {
+      "get": {
+        "summary": "Get places data version",
+        "description": "This endpoint returns the current dataVersion for the places data. A change in the `dataVersion` string indicates a modification of an existing place or the addition of a new one.\n",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PlaceDataVersionResponseDTO"
+            }
+          }
         }
-      },
-      "description" : "Place suggestion object"
+      }
     },
-    "PlaceSuggestionResponseDTO" : {
-      "type" : "object",
-      "required" : [ "id", "image1", "image2", "info", "latitude", "longitude", "name", "senderEmail", "type" ],
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "Unique identifier of the suggestion",
-          "example" : "3CBAF56E-F6CE-4489-8F1D-55298CBE3164"
-        },
-        "name" : {
-          "type" : "string",
-          "description" : "The name of the place",
-          "example" : "Example Skatepark name"
-        },
-        "info" : {
-          "type" : "string",
-          "description" : "The description of the place",
-          "example" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
-        },
-        "latitude" : {
-          "type" : "number",
-          "format" : "float",
-          "description" : "The latitude coordinate part of the place",
-          "example" : 47.123455
-        },
-        "longitude" : {
-          "type" : "number",
-          "format" : "float",
-          "description" : "The longitude coordinate part of the place",
-          "example" : 19.123455
-        },
-        "type" : {
-          "type" : "string",
-          "description" : "The type of the place",
-          "example" : "skatepark"
-        },
-        "senderEmail" : {
-          "type" : "string",
-          "description" : "E-mail address of the sender",
-          "example" : "example@gmail.com"
-        },
-        "image1" : {
-          "type" : "string",
-          "format" : "binary",
-          "description" : "Image file"
-        },
-        "image2" : {
-          "type" : "string",
-          "format" : "binary",
-          "description" : "Image file"
-        },
-        "image3" : {
-          "type" : "string",
-          "format" : "binary",
-          "description" : "Image file"
-        },
-        "image4" : {
-          "type" : "string",
-          "format" : "binary",
-          "description" : "Image file"
+    "/placesuggestions": {
+      "get": {
+        "summary": "Get all the place suggestions",
+        "description": "This endpoint allows clients to issue requests against the SkateBudapest API to get a collection of user suggested new places in Budapest.\n",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Place status",
+            "x-example": "active"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PlaceSuggestionResponseDTO"
+              }
+            }
+          }
         }
-      },
-      "description" : "Place suggestion object"
+      }
     },
-    "PlaceDataVersionResponseDTO" : {
-      "type" : "object",
-      "required" : [ "dataVersion" ],
-      "properties" : {
-        "dataVersion" : {
-          "type" : "string",
-          "description" : "The version of the extreme sport place collection",
-          "example" : "2019-05-18T12:00:00Z"
+    "/suggestplace": {
+      "post": {
+        "summary": "Post a new place by a suggestion",
+        "description": "This endpoint allows clients to issue request against the SkateBudapest API to suggest a new extreme sport related place in Budapest.\n",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "The name of the place",
+            "x-example": "Example Skatepark name"
+          },
+          {
+            "name": "info",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "The description of the place",
+            "x-example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
+          },
+          {
+            "name": "latitude",
+            "in": "formData",
+            "required": true,
+            "type": "number",
+            "format": "float",
+            "description": "The latitude coordinate part of the place",
+            "x-example": 47.123455
+          },
+          {
+            "name": "longitude",
+            "in": "formData",
+            "required": true,
+            "type": "number",
+            "format": "float",
+            "description": "The longitude coordinate part of the place",
+            "x-example": 19.123455
+          },
+          {
+            "name": "type",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "The type of the place",
+            "x-example": "skatepark"
+          },
+          {
+            "name": "senderEmail",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "E-mail address of the sender",
+            "x-example": "example@gmail.com"
+          },
+          {
+            "name": "image1",
+            "in": "formData",
+            "required": true,
+            "type": "file",
+            "description": "Image file"
+          },
+          {
+            "name": "image2",
+            "in": "formData",
+            "required": true,
+            "type": "file",
+            "description": "Image file"
+          },
+          {
+            "name": "image3",
+            "in": "formData",
+            "required": false,
+            "type": "file",
+            "description": "Image file"
+          },
+          {
+            "name": "image4",
+            "in": "formData",
+            "required": false,
+            "type": "file",
+            "description": "Image file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GeneralSuccessDTO"
+            }
+          }
+        }
+      }
+    },
+    "/placesuggestions/clear": {
+      "put": {
+        "summary": "Clear place suggestions",
+        "description": "This endpoint sets a delete flag on all place suggestions. Help to filter out new suggestions from already reviewed ones.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GeneralSuccessDTO"
+            }
+          }
+        }
+      }
+    },
+    "/placereports": {
+      "get": {
+        "summary": "Get all the place reports",
+        "description": "This endpoint allows clients to issue requests against the SkateBudapest API to get a collection of user suggested reports in Budapest.\n",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Report status",
+            "x-example": "active"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PlaceReportResponseDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/suggestreport": {
+      "post": {
+        "summary": "Post a new report for a place",
+        "description": "This endpoint allows clients to issue request against the SkateBudapest API to report problems about an existing extreme sport related place in Budapest.\n",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "placeId",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Place id for which we sent the report",
+            "x-example": "8541AEF5-5782-49A6-B71B-F3D511ABAC40"
+          },
+          {
+            "name": "placeName",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Place short name",
+            "x-example": "Skatepark at Deak square"
+          },
+          {
+            "name": "senderEmail",
+            "in": "formData",
+            "required": false,
+            "type": "string",
+            "description": "E-mail address of the sender",
+            "x-example": "example@gmail.com"
+          },
+          {
+            "name": "reportText",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": "Text describing the problem at this place",
+            "x-example": "The problem is the following at this place..."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GeneralSuccessDTO"
+            }
+          }
+        }
+      }
+    },
+    "/placereports/clear": {
+      "put": {
+        "summary": "Clear place reports",
+        "description": "This endpoint sets a delete flag on all place reports. Help to filter out new reports from already reviewed ones.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GeneralSuccessDTO"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PlaceResponseDTO": {
+      "type": "object",
+      "required": [
+        "id",
+        "info",
+        "latitude",
+        "longitude",
+        "name",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the place",
+          "example": "8541AEF5-5782-49A6-B71B-F3D511ABAC40"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the place",
+          "example": "Example Skatepark name"
+        },
+        "info": {
+          "type": "string",
+          "description": "The description of the place",
+          "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "description": "The latitude coordinate part of the place",
+          "example": 47.123455
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "description": "The longitude coordinate part of the place",
+          "example": 19.123455
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the place",
+          "enum": [
+            "skatepark",
+            "skateshop",
+            "streetspot"
+          ]
+        },
+        "thumbnailUrl": {
+          "type": "string",
+          "description": "Thumnbnail image url of the place",
+          "example": "https://images.com/skatepark.png"
+        },
+        "imageUrls": {
+          "type": "array",
+          "description": "The gallery images of the place",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "https://images.com/skatepark-1.jpg",
+            "https://images.com/skatepark-2.jpg"
+          ]
         }
       },
-      "description" : "Data version object"
+      "description": "Place object"
+    },
+    "PlaceSuggestionRequestDTO": {
+      "type": "object",
+      "required": [
+        "image1",
+        "image2",
+        "info",
+        "latitude",
+        "longitude",
+        "name",
+        "senderEmail",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the place",
+          "example": "Example Skatepark name"
+        },
+        "info": {
+          "type": "string",
+          "description": "The description of the place",
+          "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "description": "The latitude coordinate part of the place",
+          "example": 47.123455
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "description": "The longitude coordinate part of the place",
+          "example": 19.123455
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the place",
+          "example": "skatepark"
+        },
+        "senderEmail": {
+          "type": "string",
+          "description": "E-mail address of the sender",
+          "example": "example@gmail.com"
+        },
+        "image1": {
+          "type": "string",
+          "format": "binary",
+          "description": "Image file"
+        },
+        "image2": {
+          "type": "string",
+          "format": "binary",
+          "description": "Image file"
+        },
+        "image3": {
+          "type": "string",
+          "format": "binary",
+          "description": "Image file"
+        },
+        "image4": {
+          "type": "string",
+          "format": "binary",
+          "description": "Image file"
+        }
+      },
+      "description": "Place suggestion object"
+    },
+    "PlaceSuggestionResponseDTO": {
+      "type": "object",
+      "required": [
+        "id",
+        "image1",
+        "image2",
+        "info",
+        "latitude",
+        "longitude",
+        "name",
+        "senderEmail",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the suggestion",
+          "example": "3CBAF56E-F6CE-4489-8F1D-55298CBE3164"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the place",
+          "example": "Example Skatepark name"
+        },
+        "info": {
+          "type": "string",
+          "description": "The description of the place",
+          "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "description": "The latitude coordinate part of the place",
+          "example": 47.123455
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "description": "The longitude coordinate part of the place",
+          "example": 19.123455
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the place",
+          "example": "skatepark"
+        },
+        "senderEmail": {
+          "type": "string",
+          "description": "E-mail address of the sender",
+          "example": "example@gmail.com"
+        },
+        "image1": {
+          "type": "string",
+          "format": "binary",
+          "description": "Image file"
+        },
+        "image2": {
+          "type": "string",
+          "format": "binary",
+          "description": "Image file"
+        },
+        "image3": {
+          "type": "string",
+          "format": "binary",
+          "description": "Image file"
+        },
+        "image4": {
+          "type": "string",
+          "format": "binary",
+          "description": "Image file"
+        }
+      },
+      "description": "Place suggestion object"
+    },
+    "PlaceReportResponseDTO": {
+      "type": "object",
+      "required": [
+        "placeId",
+        "placeName",
+        "senderEmail",
+        "reportText"
+      ],
+      "properties": {
+        "placeId": {
+          "type": "string",
+          "description": "Unique identifier of problematic place",
+          "example": "3CBAF56E-F6CE-4489-8F1D-55298CBE3164"
+        },
+        "placeName": {
+          "type": "string",
+          "description": "The name of the place",
+          "example": "Example Skatepark name"
+        },
+        "senderEmail": {
+          "type": "string",
+          "description": "E-mail address of the sender",
+          "example": "example@gmail.com"
+        },
+        "reportText": {
+          "type": "string",
+          "description": "Text describing the problem at this place",
+          "example": "The problem is the following at this place..."
+        }
+      },
+      "description": "Place suggestion object"
+    },
+    "PlaceDataVersionResponseDTO": {
+      "type": "object",
+      "required": [
+        "dataVersion"
+      ],
+      "properties": {
+        "dataVersion": {
+          "type": "string",
+          "description": "The version of the extreme sport place collection",
+          "example": "2019-05-18T12:00:00Z"
+        }
+      },
+      "description": "Data version object"
+    },
+    "GeneralSuccessDTO": {
+      "type": "object",
+      "required": [
+        "status",
+        "message"
+      ],
+      "properties": {
+        "status": {
+          "type": "number",
+          "description": "The http status",
+          "example": 201
+        },
+        "message": {
+          "type": "string",
+          "description": "Any success message",
+          "example": "Example success message!"
+        }
+      },
+      "description": "General success DTO"
     }
   }
 }
