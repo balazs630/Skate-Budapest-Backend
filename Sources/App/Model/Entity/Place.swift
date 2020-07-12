@@ -20,6 +20,7 @@ final class Place: Model {
     @Field(key: "infoHU") var infoHU: String
     @Field(key: "infoEN") var infoEN: String
     @Field(key: "type") var type: String
+    @Field(key: "priority") var priority: Int
     @Field(key: "status") var status: PlaceStatus
     @Children(for: \.$place) var images: [PlaceImage]
     @OptionalField(key: "thumbnailUrl") var thumbnailUrl: String?
@@ -35,6 +36,7 @@ final class Place: Model {
          infoHU: String,
          infoEN: String,
          type: String,
+         priority: Int,
          status: PlaceStatus,
          thumbnailUrl: String?) {
         self.id = id
@@ -45,6 +47,7 @@ final class Place: Model {
         self.infoHU = infoHU
         self.infoEN = infoEN
         self.type = type
+        self.priority = priority
         self.status = status
         self.thumbnailUrl = thumbnailUrl
     }

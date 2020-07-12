@@ -14,6 +14,7 @@ struct PlaceResponseDTO: Content {
     let name: String
     let info: String
     let type: String
+    let priority: Int
     let thumbnailUrl: String?
     let imageUrls: [String]?
 
@@ -32,6 +33,7 @@ struct PlaceResponseDTO: Content {
         }
 
         self.type = place.type
+        self.priority = place.priority
         self.thumbnailUrl = place.thumbnailUrl
         self.imageUrls = !place.images.isEmpty
             ? place.images.map { $0.imageUrl }
