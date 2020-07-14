@@ -45,13 +45,17 @@ Start PostgreSQL service:
 brew services start postgresql@9.6
 ```
 
-For initial connection in pgamin use:
-- host: localhost
-- port: 5432
-- maintenance database: postgres
-- username: `whoami` (default user)
-
 Create separate user and database for `development` and `testing` environments with pgAdmin. See dotenv configurations as an example.
+
+Steps:
+- create new server called `skate-budapest-local`
+  - host: localhost
+  - port: 5432
+  - maintenance database: postgres
+  - username: `whoami` (check default user)
+- create a new user for both environments (without password) and with `Login privileges` only
+- create a new database for both environments, set it's owner user
+  
 Execute seed data/migration sql scripts into the databases from the `/Resources` folder.
 
 Clone the project, then open `Package.swift` in Xcode. It will download the dependencies and prepare the targets with Swift Package Manager.
