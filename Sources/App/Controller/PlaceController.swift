@@ -104,7 +104,7 @@ extension PlaceController {
 // MARK: POST endpoint methods
 extension PlaceController {
     private func postPlaceSuggestion(request: Request) throws -> EventLoopFuture<GeneralSuccessDTO> {
-        try PlaceSuggestionRequestDTO.validate(request)
+        try PlaceSuggestionRequestDTO.validate(content: request)
 
         let placeSuggestion = try request.content
             .decode(PlaceSuggestionRequestDTO.self)
@@ -113,7 +113,7 @@ extension PlaceController {
     }
 
     private func postPlaceReport(request: Request) throws -> EventLoopFuture<GeneralSuccessDTO> {
-        try PlaceReportRequestDTO.validate(request)
+        try PlaceReportRequestDTO.validate(content: request)
 
         let placeReport = try request.content
             .decode(PlaceReportRequestDTO.self)

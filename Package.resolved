@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/vapor/async-kit.git",
         "state": {
           "branch": null,
-          "revision": "8e2cad80dd9f62f0349a2a78ab8c81fb456f4d4a",
-          "version": "1.1.1"
+          "revision": "7457413e57dbfac762b32dd30c1caf2c55a02a3d",
+          "version": "1.2.0"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/vapor/fluent-postgres-driver.git",
         "state": {
           "branch": null,
-          "revision": "cf8ec53b87606dc799a07a0754a297b32cf9f592",
-          "version": "2.0.0"
+          "revision": "f310f8843fafa3134cf89d81b8b3480f16967f37",
+          "version": "2.1.0"
         }
       },
       {
@@ -159,8 +159,8 @@
         "repositoryURL": "https://github.com/apple/swift-nio-ssl.git",
         "state": {
           "branch": null,
-          "revision": "10e0e17dd47b594c3d864a063f343d716e33e5c1",
-          "version": "2.7.3"
+          "revision": "d381bc53edd9de88a75480a2b969bfc26d61ee76",
+          "version": "2.8.0"
         }
       },
       {
@@ -168,8 +168,8 @@
         "repositoryURL": "https://github.com/vapor/vapor.git",
         "state": {
           "branch": null,
-          "revision": "2bfe7149d9786e2e601898cb10b9ba9072f60c0b",
-          "version": "4.10.0"
+          "revision": "88293674e2ea017691c56af20d0938dfff7ece04",
+          "version": "4.27.0"
         }
       },
       {
