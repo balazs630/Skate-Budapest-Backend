@@ -17,7 +17,7 @@ final class PlaceSuggestionTests: XCTVaporTests {
 // MARK: Happy case tests
 extension PlaceSuggestionTests {
     func testPlaceSuggestionsCanBeRetrieved() throws {
-        try app.test(.GET, listPlaceSuggestionsURI, headers: testingHeaders, afterResponse:  { response in
+        try app.test(.GET, listPlaceSuggestionsURI, headers: testingHeaders, afterResponse: { response in
             let result = try response.content.decode([PlaceSuggestionResponseDTO].self)
 
             XCTAssertNotNil(result)
@@ -27,7 +27,7 @@ extension PlaceSuggestionTests {
     func testPlaceSuggestionsCanBeRetrievedWithActiveStatus() throws {
         let queryParams = "?status=active"
 
-        try app.test(.GET, listPlaceSuggestionsURI + queryParams, headers: testingHeaders, afterResponse:  { response in
+        try app.test(.GET, listPlaceSuggestionsURI + queryParams, headers: testingHeaders, afterResponse: { response in
             let result = try response.content.decode([PlaceSuggestionResponseDTO].self)
 
             XCTAssertNotNil(result)
@@ -37,7 +37,7 @@ extension PlaceSuggestionTests {
     func testPlaceSuggestionsCanBeRetrievedWithDeletedStatus() throws {
         let queryParams = "?status=deleted"
 
-        try app.test(.GET, listPlaceSuggestionsURI + queryParams, headers: testingHeaders, afterResponse:  { response in
+        try app.test(.GET, listPlaceSuggestionsURI + queryParams, headers: testingHeaders, afterResponse: { response in
             let result = try response.content.decode([PlaceSuggestionResponseDTO].self)
 
             XCTAssertNotNil(result)
@@ -66,7 +66,7 @@ extension PlaceSuggestionTests {
             XCTAssertEqual(responseModel.message, "Place suggestion is created!")
         })
 
-        try app.test(.GET, listPlaceSuggestionsURI, headers: testingHeaders, afterResponse:  { response in
+        try app.test(.GET, listPlaceSuggestionsURI, headers: testingHeaders, afterResponse: { response in
             let result = try response.content.decode([PlaceSuggestionResponseDTO].self)
             let matchingResults = result.filter { $0.isEqual(to: newSuggestion) }
 
@@ -78,7 +78,7 @@ extension PlaceSuggestionTests {
 // MARK: Error case tests
 extension PlaceSuggestionTests {
     func testPlaceSuggestionsCannotBeRetrievedWithoutApiKey() throws {
-        try app.test(.GET, listPlaceSuggestionsURI, headers: [:], afterResponse:  { response in
+        try app.test(.GET, listPlaceSuggestionsURI, headers: [:], afterResponse: { response in
             let error = try response.content.decode(GeneralErrorDTO.self)
 
             XCTAssertEqual(error.reason, "Your request did not include an API-Key!")
@@ -86,7 +86,7 @@ extension PlaceSuggestionTests {
     }
 
     func testPlaceSuggestionsCannotBeRetrievedWitInvalidApiKey() throws {
-        try app.test(.GET, listPlaceSuggestionsURI, headers: ["Api-Key": "00000000-0000-0000-0000-000000000000"], afterResponse:  { response in
+        try app.test(.GET, listPlaceSuggestionsURI, headers: ["Api-Key": "00000000-0000-0000-0000-000000000000"], afterResponse: { response in
             let error = try response.content.decode(GeneralErrorDTO.self)
 
             XCTAssertEqual(error.reason, "Invalid Api-Key!")
@@ -96,7 +96,7 @@ extension PlaceSuggestionTests {
     func testPlaceSuggestionsCannotBeRetrievedWithInvalidStatusParam() throws {
         let queryParams = "?lang=hu&status=invalid"
 
-        try app.test(.GET, listPlaceSuggestionsURI + queryParams, headers: testingHeaders, afterResponse:  { response in
+        try app.test(.GET, listPlaceSuggestionsURI + queryParams, headers: testingHeaders, afterResponse: { response in
             let error = try response.content.decode(GeneralErrorDTO.self)
 
             XCTAssertEqual(error.reason, "Invalid `status` parameter.")

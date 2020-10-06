@@ -17,7 +17,7 @@ final class PlaceReportTests: XCTVaporTests {
 // MARK: Happy case tests
 extension PlaceReportTests {
     func testPlaceReportsCanBeRetrieved() throws {
-        try app.test(.GET, listPlaceReportsURI, headers: testingHeaders, afterResponse:  { response in
+        try app.test(.GET, listPlaceReportsURI, headers: testingHeaders, afterResponse: { response in
             let result = try response.content.decode([PlaceReportResponseDTO].self)
 
             XCTAssertNotNil(result)
@@ -27,7 +27,7 @@ extension PlaceReportTests {
     func testPlaceReportsCanBeRetrievedWithActiveStatus() throws {
         let queryParams = "?status=active"
 
-        try app.test(.GET, listPlaceReportsURI + queryParams, headers: testingHeaders, afterResponse:  { response in
+        try app.test(.GET, listPlaceReportsURI + queryParams, headers: testingHeaders, afterResponse: { response in
             let result = try response.content.decode([PlaceReportResponseDTO].self)
 
             XCTAssertNotNil(result)
@@ -37,7 +37,7 @@ extension PlaceReportTests {
     func testPlaceReportsCanBeRetrievedWithDeletedStatus() throws {
         let queryParams = "?status=deleted"
 
-        try app.test(.GET, listPlaceReportsURI + queryParams, headers: testingHeaders, afterResponse:  { response in
+        try app.test(.GET, listPlaceReportsURI + queryParams, headers: testingHeaders, afterResponse: { response in
             let result = try response.content.decode([PlaceReportResponseDTO].self)
 
             XCTAssertNotNil(result)
@@ -60,7 +60,7 @@ extension PlaceReportTests {
             XCTAssertEqual(responseModel.message, "Place report is created!")
         })
 
-        try app.test(.GET, listPlaceReportsURI, headers: testingHeaders, afterResponse:  { response in
+        try app.test(.GET, listPlaceReportsURI, headers: testingHeaders, afterResponse: { response in
             let result = try response.content.decode([PlaceReportResponseDTO].self)
             let matchingResults = result.filter { $0.isEqual(to: newReport) }
 
@@ -72,7 +72,7 @@ extension PlaceReportTests {
 // MARK: Error case tests
 extension PlaceReportTests {
     func testPlaceReportsCannotBeRetrievedWithoutApiKey() throws {
-        try app.test(.GET, listPlaceReportsURI, headers: [:], afterResponse:  { response in
+        try app.test(.GET, listPlaceReportsURI, headers: [:], afterResponse: { response in
             let error = try response.content.decode(GeneralErrorDTO.self)
 
             XCTAssertEqual(error.reason, "Your request did not include an API-Key!")
@@ -80,7 +80,7 @@ extension PlaceReportTests {
     }
 
     func testPlaceReportsCannotBeRetrievedWitInvalidApiKey() throws {
-        try app.test(.GET, listPlaceReportsURI, headers: ["Api-Key": "00000000-0000-0000-0000-000000000000"], afterResponse:  { response in
+        try app.test(.GET, listPlaceReportsURI, headers: ["Api-Key": "00000000-0000-0000-0000-000000000000"], afterResponse: { response in
             let error = try response.content.decode(GeneralErrorDTO.self)
 
             XCTAssertEqual(error.reason, "Invalid Api-Key!")
@@ -90,7 +90,7 @@ extension PlaceReportTests {
     func testPlaceReportsCannotBeRetrievedWithInvalidStatusParam() throws {
         let queryParams = "?lang=hu&status=invalid"
 
-        try app.test(.GET, listPlaceReportsURI + queryParams, headers: testingHeaders, afterResponse:  { response in
+        try app.test(.GET, listPlaceReportsURI + queryParams, headers: testingHeaders, afterResponse: { response in
             let error = try response.content.decode(GeneralErrorDTO.self)
 
             XCTAssertEqual(error.reason, "Invalid `status` parameter.")
