@@ -55,6 +55,12 @@ Steps:
   - username: `whoami` (check default user)
 - create a new user for both environments (without password) and with `Login privileges` only
 - create a new database for both environments, set it's owner user
+
+Grant privileges to the new user with pgAdmin:
+- right click on the database > `Grant Wizard...`
+- select all tables
+- set `grantee`: owner user, `privileges`: all, `grantor`: default user
+- do it on both environment
   
 Execute seed data/migration sql scripts into the databases from the `/Resources` folder.
 
