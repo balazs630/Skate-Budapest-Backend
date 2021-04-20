@@ -36,7 +36,7 @@ Install [Xcode 11.4 or greater](https://itunes.apple.com/us/app/xcode/id49779983
 
 Install PostgreSQL and pgAdmin with [Homebrew](https://brew.sh):
 ```
-brew cask install pgadmin4
+brew install --cask pgadmin4
 brew install postgresql@9.6
 ```
 

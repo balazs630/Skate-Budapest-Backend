@@ -74,8 +74,8 @@ Google Cloud Console / VPC network / Firewall rules / + Create Firewall rule
  
 Install [TablePlus](https://tableplus.com) / [pgAdmin](https://www.pgadmin.org) database manager on dev Macintosh:
 ```
-brew cask install tableplus
-brew cask install pgadmin4
+brew install --cask tableplus
+brew install --cask pgadmin4
 ```
 
 * Add new server connection: connect with default user/pass/database: postgres/postgres/postgres
